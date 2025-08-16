@@ -1,0 +1,16 @@
+[SliderServer]
+port = 8080
+host = "0.0.0.0"
+server_timing_header = true
+exclude = [
+    "tools/jupyter conversion script.jl",
+]
+
+[Export]
+baked_state = false
+baked_notebookfile = false
+# create_pluto_featured_index = true
+slider_server_url = "https://bmlip-surfer.plutojl.org/"
+exclude = [
+    "tools/jupyter conversion script.jl",
+]
