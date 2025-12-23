@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.19
+# v0.20.21
 
 #> [frontmatter]
 #> description = "Review of probability theory as a foundation for rational reasoning and Bayesian inference."
@@ -84,33 +84,6 @@ md"""
 
 """
 
-# ╔═╡ 9b9be452-9681-43e8-bb09-cc8728df384f
-md"""
-## 📕 Data Analysis: A Bayesian Tutorial
-
-The following is an excerpt from the book [Data Analysis: A Bayesian Tutorial](https://global.oup.com/academic/product/data-analysis-9780198568322) (2006), by D.S. Sivia with J.S. Skilling:
-"""
-
-# ╔═╡ 9f4125a2-d5d2-4acf-8bad-82f94af230e8
-blockquote(
-	md"""
-	
-#### Preface
-"As an undergraduate, I always found the subject of statistics to be rather mysterious. This topic wasn’t entirely new to me, as we had been taught a little bit about probability earlier at high school; for example, I was already familiar with the binomial, Poisson and normal distributions. Most of this made sense, but only seemed to relate to things like rolling dice, flipping coins, shuffling cards and so on. However, having aspirations of becoming a scientist, what I really wanted to know was how to analyse experimental data. Thus, I eagerly looked forward to the lectures on statistics. Sadly, they were a great disappointment. Although many of the tests and procedures expounded were intuitively reasonable, there was something deeply unsatisfactory about the whole affair: there didn’t seem to be any underlying basic principles! Hence, the course on ‘probability and statistics’ had led to an unfortunate dichotomy: probability made sense, but was just a game; statistics was important, but it was a bewildering collection of tests with little obvious rhyme or reason. While not happy with this situation, I decided to put aside the subject and concentrate on real science. After all, the predicament was just a reflection of my own inadequacies and I’d just have to work at it when the time came to really analyse my data.
-
-The story above is not just my own, but is the all too common experience of many scientists. Fortunately, it doesn’t have to be like this. What we were not told in our undergraduate lectures is that there is an alternative approach to the whole subject of data analysis which uses only probability theory. In one sense, it makes the topic of statistics entirely superfluous. In another, it provides the logical justification for many of the prevalent statistical tests and procedures, making explicit the conditions and approximations implicitly assumed in their use."
-""",
-	# "D.S. Sivia"
-)
-
-# ╔═╡ f8c8ba53-df36-48a6-afde-2952cbcfbe48
-md"""
-Does this fragment resonate with your own experience? 
-
-In this lesson we introduce *Probability Theory* (PT) again. As we will see in the next lessons, PT is all you need to make sense of machine learning, artificial intelligence, statistics, etc. 
-
-"""
-
 # ╔═╡ 61713e1c-8e37-45d9-9f58-c3db69e15b66
 challenge_statement("Disease Diagnosis",header_level=1)
 
@@ -133,24 +106,40 @@ Boolean logic (or propositional logic) is a formal system of logic based on bina
 
 With Boolean operators (``\lor``, ``\land``, ``\implies``, etc.), we can create and evaluate compound propositions, e.g.,
 
-- Given two events ``A`` and ``B``, the **conjunction** (logical-and) ``A \land B`` is true if-and-only-if both ``A`` and ``B`` are true. We write ``A \land B`` also shortly as ``AB`` (or use a comma as in a joint probability distribution ``p(A,B)``). 
+- Given two events ``A`` and ``B``, the **conjunction** (logical-and) 
+```math
+A \land B
+```
+is true if-and-only-if both ``A`` and ``B`` are true. We write ``A \land B`` also shortly as ``AB`` (or use a comma as in a joint probability distribution ``p(A,B)``). 
 
-- The **disjunction** (logical-or) ``A \lor B``, is true if either ``A`` or ``B`` is true or both ``A`` and ``B`` are true. We write ``A \lor B`` also as ``A + B`` (Note that the plus-sign is here not an arithmetic operator, but rather a logical operator to process truth values.)
+- The **disjunction** (logical-or) 
+```math
+A \lor B
+```
+is true if either ``A`` or ``B`` is true or both ``A`` and ``B`` are true. We write ``A \lor B`` also as ``A + B`` (Note that the plus-sign is here not an arithmetic operator, but rather a logical operator to process truth values.)
 
-- The denial of ``A``, i.e., the event **not**-A, is written as ``\bar{A}``. 
+- The denial of ``A``, i.e., the event **not**-A, is written as 
+```math
+\bar{A}\,.
+```
 
 Boolean logic provides the rules of inference for **deductive reasoning** and underpins all formal reasoning systems in mathematics and philosophy. 
 """
 
 # ╔═╡ 3e1889b8-d294-11ef-17bb-496655fbd618
 md"""
-## The Design of Probability Theory
+## Probability as Degree-of-Belief
 
-In the real world, we are rarely completely certain of something. Instead of a truth value for the proposition ``A``, we can attach a **degree-of-belief** ``p(A)`` that represents how likely we think ``A`` is. 
-
-Now consider the truth value of the proposition 
+In the real world, we are rarely completely certain about anything. Rather than assigning a binary truth value to a proposition ``A``, we associate it with a degree of belief 
 ```math
-𝐴= \texttt{``there is life on Mars''}
+0 \leq p(A) \leq 1 \,,
+```
+which quantifies how likely we believe ``A`` is to be true.
+
+
+Consider the truth value of the proposition 
+```math
+A = \texttt{``there is life on Mars''}
 ```
 
 with 
@@ -171,6 +160,9 @@ becomes available, how **should** our degree of belief in event ``A`` be affecte
 
 # ╔═╡ 3e18b2fa-d294-11ef-1255-df048f0dcec2
 md"""
+
+## Richard Cox and the Calculus of Rational Reasoning
+
 [Richard T. Cox (1946)](https://aapt.scitation.org/doi/10.1119/1.1990764) developed a **calculus for rational reasoning** about how to represent and update the **degree-of-belief** about the truth value of an event when faced with new information.  
 
 """
@@ -192,7 +184,16 @@ In developing this calculus, only some very agreeable assumptions were made, inc
 
 # ╔═╡ 3e18d2ea-d294-11ef-35e9-2332dd31dbf0
 md"""
-Under these assumptions, Cox showed that any consistent system of reasoning about uncertainty must obey the **rules of probability theory** (see [Cox theorem, 1946](https://en.wikipedia.org/wiki/Cox%27s_theorem), and [Caticha, 2012](https://github.com/bmlip/course/blob/main/assets/files/Caticha-2012-Entropic-Inference-and-the-Foundations-of-Physics.pdf), pp.7-26). These rules are the sum and product rules:
+Under these assumptions, Cox showed that any consistent system of reasoning about uncertainty must obey the **rules of probability theory** (see [Cox theorem, 1946](https://en.wikipedia.org/wiki/Cox%27s_theorem), and [Caticha, 2012](https://github.com/bmlip/course/blob/main/assets/files/Caticha-2012-Entropic-Inference-and-the-Foundations-of-Physics.pdf), pp.7-26). These rules are the sum and product rules.
+
+
+
+"""
+
+# ╔═╡ 4abbb3de-3b21-4c31-b015-e16c466a20aa
+md"""
+
+## The Sum and Product Rules 
 
 ##### The sum rule
 
@@ -212,19 +213,6 @@ Under these assumptions, Cox showed that any consistent system of reasoning abou
 
 Cox’s Theorem derives the rules of probability theory from first principles, not as arbitrary postulates but as consequences of rational reasoning. 
 In other words: **Probability = extended logic**.
-
-"""
-
-# ╔═╡ dd11e93a-3dad-4e97-8642-fb70edfa6aae
-md"""
-##### Some notational conventions
-
-In the above sum and product rules, 
-  - the **conditional probability** of ``A`` given ``I``, denoted by ``p(A|I)``, indicates the degree of belief in event ``A``, given that ``I`` is true. 
-- ``p(A,B|I)`` should be read as the *joint* probabability that both ``A`` and ``B`` are true, given that ``I`` is true. 
-- Similarly, ``p(A|B,I)`` is the probability that ``A`` is true, given that both ``B`` and ``I`` are true. 
-
-
 """
 
 # ╔═╡ 3e18e4bc-d294-11ef-38bc-cb97cb4e0963
@@ -362,29 +350,6 @@ md"""
 If ``X`` is *continuously* valued, then ``p(X=x)`` is a probability *density* function (PDF) with ``p(X=x)\ge 0``  and normalization ``\int_x p(x)\mathrm{d}x=1``. 
 
   * Note that if ``X`` is continuously valued, then the value of ``p(x)`` is not necessarily ``\le 1``. E.g., a uniform distribution on the continuous domain ``[0,.5]`` has value ``p(x) = 2`` over its domain.
-
-"""
-
-# ╔═╡ 3e1fc4da-d294-11ef-12f5-d51f9728fcc0
-md"""
-## Notational Conventions
-
-Here is a notational convention that you should be precise about (but many authors are not).
-
-If you want to write that a variable ``x`` is distributed as a Gaussian with mean ``\mu`` and covariance matrix ``\Sigma``, you can write this in either of two ways:
-
-```math
-\begin{align*} 
-p(x) &= \mathcal{N}(x|\mu,\Sigma) \\
-x &\sim \mathcal{N}(\mu,\Sigma)
-\end{align*}
-```
-
-In the second version, the symbol ``\sim`` can be interpreted as "is distributed as" (a Gaussian with parameters ``\mu`` and ``\Sigma``).
-
-Don't write ``p(x) = \mathcal{N}(\mu,\Sigma)`` because ``p(x)`` is a function of ``x`` but ``\mathcal{N}(\mu,\Sigma)`` is not. 
-
-Also, ``x \sim \mathcal{N}(x|\mu,\Sigma)`` is not entirely proper because you already named the argument on the right-hand-site. On the other hand, ``x \sim \mathcal{N}(\cdot|\mu,\Sigma)`` is fine, as is the shorter ``x \sim \mathcal{N}(\mu,\Sigma)``.
 
 """
 
@@ -1446,7 +1411,7 @@ md"""
   - Given is a disease with a prevalence of $(prevalence_bond) and a test procedure with sensitivity ('true positive' rate) of $(sensitivity_bond), and specificity ('true negative' rate) of $(specificity_bond). What is the chance that somebody who tests positive actually has the disease?
 
 ##### Solution
-  - Use probabilistic inference, to be discussed in this lecture. 
+  - [Later in this lecture](#Challenge-Revisited:-Disease-Diagnosis), making use (only) of the sum and product rules of probability theory. 
 """
 
 # ╔═╡ 3e1d6d00-d294-11ef-1081-e11b8397eb91
@@ -2797,9 +2762,6 @@ version = "1.9.2+0"
 # ╟─3e17df5e-d294-11ef-38c7-f573724871d8
 # ╟─bcb4be20-0439-4809-a166-8c50b6b9206b
 # ╟─3e1803d0-d294-11ef-0304-df2b9b698cd1
-# ╟─9b9be452-9681-43e8-bb09-cc8728df384f
-# ╟─9f4125a2-d5d2-4acf-8bad-82f94af230e8
-# ╟─f8c8ba53-df36-48a6-afde-2952cbcfbe48
 # ╟─61713e1c-8e37-45d9-9f58-c3db69e15b66
 # ╟─3e185ab0-d294-11ef-3f7d-9bd465518274
 # ╟─840ab4dc-0d2e-4bf8-acc7-5f1ee2b0dcaf
@@ -2808,7 +2770,7 @@ version = "1.9.2+0"
 # ╟─3e18b2fa-d294-11ef-1255-df048f0dcec2
 # ╟─3e18c25c-d294-11ef-11bc-a93c2572b107
 # ╟─3e18d2ea-d294-11ef-35e9-2332dd31dbf0
-# ╟─dd11e93a-3dad-4e97-8642-fb70edfa6aae
+# ╟─4abbb3de-3b21-4c31-b015-e16c466a20aa
 # ╟─3e18e4bc-d294-11ef-38bc-cb97cb4e0963
 # ╟─3e18f18c-d294-11ef-33e4-b7f9495e0508
 # ╟─3e1906ea-d294-11ef-236e-c966a9474170
@@ -2825,7 +2787,6 @@ version = "1.9.2+0"
 # ╟─3e1a69f4-d294-11ef-103e-efc47025fb8f
 # ╟─3e1a7c8e-d294-11ef-1f97-55e608d49141
 # ╟─3e1a8eca-d294-11ef-1ef0-c15b24d05990
-# ╟─3e1fc4da-d294-11ef-12f5-d51f9728fcc0
 # ╟─3e1ab104-d294-11ef-1a98-412946949fba
 # ╟─fea8ae4c-8ef9-4b74-ad13-1314afef97de
 # ╟─3e1b4b1c-d294-11ef-0423-9152887cc403
