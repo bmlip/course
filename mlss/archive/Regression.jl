@@ -39,36 +39,6 @@ title("Regression")
 # ╔═╡ 66998cd5-78d6-4b22-a9c9-886436cba4dd
 PlutoUI.TableOfContents()
 
-# ╔═╡ 234b8c8e-d294-11ef-296a-3b38564babc4
-md"""
-## Preliminaries
-
-##### Goal 
-
-* Introduction to Bayesian (Linear) Regression
-
-##### Materials        
-
-* Mandatory
-
-  * These lecture notes
-  
-* Optional
-
-  * [Bishop PRML book](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf),  pp. 152-158
-
-  * Matrix Calculus
-    * In this and forthcoming lectures, we will make use of some elementary matrix calculus. Please see the [Formula Cheatsheet](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf) for formulas that will be made available to you at the written exam.
-
-  * [RxInfer Bayesian Linear Regression example](https://examples.rxinfer.com/categories/basic_examples/bayesian_linear_regression/)
-     *  A tutorial on Bayesian linear regression with RxInfer.
-
-  * Jaynes (1990), [Straight Line Fitting - A Bayesian Solution](https://github.com/bmlip/course/blob/main/assets/files/Jaynes-1990-straight-line-fitting-a-Bayesian-solution.pdf)
-    * A fully Bayesian solution on straight line fitting with uncertainties in both ``x`` and ``y`` coordinates.
-
-
-"""
-
 # ╔═╡ 234ba8c2-d294-11ef-36f6-b1f61f65557a
 
 
@@ -401,11 +371,68 @@ md"""
 See the [Mini about Basis Functions](https://bmlip.github.io/course/minis/Basis%20Functions.html) to learn more!
 """
 
-# ╔═╡ 142f4700-ccf4-4019-b3a9-57035c458276
-σ_basis² = 0.01;
+# ╔═╡ 22e76656-b9f4-463e-9bf8-bd383e92948b
+const Layout = PlutoUI.ExperimentalLayout
+
+# ╔═╡ 9fd4a9b4-3296-4fe3-931f-17744bc4df81
+Layout.vbox([
+	secret_function_bond,
+	N_bond,
+	σ_noise_bond, 
+])
+
+# ╔═╡ 338ee8e9-b786-48e1-b084-a0e8a6d12118
+baseplot(args...; kwargs...) = plot(args...; size=(650,400), xlim=(-0.0, 1.0), ylim=(-1.2,1.2), kwargs...)
+
+# ╔═╡ 0e9435fc-3206-4249-b5ff-42cc35c98d47
+function plot_data!(D)
+	plot!(; legend=:bottomleft)
+	plot!(secret_function;
+		  label="True function",
+		  color=3,
+		  lw=3,
+			linestyle=:dash,
+		 )
+	scatter!(
+		D; 
+		label="Observations",
+		color=1,
+		# markerstrokewidth=0,
+	)
+end
+
+# ╔═╡ 88a2bd82-6663-48cc-a535-5b3e47d814a9
+const deterministic_randomness = MersenneTwister
+
+# ╔═╡ 68141653-e444-4e29-bbec-4cd7359cb84c
+σ_data_noise² = σ_data_noise^2
+
+# ╔═╡ 72fcb6a3-36ee-4840-bdc3-ddb743e5c149
+D = let
+	xs = rand(deterministic_randomness(19), Uniform(0,1), N)
+
+	ys_exact = secret_function.(xs)
+
+	rng = deterministic_randomness(37)
+	ys = [
+		rand(rng, Normal(y, sqrt(σ_data_noise²)))
+		for y in ys_exact
+	 ]
+
+	collect(zip(xs, ys))
+end
+
+# ╔═╡ 5d48e25f-9a98-43ce-8f23-d9ab28f69996
+let
+	baseplot()
+	plot_data!(D)
+end
 
 # ╔═╡ 70ca3a3f-ee1c-4f3d-9d77-bf55e8e808c1
 μ_basis = range(0.0, 1.0; length=10);
+
+# ╔═╡ 142f4700-ccf4-4019-b3a9-57035c458276
+σ_basis² = 0.01;
 
 # ╔═╡ 3a3b7ff2-68aa-411c-b7fb-c6cd00d0dd7b
 ϕ(μ, x) = exp(-(x - μ)^2 / σ_basis²);
@@ -417,11 +444,38 @@ function f(w, x)
 	end
 end;
 
-# ╔═╡ 4d2be102-8849-4b8d-9962-8b45099ab8f2
-md"""
-#### Bayesian inference
-We have a closed-form solution for the posterior:
-"""
+# ╔═╡ 8a2730b8-3262-48cc-81f0-777cf85b9836
+# This is called the "design matrix"
+Φ = [
+	ϕ(μ, datum[1])
+	for datum in D, μ in μ_basis
+];
+
+# ╔═╡ 98d729ab-79f8-4a0f-9db5-387f488fc19d
+weights_posterior = MvNormalCanon(
+	# Posterior potential vector
+	Φ' * last.(D) / σ_data_noise²,
+	# Posterior precision matrix (inverse covariance)
+	Φ' * Φ / σ_data_noise² + I / σ_prior²
+);
+
+# ╔═╡ f9a5c91e-12be-4e8b-930d-74e46e39ea58
+let
+	baseplot()
+	if true
+		for i in 1:40
+			w = rand(weights_posterior)
+			plot!(
+				x -> f(w, x);
+				opacity=.3, 
+				color=2, 
+				label=i==1 ? "Posterior samples" : nothing,
+			)
+		end
+	end
+
+	plot_data!(D)
+end
 
 # ╔═╡ ec0ccf94-e12e-422d-b4d2-dcb933453146
 md"""
@@ -638,19 +692,6 @@ md"""
 _Reading this lecture online? Click **"View code"** in the top right to read the implementation of this visualisation._
 """
 
-# ╔═╡ 234f5d32-d294-11ef-279f-f331396e47ad
-md"""
-
-## Uncertainty About Inputs?
-
-In this lesson, we focused on modelling the map from given inputs ``x`` to uncertain outputs ``y``, or more formally, on the distribution ``p(y|x)``. 
-
-What if you want to fit the best curve through a data set ``\{(x_1,y_1),\dotsc,(x_N,y_N)\}`` where both variables ``x_n`` and ``y_n`` are subject to errors? In other words, we must now also fit a model ``p(x)`` for the inputs, leading to a generative model ``p(y,x) = p(y|x) p(x)``.  
-
-While this is a very common problem that occurs throughout the sciences, a proper solution to this problem is still hardly covered in statistics textbooks. Edwin T. Jaynes (author of the brilliant book [Probability Theory: The Logic of Science](https://bayes.wustl.edu/etj/prob/book.pdf)) discusses a fully Bayesian solution in his 1990 paper on [Straight Line Fitting - A Bayesian Solution](https://github.com/bmlip/course/blob/main/assets/files/Jaynes-1990-straight-line-fitting-a-Bayesian-solution.pdf). (Optional reading).
-
-"""
-
 # ╔═╡ 9577225a-9ce3-4cf2-ac63-499ae8e905bd
 md"""
 # Summary
@@ -806,96 +847,6 @@ md"""
 md"""
 # Code
 """
-
-# ╔═╡ 22e76656-b9f4-463e-9bf8-bd383e92948b
-const Layout = PlutoUI.ExperimentalLayout
-
-# ╔═╡ 9fd4a9b4-3296-4fe3-931f-17744bc4df81
-Layout.vbox([
-	secret_function_bond,
-	N_bond,
-	σ_noise_bond, 
-])
-
-# ╔═╡ 338ee8e9-b786-48e1-b084-a0e8a6d12118
-baseplot(args...; kwargs...) = plot(args...; size=(650,400), xlim=(-0.0, 1.0), ylim=(-1.2,1.2), kwargs...)
-
-# ╔═╡ 0e9435fc-3206-4249-b5ff-42cc35c98d47
-function plot_data!(D)
-	plot!(; legend=:bottomleft)
-	plot!(secret_function;
-		  label="True function",
-		  color=3,
-		  lw=3,
-			linestyle=:dash,
-		 )
-	scatter!(
-		D; 
-		label="Observations",
-		color=1,
-		# markerstrokewidth=0,
-	)
-end
-
-# ╔═╡ 88a2bd82-6663-48cc-a535-5b3e47d814a9
-const deterministic_randomness = MersenneTwister
-
-# ╔═╡ 68141653-e444-4e29-bbec-4cd7359cb84c
-σ_data_noise² = σ_data_noise^2
-
-# ╔═╡ 72fcb6a3-36ee-4840-bdc3-ddb743e5c149
-D = let
-	xs = rand(deterministic_randomness(19), Uniform(0,1), N)
-
-	ys_exact = secret_function.(xs)
-
-	rng = deterministic_randomness(37)
-	ys = [
-		rand(rng, Normal(y, sqrt(σ_data_noise²)))
-		for y in ys_exact
-	 ]
-
-	collect(zip(xs, ys))
-end
-
-# ╔═╡ 5d48e25f-9a98-43ce-8f23-d9ab28f69996
-let
-	baseplot()
-	plot_data!(D)
-end
-
-# ╔═╡ 8a2730b8-3262-48cc-81f0-777cf85b9836
-# This is called the "design matrix"
-Φ = [
-	ϕ(μ, datum[1])
-	for datum in D, μ in μ_basis
-];
-
-# ╔═╡ 98d729ab-79f8-4a0f-9db5-387f488fc19d
-weights_posterior = MvNormalCanon(
-	# Posterior potential vector
-	Φ' * last.(D) / σ_data_noise²,
-	# Posterior precision matrix (inverse covariance)
-	Φ' * Φ / σ_data_noise² + I / σ_prior²
-);
-
-# ╔═╡ f9a5c91e-12be-4e8b-930d-74e46e39ea58
-let
-	baseplot()
-	if true
-		for i in 1:40
-			w = rand(weights_posterior)
-			plot!(
-				x -> f(w, x);
-				opacity=.3, 
-				color=2, 
-				label=i==1 ? "Posterior samples" : nothing,
-			)
-		end
-	end
-
-	plot_data!(D)
-end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2179,7 +2130,6 @@ version = "1.9.2+0"
 # ╔═╡ Cell order:
 # ╟─234b77a8-d294-11ef-15d5-ff54ed5bec1e
 # ╟─66998cd5-78d6-4b22-a9c9-886436cba4dd
-# ╟─234b8c8e-d294-11ef-296a-3b38564babc4
 # ╟─234ba8c2-d294-11ef-36f6-b1f61f65557a
 # ╟─e248df9b-0c48-4803-8d1e-b466ab07692e
 # ╟─f1bf64f6-09f9-45a3-acd1-7975ab9e79fc
@@ -2204,19 +2154,23 @@ version = "1.9.2+0"
 # ╟─234d6dd8-d294-11ef-3abf-8d6cb00b1907
 # ╟─ab3baeb4-51d7-4f50-9e06-ed00bb783ebd
 # ╟─fb113692-f00c-4b48-85cc-d7bba88c7099
-# ╟─f600c228-e048-42aa-b79a-60592b367dec
-# ╟─c0c57aa6-155a-49a9-9ed2-d568de1b5be2
-# ╟─9fd4a9b4-3296-4fe3-931f-17744bc4df81
-# ╟─b48b93c3-1ff2-4be0-8fad-181035f3e50e
-# ╟─3fe01c67-6f95-4f6d-8c7f-5a389272ff65
-# ╟─f9a5c91e-12be-4e8b-930d-74e46e39ea58
-# ╟─018b6c7b-36bc-4867-a058-3802b43fd1eb
-# ╟─90cb881a-7b5d-44e3-a7d1-bb93bef4a82b
-# ╠═142f4700-ccf4-4019-b3a9-57035c458276
+# ╠═f600c228-e048-42aa-b79a-60592b367dec
+# ╠═c0c57aa6-155a-49a9-9ed2-d568de1b5be2
+# ╠═9fd4a9b4-3296-4fe3-931f-17744bc4df81
+# ╠═b48b93c3-1ff2-4be0-8fad-181035f3e50e
+# ╠═3fe01c67-6f95-4f6d-8c7f-5a389272ff65
+# ╠═f9a5c91e-12be-4e8b-930d-74e46e39ea58
+# ╠═018b6c7b-36bc-4867-a058-3802b43fd1eb
+# ╠═90cb881a-7b5d-44e3-a7d1-bb93bef4a82b
+# ╠═22e76656-b9f4-463e-9bf8-bd383e92948b
+# ╠═338ee8e9-b786-48e1-b084-a0e8a6d12118
+# ╠═0e9435fc-3206-4249-b5ff-42cc35c98d47
+# ╠═88a2bd82-6663-48cc-a535-5b3e47d814a9
+# ╠═68141653-e444-4e29-bbec-4cd7359cb84c
 # ╠═70ca3a3f-ee1c-4f3d-9d77-bf55e8e808c1
+# ╠═142f4700-ccf4-4019-b3a9-57035c458276
 # ╠═3a3b7ff2-68aa-411c-b7fb-c6cd00d0dd7b
 # ╠═290bc994-d0f9-4af3-bd63-78de1640c85c
-# ╟─4d2be102-8849-4b8d-9962-8b45099ab8f2
 # ╠═98d729ab-79f8-4a0f-9db5-387f488fc19d
 # ╠═8a2730b8-3262-48cc-81f0-777cf85b9836
 # ╟─ec0ccf94-e12e-422d-b4d2-dcb933453146
@@ -2239,7 +2193,6 @@ version = "1.9.2+0"
 # ╟─b6443a13-9301-4559-a5c3-396bae2a27b9
 # ╟─234ef126-d294-11ef-17a9-3da87a7e7d0a
 # ╟─e9804f92-29b0-4463-bf37-872183061ee2
-# ╟─234f5d32-d294-11ef-279f-f331396e47ad
 # ╟─9577225a-9ce3-4cf2-ac63-499ae8e905bd
 # ╟─70ddbde1-5de4-4bc0-ace0-9414ac616888
 # ╟─8e2b2c1d-81f3-4283-ae2e-d8b3e9c201b3
@@ -2252,10 +2205,5 @@ version = "1.9.2+0"
 # ╠═f8c69b91-4415-454e-a50d-c4a37ada89d1
 # ╠═33ca4c67-d96f-457f-bc19-171f4b4b03c6
 # ╠═3ff2bd04-1490-4be6-8b26-b82d1902bb07
-# ╟─22e76656-b9f4-463e-9bf8-bd383e92948b
-# ╟─338ee8e9-b786-48e1-b084-a0e8a6d12118
-# ╟─0e9435fc-3206-4249-b5ff-42cc35c98d47
-# ╟─88a2bd82-6663-48cc-a535-5b3e47d814a9
-# ╟─68141653-e444-4e29-bbec-4cd7359cb84c
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

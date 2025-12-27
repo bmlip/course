@@ -48,42 +48,6 @@ title("Probability Theory Review")
 # ╔═╡ bcb4be20-0439-4809-a166-8c50b6b9206b
 PlutoUI.TableOfContents()
 
-# ╔═╡ 3e1803d0-d294-11ef-0304-df2b9b698cd1
-md"""
-## Preliminaries
-
-##### Goal 
-
-- Review of Probability Theory as a theory for rational/logical reasoning with uncertainties (i.e., a Bayesian interpretation)
-
-##### Materials        
-
-- Mandatory
-
-  - These lecture notes
-
-- Optional
-
-  - Bishop pp. 12-24
-
-  - [3Blue1Brown, YouTube video on Bayes theorem (2019)](https://youtu.be/HZGCoVF3YvM?si=JaXdesPjU8B_BtrC)
-    - Nice animated tutorial on Bayes rule.
-      
-  - [Edwin Jaynes, Probability Theory–The Logic of Science (2003)](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf). 
-    - Brilliant book on the Bayesian view of probability theory. Just for fun, scan the annotated bibliography and references.
-
-  - [Aubrey Clayton, Bernoulli's Fallacy–Statistical Illogic and the Crisis of Modern Science (2021)](https://aubreyclayton.com/bernoulli)
-    - A very readable account of the history of statistics and probability theory. Discusses why most popular statistics recipes are very poor scientific analysis tools. Use probability theory instead!
-
-  - [Ariel Caticha, Entropic Inference and the Foundations of Physics (2012)](https://github.com/bmlip/course/blob/main/assets/files/Caticha-2012-Entropic-Inference-and-the-Foundations-of-Physics.pdf), pp.7-56 (ch.2: probability)
-    - Great introduction to probability theory, in particular w.r.t. its correct interpretation as a state-of-knowledge.
-    - Absolutely worth your time to read the whole chapter, even if you skip section 2.2.4 (pp.15-18) on Cox's proof.
-
-  - [Joram Soch et al ., The Book of Statistical Proofs (2023 - )](https://statproofbook.github.io/)
-    - Online resource for proofs in probability theory and statistical inference.
-
-"""
-
 # ╔═╡ 61713e1c-8e37-45d9-9f58-c3db69e15b66
 challenge_statement("Disease Diagnosis",header_level=1)
 
@@ -223,135 +187,6 @@ keyconcept(" ",
 	
 	"""
 )
-
-# ╔═╡ 3e18f18c-d294-11ef-33e4-b7f9495e0508
-md"""
-## Why Probability Theory for Machine Learning?
-
-Machine learning concerns updating our beliefs about appropriate settings for model parameters from new information (namely a data set), and therefore PT provides the *optimal calculus for machine learning*. 
-
-"""
-
-# ╔═╡ 3e1906ea-d294-11ef-236e-c966a9474170
-md"""
-In general, nearly all interesting questions in machine learning (and information processing in general) can be stated in the following form (a conditional probability):
-
-```math
-p(\texttt{whatever-we-want-to-know}\, | \,\texttt{whatever-we-do-know})
-```
-
-where ``p(A|B)`` means the probability that ``A`` is true, given that ``B`` is true.
-
-"""
-
-# ╔═╡ 3e191b6c-d294-11ef-3174-d1b4b36e252b
-md"""
-##### Examples
-
-  * Predictions
-
-```math
-p(\,\texttt{future-observations}\,|\,\texttt{past-observations}\,)
-```
-
-  * Classify a received data point ``x`` 
-
-```math
-p(\,x\texttt{-belongs-to-class-}k \,|\,x\,)
-```
-
-  * Update a model based on a new observation
-
-```math
-p(\,\texttt{model-parameters} \,|\,\texttt{new-observation},\,\texttt{past-observations}\,)
-```
-
-"""
-
-# ╔═╡ 3e192ef4-d294-11ef-1fc4-87175eeec5eb
-md"""
-## Frequentist vs. Bayesian Interpretation of Probabilities
-
-The interpretation of a probability as a **degree-of-belief** about the truth value of an event is also called the **Bayesian** interpretation.  
-
-"""
-
-# ╔═╡ 3e19436c-d294-11ef-11c5-f9914f7a3a57
-md"""
-In the **Bayesian** interpretation, the probability is associated with a **state-of-knowledge** (usually held by a person, but formally by a rational agent). 
-
-  * For instance, in a coin tossing experiment, ``p(\texttt{outcome} = \texttt{tail}) = 0.4`` should be interpreted as the belief that there is a 40% chance that ``\texttt{tail}`` comes up if the coin were tossed.
-  * Under the Bayesian interpretation, PT calculus (sum and product rules) **extends boolean logic to rational reasoning with uncertainty**.
-
-"""
-
-# ╔═╡ 4edf38ab-a940-4ab0-be22-fa95cf571146
-md"""
-In the Bayesian interpretation, all probabilities are, in principle, conditional probabilities of the type ``p(A|I)``, since there is always some background knowledge. However, we often write ``p(A)`` rather than ``p(A|I)`` if the background knowledge ``I`` is assumed to be obviously present. E.g., we usually write ``p(A)`` rather than ``p(\,A\,|\,\text{the-sun-comes-up-tomorrow}\,)``.
-
-"""
-
-# ╔═╡ 3e194ef2-d294-11ef-3b38-1ddc3063ff35
-md"""
-The Bayesian interpretation contrasts with the **frequentist** interpretation of a probability as the relative frequency that an event would occur under repeated execution of an experiment.
-
-  * For instance, if the experiment is tossing a coin, then ``p(\texttt{outcome} = \texttt{tail}) = 0.4`` means that in the limit of a large number of coin tosses, 40% of outcomes turn up as ``\texttt{tail}``.
-
-"""
-
-# ╔═╡ 3e1964b4-d294-11ef-373d-712257fc130f
-md"""
-The Bayesian viewpoint is more generally applicable than the frequentist viewpoint, e.g., it is hard to apply the frequentist viewpoint to events like ``\texttt{"it will rain tomorrow"}``. 
-
-"""
-
-# ╔═╡ 3e196d6a-d294-11ef-0795-41c045079251
-md"""
-The Bayesian viewpoint is clearly favored in the machine learning community. (In this class, we also strongly favor the Bayesian interpretation). 
-
-"""
-
-# ╔═╡ 3e198336-d294-11ef-26fd-03cd15876486
-md"""
-Aubrey Clayton, in his wonderful book [Bernoulli's fallacy](https://aubreyclayton.com/bernoulli) (2021), writes about this issue: 
-
-> “Compared with Bayesian methods, standard [frequentist] statistical techniques use only a small fraction of the available information about a research hypothesis (how well it predicts some observation), so naturally they will struggle when that limited information proves inadequate. Using standard statistical methods is like driving a car at night on a poorly lit highway: to keep from going in a ditch, we could build an elaborate system of bumpers and guardrails and equip the car with lane departure warnings and sophisticated navigation systems, and even then we could at best only drive to a few destinations. Or we could turn on the headlights.”
-
-
-"""
-
-# ╔═╡ 3e198ba6-d294-11ef-3fe7-d70bf4833fa6
-md"""
-In this class, we aim to turn on the headlights and illuminate the elegance and power of the Bayesian approach to information processing. 
-
-"""
-
-# ╔═╡ 3e19e95a-d294-11ef-3da4-6d23922a5150
-md"""
-## Variable Assignments as Propositions 
-
-
-"""
-
-# ╔═╡ 3e1a69f4-d294-11ef-103e-efc47025fb8f
-md"""
-If ``X`` is a variable, then an *assignment* ``X=x`` (where ``x`` is a value, e.g., ``X=5``) can be interpreted as an event. Hence, the expression ``p(X=5)`` should be interpreted as the *degree-of-belief of the event* that variable ``X`` takes on the value ``5``. 
-
-"""
-
-# ╔═╡ 3e1a7c8e-d294-11ef-1f97-55e608d49141
-md"""
-If ``X`` is a *discretely* valued variable, then ``p(X=x)`` is a probability *mass* function (PMF) with ``0\le p(X=x)\le 1`` and normalization ``\sum_x p(x) =1``. 
-
-"""
-
-# ╔═╡ 3e1a8eca-d294-11ef-1ef0-c15b24d05990
-md"""
-If ``X`` is *continuously* valued, then ``p(X=x)`` is a probability *density* function (PDF) with ``p(X=x)\ge 0``  and normalization ``\int_x p(x)\mathrm{d}x=1``. 
-
-  * Note that if ``X`` is continuously valued, then the value of ``p(x)`` is not necessarily ``\le 1``. E.g., a uniform distribution on the continuous domain ``[0,.5]`` has value ``p(x) = 2`` over its domain.
-
-"""
 
 # ╔═╡ 3e1ab104-d294-11ef-1a98-412946949fba
 md"""
@@ -510,16 +345,6 @@ Note that marginalization can be understood as applying a "generalized" sum rule
 
 """
 
-# ╔═╡ 3e1bba8e-d294-11ef-1f61-295af16078ce
-md"""
-Of course, in the continuous domain, marginalization becomes
-
-```math
-p(X)=\int_Y p(X,Y) \,\mathrm{d}Y
-```
-
-"""
-
 # ╔═╡ 3e1bcb00-d294-11ef-2795-bd225bd00496
 md"""
 ## $(HTML("<span id='Bayes-rule'>Bayes Rule</span>"))
@@ -561,92 +386,6 @@ Bayes rule tells us how to update our knowledge about model parameters when faci
 
 # ╔═╡ 16c2eb59-16b8-4347-9aab-6e4b99016c79
 keyconcept("", md"Bayes rule is the fundamental rule for learning from data!")
-
-# ╔═╡ 3e1bffec-d294-11ef-2a49-9ff0f6331add
-md"""
-## Bayes Rule Nomenclature
-
-Some nomenclature associated with Bayes rule:
-
-```math
-\underbrace{p(\theta | D)}_{\text{posterior}} = \frac{\overbrace{p(D|\theta)}^{\text{likelihood}} \times \overbrace{p(\theta)}^{\text{prior}}}{\underbrace{p(D)}_{\text{evidence}}}
-```
-
-"""
-
-# ╔═╡ 3e1c0e80-d294-11ef-0d19-375e01988f16
-md"""
-Note that the evidence (a.k.a. *marginal likelihood* ) can be computed from the numerator through marginalization since
-
-```math
- p(D) = \int p(D,\theta) \,\mathrm{d}\theta = \int p(D|\theta)\,p(\theta) \,\mathrm{d}\theta
-```
-
-"""
-
-# ╔═╡ 3e1c1e3e-d294-11ef-0955-bdf9d0ba3c53
-md"""
-Hence, having access to likelihood and prior is in principle sufficient to compute both the evidence and the posterior. To emphasize that point, Bayes rule is sometimes written as a transformation:
-
-```math
- \underbrace{\underbrace{p(\theta|D)}_{\text{posterior}}\cdot \underbrace{p(D)}_{\text{evidence}}}_{\text{this is what we want to compute}} = \underbrace{\underbrace{p(D|\theta)}_{\text{likelihood}}\cdot \underbrace{p(\theta)}_{\text{prior}}}_{\text{this is available}}
-```
-
-"""
-
-# ╔═╡ 3e1c4224-d294-11ef-2707-49470aaae6eb
-md"""
-For a given data set ``D``, the posterior probabilities of the parameters scale relatively against each other as
-
-```math
-p(\theta|D) \propto p(D|\theta) p(\theta)
-```
-
-Hence, all that we can learn from the observed data is contained in the likelihood function ``p(D|\theta)``. This is called the **likelihood principle**.
-
-"""
-
-# ╔═╡ 3e1c51e2-d294-11ef-2c6d-d32a98308c6f
-md"""
-## The Likelihood Function vs the Sampling Distribution
-
-Consider a distribution ``p(D|\theta)``, where ``D`` relates to variables that are observed (i.e., a "data set") and ``\theta`` are model parameters.
-
-"""
-
-# ╔═╡ 3e1c60ba-d294-11ef-3a01-cf9e97512857
-md"""
-In general, ``p(D|\theta)`` is just a function of the two variables ``D`` and ``\theta``. We distinguish two interpretations of this function, depending on which variable is observed (or given by other means). 
-
-"""
-
-# ╔═╡ 3e1c70be-d294-11ef-14ed-0d46515541c5
-md"""
-The **sampling distribution** (a.k.a. the **data-generating** distribution) 
-
-```math
-p(D|\theta=\theta_0)
-```
-
-(which is a function of ``D`` only) describes a probability distribution for data ``D``, assuming that it is generated by the given model with parameters fixed at ``\theta = \theta_0``.
-
-"""
-
-# ╔═╡ 3e1c806a-d294-11ef-1fad-17e5625279f7
-md"""
-In a machine learning context, often the data is observed, and ``\theta`` is the free variable. In that case, for given observations ``D=D_0``, the **likelihood function** (which is a function only of the model parameters ``\theta``) is defined as 
-
-```math
-L(\theta) \triangleq p(D=D_0|\theta)
-```
-
-"""
-
-# ╔═╡ 3e1c9184-d294-11ef-3e35-5393d97fbc44
-md"""
-Note that ``L(\theta)`` is not a probability distribution for ``\theta`` since in general ``\sum_\theta L(\theta) \neq 1``.
-
-"""
 
 # ╔═╡ 3e1d33c8-d294-11ef-0a08-bdc419949925
 md"""
@@ -696,79 +435,8 @@ md"""
 # Examples
 """
 
-# ╔═╡ e3157dc0-5a64-4479-a37a-40fe25cccc07
-code_example("Sampling Distribution and Likelihood Function for the Coin Toss")
-
-# ╔═╡ 7d493e09-f7cc-4e13-a506-b792edcbf390
-md"""
-
-and the likelihood function 
-
-```math
-L(\theta) \triangleq p(y=1|\theta) = \theta \,.
-```
-
-"""
-
-# ╔═╡ 3e1d20e0-d294-11ef-2044-e1fe6590a600
-md"""
-!!! note
-	The (discrete) sampling distribution is a valid probability distribution. 
-	
-	However, the likelihood function ``L(\theta)`` clearly isn't, since ``\int_0^1 L(\theta) \mathrm{d}\theta = 0.5 \neq 1``. 
-"""
-
-# ╔═╡ fc733d61-fd0f-4a13-9afc-4505ac0253df
-f(y,θ) = θ.^y .* (1 .- θ).^(1 .- y) # p(y|θ)
-
 # ╔═╡ ab223dea-8ba8-4d30-94f4-72c8e070aadf
 θ_bond = @bind θ Scrubbable(0.0:0.02:1; format=".2f");
-
-# ╔═╡ d93f73d4-2783-4777-b0ce-cdc0444cb300
-md"""
-
-Consider the following simple model for the outcome ``y \in \{0,1\}`` (tail = ``0``, head = ``1``) of a biased coin toss with a real parameter $θ_bond ``= \theta \in [0,1]``:
-
-```math
-\begin{align*}
-p(y|\theta) = \theta^y (1-\theta)^{1-y}\\
-\end{align*}
-```
-
-Next, we use Julia to plot both the sampling distribution 
-
-"""
-
-# ╔═╡ 8a7dd8b7-5faf-4091-8451-9769f842accb
-let
-	p1 = plot(
-			[0,1], f([0,1], θ);
-			line=:stem, 
-			marker=:circle, 
-			xrange=(-0.5, 1.5), yrange=(0,1), 
-			title="Sampling Distribution", 
-			xlabel="y", ylabel=L"p(y|θ=%$θ)", label=""
-		 )
-	
-	_θ = 0:0.01:1
-	y=1
-	p2 = plot(
-			_θ, f(y, _θ);
-			ylabel=L"p(y=%$y | θ)", xlabel=L"θ", 
-			title="Likelihood Function", label=""
-		 )
-	scatter!(p2,
-			[θ], [f(y, θ)];
-			label=nothing,
-			)
-	
-	plot(p1, p2)
-end
-
-# ╔═╡ b7445b9b-7fbb-4560-b947-a23af0fcf101
-md"""
-Click and drag this number to change ``\theta``: $θ_bond.
-"""
 
 # ╔═╡ 922770f4-ddc8-4089-b378-f14088276b43
 exercise_statement("Which color does the ball have?"; prefix="Inference ")
@@ -863,6 +531,477 @@ challenge_solution("Disease Diagnosis",header_level=1)
 Show solution? $(@bind(show_disease_diagnosis_solution, CheckBox(default=false)))
 </label>
 """
+
+# ╔═╡ 9b92fc89-2036-4525-979b-d296ab29329c
+md"""
+# Summary
+"""
+
+# ╔═╡ 5da42e9a-4318-48ea-9f43-4c1e1c97bceb
+keyconceptsummary()
+
+# ╔═╡ 03692f4d-0daf-4dfc-a7ff-6b954326e4d0
+exercises()
+
+
+# ╔═╡ 3a1d380e-df80-4727-9772-f199214cf05d
+md"""
+##### The Sum Rule (**)
+
+Derive the general sum rule,
+```math
+p(A + B) = p(A) + p(B) - p(A,B)
+```
+from the elementary sum rule ``p(A) + p(\bar A) = 1`` and the sum and product rules.
+ 
+"""
+
+# ╔═╡ 99d9099f-4908-4bb3-8d59-da9cb69af04c
+hint(
+	md"""
+	Here, you may make use of the (Boolean logic) fact that ``A + B = \overline {\bar A \bar B }``. 
+	"""
+)
+
+# ╔═╡ 3b1b0869-b815-4697-9dba-3c4b4cb5ac47
+hide_solution( 
+md"""
+```math
+\begin{align}
+p\left( A + B \right)  &\underset{\mathrm{bool}}{=}  p\left( \overline {\bar A \bar B }  \right) \\
+  &\underset{\mathrm{sum}}{=} 1 - p\left( \bar{A} \bar{B} \right) \\
+  &\underset{\mathrm{prod}}{=} 1 - p\left( \bar{A} |\bar{B} \right) p\left(\bar{B}  \right) \\
+  &\underset{\mathrm{sum}}{=} 1 - \left( 1 - p\left(A|\bar B \right) \right) \left( 1 - p\left( B \right) \right) \\
+  &= p(B) + \left( {1 - p\left( B \right)} \right)p\left( {A|\bar B } \right)  \\
+  &\underset{\mathrm{prod}}{=} p(B) + \left( 1 - p\left( B \right) \right) p\left( \bar{B} |A \right) \frac{ p\left( A \right) }{ p\left(\bar{B}\right)} \\
+    &\underset{\mathrm{sum}}{=} p(B) + p\left(\bar{B} |A \right) p\left( A \right) \\
+    &\underset{\mathrm{sum}}{=} p(B) + \left( 1 - p\left( {B|A} \right) \right) p\left( A \right)  \\
+   &\underset{\mathrm{sum}}{=} p\left( A \right) + p(B) - p\left( A,B \right) 
+\end{align}
+```
+Note that, aside from the first boolean rewrite, everything follows straight application of sum and product rules. 
+
+		
+""")
+
+# ╔═╡ 5f377237-d9a5-4778-aa4d-1c6ce109b705
+md"""
+##### Apples and Oranges
+
+Box 1 contains 8 apples and 4 oranges. Box 2 contains 10 apples and 2 oranges. Boxes are chosen with equal probability. You pick a box and then select a fruit from that box.
+- (a) (*) What is the probability of choosing an apple?  
+- (b) (**) If an apple is chosen, what is the probability that it came from box 1?
+"""
+
+# ╔═╡ 5613e9b7-ff0d-435a-9de6-aaf293ebf592
+hide_solution(
+md"""
+The following probabilities are given in the problem statement,
+```math
+\begin{align}
+p(b_1) &= p(b_2) = 1/2  \\
+p(a|b_1) &= 8/12,  \quad p(a|b_2) = 10/12 \\
+p(o|b_1) &= 4/12,  \quad p(o|b_2) = 2/12
+\end{align}
+```
+(a)
+```math 
+p(a) = \sum_i p(a,b_i) = \sum_i p(a|b_i)p(b_i)=\frac{8}{12}\cdot\frac{1}{2} + \frac{10}{12}\cdot\frac{1}{2} = \frac{3}{4}
+```
+(b)		
+```math 
+p(b_1|a) = \frac{p(a,b_1)}{p(a)} = \frac{p(a|b_1)p(b_1)}{p(a)} = \frac{\frac{8}{12}\cdot\frac{1}{2}}{\frac{3}{4}} = \frac{4}{9}
+```
+"""
+)
+
+# ╔═╡ fc3151f9-e143-4e31-b7b7-3f25b4fe9dab
+md"""
+##### What is a Random Signal? (*)
+Is a speech signal a "probabilistic" (random) or a deterministic signal?
+"""
+
+# ╔═╡ 66ebe33c-8360-4938-9b51-625e5bed176c
+hide_solution(
+md"""
+That depends. The term “probabilistic” refers to a state-of-knowledge (or beliefs) about something—in this case, about the values of a speech signal. The key point is that the signal itself is neither inherently probabilistic nor deterministic; these labels describe our knowledge about it.
+
+If you had a perfect microphone and recorded the speech signal flawlessly at its source, you would know all its values exactly—no uncertainty—so you could call it deterministic.
+
+However, before making the recording, how would you represent your knowledge about the signal values you are going to measure? You face uncertainty, so the appropriate description is a probability distribution over all possible signal values.
+""")
+
+# ╔═╡ 5b681e41-ad14-4c58-8ea0-4b6d85885c51
+md"""
+##### Who Speaks the Truth? (***)
+The inhabitants of an island tell the truth one-third of the time. They lie with probability ``2/3``. On an occasion, after one of them made a statement, you ask another person "was that statement true?" and he says "yes". What is the probability that the statement was indeed true?
+
+"""
+
+# ╔═╡ 91dd40f0-c373-48b3-b83b-6e8df2c43e5a
+hide_solution(
+md"""
+We use variables ``S_1 \in \{\text{t},\text{f}\}`` and ``S_2 \in \{\text{y},\text{n}\}`` for statements 1 and 2 and shorthand "y", "n", "t" and "f" for "yes", "no", "true" and "false", respectively. The problem statement provides us with the following probabilities,
+```math		
+\begin{align}
+p(S_1=\text{t}) &= 1/3 \\
+p(S_1=\text{f}) &= 1 - p(S_1=\text{t}) = 2/3\\
+p(S_2=\text{y} | S_1=\text{t}) &= 1/3 \\
+p(S_2=\text{y} | S_1=\text{f}) &= 2/3
+\end{align}
+```
+We are asked to compute ``p(S_1=\text{t} | S_2=\text{y})``. Use Bayes rule,
+```math			
+\begin{align}
+p(S_1=\text{t} | S_2=\text{y}) &= \frac{p(S_1=\text{t},S_2=\text{y})}{p(S_2=\text{y})} \\
+&= \frac{\overbrace{p(S_2=\text{y}|S_1=\text{t})p(S_1=\text{t})}^{\text{both speak the truth}}}{\underbrace{p(S_2=\text{y}|S_1=\text{t})p(S_1=\text{t})}_{\text{both speak the truth}}+\underbrace{p(S_2=\text{y}|S_1=\text{f})p(S_1=\text{f})}_{\text{both lie}}}\\
+&= \frac{\frac{1}{3}\cdot\frac{1}{3}}{\frac{1}{3}\cdot\frac{1}{3}+\frac{2}{3}\cdot\frac{2}{3}} = \frac{1}{5}
+\end{align}
+```
+""")
+
+# ╔═╡ a8d4a517-84a7-426e-a49e-482c5fd047ae
+md"""
+##### The Likelihood Function is a Function of What? (*)
+
+When considering the distribution ``p(D|\theta)``, is it more correct to speak about the likelihood of the model parameters ``\theta`` than about the likelihood of the observed data set ``D``. And why?
+
+"""
+
+# ╔═╡ d3b003c6-70ca-419f-a343-e35b266323f3
+hide_solution(
+md"""
+Yes, it’s more correct to speak about the likelihood of the model parameters, not of the observed data set. Once ``D`` has been observed, it is no longer a random variable; it’s just a fixed outcome. What varies is ``\theta``, so ``L(\theta) = p(D|\theta)`` is a function of the parameters, not of the data.
+
+Saying “likelihood of the data” is misleading because it confuses likelihood with the sampling distribution ``p(D|\theta)`` seen as a function of ``D`` (where ``\theta`` is fixed). The latter is a probability distribution over possible data sets before observing them.
+""")
+
+# ╔═╡ be66b697-f920-4361-9ff2-b12cc50ae8c9
+md"""
+# Optional Slides
+"""
+
+# ╔═╡ 3e1803d0-d294-11ef-0304-df2b9b698cd1
+md"""
+## Preliminaries
+
+##### Goal 
+
+- Review of Probability Theory as a theory for rational/logical reasoning with uncertainties (i.e., a Bayesian interpretation)
+
+##### Materials        
+
+- Mandatory
+
+  - These lecture notes
+
+- Optional
+
+  - Bishop pp. 12-24
+
+  - [3Blue1Brown, YouTube video on Bayes theorem (2019)](https://youtu.be/HZGCoVF3YvM?si=JaXdesPjU8B_BtrC)
+    - Nice animated tutorial on Bayes rule.
+      
+  - [Edwin Jaynes, Probability Theory–The Logic of Science (2003)](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf). 
+    - Brilliant book on the Bayesian view of probability theory. Just for fun, scan the annotated bibliography and references.
+
+  - [Aubrey Clayton, Bernoulli's Fallacy–Statistical Illogic and the Crisis of Modern Science (2021)](https://aubreyclayton.com/bernoulli)
+    - A very readable account of the history of statistics and probability theory. Discusses why most popular statistics recipes are very poor scientific analysis tools. Use probability theory instead!
+
+  - [Ariel Caticha, Entropic Inference and the Foundations of Physics (2012)](https://github.com/bmlip/course/blob/main/assets/files/Caticha-2012-Entropic-Inference-and-the-Foundations-of-Physics.pdf), pp.7-56 (ch.2: probability)
+    - Great introduction to probability theory, in particular w.r.t. its correct interpretation as a state-of-knowledge.
+    - Absolutely worth your time to read the whole chapter, even if you skip section 2.2.4 (pp.15-18) on Cox's proof.
+
+  - [Joram Soch et al ., The Book of Statistical Proofs (2023 - )](https://statproofbook.github.io/)
+    - Online resource for proofs in probability theory and statistical inference.
+
+"""
+
+# ╔═╡ 3e18f18c-d294-11ef-33e4-b7f9495e0508
+md"""
+## Why Probability Theory for Machine Learning?
+
+Machine learning concerns updating our beliefs about appropriate settings for model parameters from new information (namely a data set), and therefore PT provides the *optimal calculus for machine learning*. 
+
+"""
+
+# ╔═╡ 3e1906ea-d294-11ef-236e-c966a9474170
+md"""
+In general, nearly all interesting questions in machine learning (and information processing in general) can be stated in the following form (a conditional probability):
+
+```math
+p(\texttt{whatever-we-want-to-know}\, | \,\texttt{whatever-we-do-know})
+```
+
+where ``p(A|B)`` means the probability that ``A`` is true, given that ``B`` is true.
+
+"""
+
+# ╔═╡ 3e191b6c-d294-11ef-3174-d1b4b36e252b
+md"""
+##### Examples
+
+  * Predictions
+
+```math
+p(\,\texttt{future-observations}\,|\,\texttt{past-observations}\,)
+```
+
+  * Classify a received data point ``x`` 
+
+```math
+p(\,x\texttt{-belongs-to-class-}k \,|\,x\,)
+```
+
+  * Update a model based on a new observation
+
+```math
+p(\,\texttt{model-parameters} \,|\,\texttt{new-observation},\,\texttt{past-observations}\,)
+```
+
+"""
+
+# ╔═╡ 3e192ef4-d294-11ef-1fc4-87175eeec5eb
+md"""
+## Frequentist vs. Bayesian Interpretation of Probabilities
+
+The interpretation of a probability as a **degree-of-belief** about the truth value of an event is also called the **Bayesian** interpretation.  
+
+"""
+
+# ╔═╡ 3e19436c-d294-11ef-11c5-f9914f7a3a57
+md"""
+In the **Bayesian** interpretation, the probability is associated with a **state-of-knowledge** (usually held by a person, but formally by a rational agent). 
+
+  * For instance, in a coin tossing experiment, ``p(\texttt{outcome} = \texttt{tail}) = 0.4`` should be interpreted as the belief that there is a 40% chance that ``\texttt{tail}`` comes up if the coin were tossed.
+  * Under the Bayesian interpretation, PT calculus (sum and product rules) **extends boolean logic to rational reasoning with uncertainty**.
+
+"""
+
+# ╔═╡ 4edf38ab-a940-4ab0-be22-fa95cf571146
+md"""
+In the Bayesian interpretation, all probabilities are, in principle, conditional probabilities of the type ``p(A|I)``, since there is always some background knowledge. However, we often write ``p(A)`` rather than ``p(A|I)`` if the background knowledge ``I`` is assumed to be obviously present. E.g., we usually write ``p(A)`` rather than ``p(\,A\,|\,\text{the-sun-comes-up-tomorrow}\,)``.
+
+"""
+
+# ╔═╡ 3e194ef2-d294-11ef-3b38-1ddc3063ff35
+md"""
+The Bayesian interpretation contrasts with the **frequentist** interpretation of a probability as the relative frequency that an event would occur under repeated execution of an experiment.
+
+  * For instance, if the experiment is tossing a coin, then ``p(\texttt{outcome} = \texttt{tail}) = 0.4`` means that in the limit of a large number of coin tosses, 40% of outcomes turn up as ``\texttt{tail}``.
+
+"""
+
+# ╔═╡ 3e1964b4-d294-11ef-373d-712257fc130f
+md"""
+The Bayesian viewpoint is more generally applicable than the frequentist viewpoint, e.g., it is hard to apply the frequentist viewpoint to events like ``\texttt{"it will rain tomorrow"}``. 
+
+"""
+
+# ╔═╡ 3e196d6a-d294-11ef-0795-41c045079251
+md"""
+The Bayesian viewpoint is clearly favored in the machine learning community. (In this class, we also strongly favor the Bayesian interpretation). 
+
+"""
+
+# ╔═╡ 3e198336-d294-11ef-26fd-03cd15876486
+md"""
+Aubrey Clayton, in his wonderful book [Bernoulli's fallacy](https://aubreyclayton.com/bernoulli) (2021), writes about this issue: 
+
+> “Compared with Bayesian methods, standard [frequentist] statistical techniques use only a small fraction of the available information about a research hypothesis (how well it predicts some observation), so naturally they will struggle when that limited information proves inadequate. Using standard statistical methods is like driving a car at night on a poorly lit highway: to keep from going in a ditch, we could build an elaborate system of bumpers and guardrails and equip the car with lane departure warnings and sophisticated navigation systems, and even then we could at best only drive to a few destinations. Or we could turn on the headlights.”
+
+
+"""
+
+# ╔═╡ 3e198ba6-d294-11ef-3fe7-d70bf4833fa6
+md"""
+In this class, we aim to turn on the headlights and illuminate the elegance and power of the Bayesian approach to information processing. 
+
+"""
+
+# ╔═╡ 3e19e95a-d294-11ef-3da4-6d23922a5150
+md"""
+## Variable Assignments as Propositions 
+
+
+"""
+
+# ╔═╡ 3e1a69f4-d294-11ef-103e-efc47025fb8f
+md"""
+If ``X`` is a variable, then an *assignment* ``X=x`` (where ``x`` is a value, e.g., ``X=5``) can be interpreted as an event. Hence, the expression ``p(X=5)`` should be interpreted as the *degree-of-belief of the event* that variable ``X`` takes on the value ``5``. 
+
+"""
+
+# ╔═╡ 3e1a7c8e-d294-11ef-1f97-55e608d49141
+md"""
+If ``X`` is a *discretely* valued variable, then ``p(X=x)`` is a probability *mass* function (PMF) with ``0\le p(X=x)\le 1`` and normalization ``\sum_x p(x) =1``. 
+
+"""
+
+# ╔═╡ 3e1a8eca-d294-11ef-1ef0-c15b24d05990
+md"""
+If ``X`` is *continuously* valued, then ``p(X=x)`` is a probability *density* function (PDF) with ``p(X=x)\ge 0``  and normalization ``\int_x p(x)\mathrm{d}x=1``. 
+
+  * Note that if ``X`` is continuously valued, then the value of ``p(x)`` is not necessarily ``\le 1``. E.g., a uniform distribution on the continuous domain ``[0,.5]`` has value ``p(x) = 2`` over its domain.
+
+"""
+
+# ╔═╡ 3e1bffec-d294-11ef-2a49-9ff0f6331add
+md"""
+## Bayes Rule Nomenclature
+
+Some nomenclature associated with Bayes rule:
+
+```math
+\underbrace{p(\theta | D)}_{\text{posterior}} = \frac{\overbrace{p(D|\theta)}^{\text{likelihood}} \times \overbrace{p(\theta)}^{\text{prior}}}{\underbrace{p(D)}_{\text{evidence}}}
+```
+
+"""
+
+# ╔═╡ 3e1c0e80-d294-11ef-0d19-375e01988f16
+md"""
+Note that the evidence (a.k.a. *marginal likelihood* ) can be computed from the numerator through marginalization since
+
+```math
+ p(D) = \int p(D,\theta) \,\mathrm{d}\theta = \int p(D|\theta)\,p(\theta) \,\mathrm{d}\theta
+```
+
+"""
+
+# ╔═╡ 3e1c1e3e-d294-11ef-0955-bdf9d0ba3c53
+md"""
+Hence, having access to likelihood and prior is in principle sufficient to compute both the evidence and the posterior. To emphasize that point, Bayes rule is sometimes written as a transformation:
+
+```math
+ \underbrace{\underbrace{p(\theta|D)}_{\text{posterior}}\cdot \underbrace{p(D)}_{\text{evidence}}}_{\text{this is what we want to compute}} = \underbrace{\underbrace{p(D|\theta)}_{\text{likelihood}}\cdot \underbrace{p(\theta)}_{\text{prior}}}_{\text{this is available}}
+```
+
+"""
+
+# ╔═╡ 3e1c4224-d294-11ef-2707-49470aaae6eb
+md"""
+For a given data set ``D``, the posterior probabilities of the parameters scale relatively against each other as
+
+```math
+p(\theta|D) \propto p(D|\theta) p(\theta)
+```
+
+Hence, all that we can learn from the observed data is contained in the likelihood function ``p(D|\theta)``. This is called the **likelihood principle**.
+
+"""
+
+# ╔═╡ 3e1c51e2-d294-11ef-2c6d-d32a98308c6f
+md"""
+## The Likelihood Function vs the Sampling Distribution
+
+Consider a distribution ``p(D|\theta)``, where ``D`` relates to variables that are observed (i.e., a "data set") and ``\theta`` are model parameters.
+
+"""
+
+# ╔═╡ 3e1c60ba-d294-11ef-3a01-cf9e97512857
+md"""
+In general, ``p(D|\theta)`` is just a function of the two variables ``D`` and ``\theta``. We distinguish two interpretations of this function, depending on which variable is observed (or given by other means). 
+
+"""
+
+# ╔═╡ 3e1c70be-d294-11ef-14ed-0d46515541c5
+md"""
+The **sampling distribution** (a.k.a. the **data-generating** distribution) 
+
+```math
+p(D|\theta=\theta_0)
+```
+
+(which is a function of ``D`` only) describes a probability distribution for data ``D``, assuming that it is generated by the given model with parameters fixed at ``\theta = \theta_0``.
+
+"""
+
+# ╔═╡ 3e1c806a-d294-11ef-1fad-17e5625279f7
+md"""
+In a machine learning context, often the data is observed, and ``\theta`` is the free variable. In that case, for given observations ``D=D_0``, the **likelihood function** (which is a function only of the model parameters ``\theta``) is defined as 
+
+```math
+L(\theta) \triangleq p(D=D_0|\theta)
+```
+
+"""
+
+# ╔═╡ 3e1c9184-d294-11ef-3e35-5393d97fbc44
+md"""
+Note that ``L(\theta)`` is not a probability distribution for ``\theta`` since in general ``\sum_\theta L(\theta) \neq 1``.
+
+"""
+
+# ╔═╡ e3157dc0-5a64-4479-a37a-40fe25cccc07
+code_example("Sampling Distribution and Likelihood Function for the Coin Toss")
+
+# ╔═╡ d93f73d4-2783-4777-b0ce-cdc0444cb300
+md"""
+
+Consider the following simple model for the outcome ``y \in \{0,1\}`` (tail = ``0``, head = ``1``) of a biased coin toss with a real parameter $θ_bond ``= \theta \in [0,1]``:
+
+```math
+\begin{align*}
+p(y|\theta) = \theta^y (1-\theta)^{1-y}\\
+\end{align*}
+```
+
+Next, we use Julia to plot both the sampling distribution 
+
+"""
+
+# ╔═╡ 7d493e09-f7cc-4e13-a506-b792edcbf390
+md"""
+
+and the likelihood function 
+
+```math
+L(\theta) \triangleq p(y=1|\theta) = \theta \,.
+```
+
+"""
+
+# ╔═╡ b7445b9b-7fbb-4560-b947-a23af0fcf101
+md"""
+Click and drag this number to change ``\theta``: $θ_bond.
+"""
+
+# ╔═╡ 3e1d20e0-d294-11ef-2044-e1fe6590a600
+md"""
+!!! note
+	The (discrete) sampling distribution is a valid probability distribution. 
+	
+	However, the likelihood function ``L(\theta)`` clearly isn't, since ``\int_0^1 L(\theta) \mathrm{d}\theta = 0.5 \neq 1``. 
+"""
+
+# ╔═╡ fc733d61-fd0f-4a13-9afc-4505ac0253df
+f(y,θ) = θ.^y .* (1 .- θ).^(1 .- y) # p(y|θ)
+
+# ╔═╡ 8a7dd8b7-5faf-4091-8451-9769f842accb
+let
+	p1 = plot(
+			[0,1], f([0,1], θ);
+			line=:stem, 
+			marker=:circle, 
+			xrange=(-0.5, 1.5), yrange=(0,1), 
+			title="Sampling Distribution", 
+			xlabel="y", ylabel=L"p(y|θ=%$θ)", label=""
+		 )
+	
+	_θ = 0:0.01:1
+	y=1
+	p2 = plot(
+			_θ, f(y, _θ);
+			ylabel=L"p(y=%$y | θ)", xlabel=L"θ", 
+			title="Likelihood Function", label=""
+		 )
+	scatter!(p2,
+			[θ], [f(y, θ)];
+			label=nothing,
+			)
+	
+	plot(p1, p2)
+end
 
 # ╔═╡ ef264651-854e-4374-8ea8-5476c85150c4
 md"# Moments and Transformations"
@@ -1244,150 +1383,6 @@ p_y(y) &= p_x(g(y)) \cdot g^\prime(y) \\
 In the statistics literature, ``y = \frac{x-\mu}{\sigma}`` is called the **standardized** variable since it transforms a general normal variable into a standard normal one.)
 """)
 
-# ╔═╡ 9b92fc89-2036-4525-979b-d296ab29329c
-md"""
-# Summary
-"""
-
-# ╔═╡ 5da42e9a-4318-48ea-9f43-4c1e1c97bceb
-keyconceptsummary()
-
-# ╔═╡ 03692f4d-0daf-4dfc-a7ff-6b954326e4d0
-exercises()
-
-
-# ╔═╡ 3a1d380e-df80-4727-9772-f199214cf05d
-md"""
-##### The Sum Rule (**)
-
-Derive the general sum rule,
-```math
-p(A + B) = p(A) + p(B) - p(A,B)
-```
-from the elementary sum rule ``p(A) + p(\bar A) = 1`` and the sum and product rules.
- 
-"""
-
-# ╔═╡ 99d9099f-4908-4bb3-8d59-da9cb69af04c
-hint(
-	md"""
-	Here, you may make use of the (Boolean logic) fact that ``A + B = \overline {\bar A \bar B }``. 
-	"""
-)
-
-# ╔═╡ 3b1b0869-b815-4697-9dba-3c4b4cb5ac47
-hide_solution( 
-md"""
-```math
-\begin{align}
-p\left( A + B \right)  &\underset{\mathrm{bool}}{=}  p\left( \overline {\bar A \bar B }  \right) \\
-  &\underset{\mathrm{sum}}{=} 1 - p\left( \bar{A} \bar{B} \right) \\
-  &\underset{\mathrm{prod}}{=} 1 - p\left( \bar{A} |\bar{B} \right) p\left(\bar{B}  \right) \\
-  &\underset{\mathrm{sum}}{=} 1 - \left( 1 - p\left(A|\bar B \right) \right) \left( 1 - p\left( B \right) \right) \\
-  &= p(B) + \left( {1 - p\left( B \right)} \right)p\left( {A|\bar B } \right)  \\
-  &\underset{\mathrm{prod}}{=} p(B) + \left( 1 - p\left( B \right) \right) p\left( \bar{B} |A \right) \frac{ p\left( A \right) }{ p\left(\bar{B}\right)} \\
-    &\underset{\mathrm{sum}}{=} p(B) + p\left(\bar{B} |A \right) p\left( A \right) \\
-    &\underset{\mathrm{sum}}{=} p(B) + \left( 1 - p\left( {B|A} \right) \right) p\left( A \right)  \\
-   &\underset{\mathrm{sum}}{=} p\left( A \right) + p(B) - p\left( A,B \right) 
-\end{align}
-```
-Note that, aside from the first boolean rewrite, everything follows straight application of sum and product rules. 
-
-		
-""")
-
-# ╔═╡ 5f377237-d9a5-4778-aa4d-1c6ce109b705
-md"""
-##### Apples and Oranges
-
-Box 1 contains 8 apples and 4 oranges. Box 2 contains 10 apples and 2 oranges. Boxes are chosen with equal probability. You pick a box and then select a fruit from that box.
-- (a) (*) What is the probability of choosing an apple?  
-- (b) (**) If an apple is chosen, what is the probability that it came from box 1?
-"""
-
-# ╔═╡ 5613e9b7-ff0d-435a-9de6-aaf293ebf592
-hide_solution(
-md"""
-The following probabilities are given in the problem statement,
-```math
-\begin{align}
-p(b_1) &= p(b_2) = 1/2  \\
-p(a|b_1) &= 8/12,  \quad p(a|b_2) = 10/12 \\
-p(o|b_1) &= 4/12,  \quad p(o|b_2) = 2/12
-\end{align}
-```
-(a)
-```math 
-p(a) = \sum_i p(a,b_i) = \sum_i p(a|b_i)p(b_i)=\frac{8}{12}\cdot\frac{1}{2} + \frac{10}{12}\cdot\frac{1}{2} = \frac{3}{4}
-```
-(b)		
-```math 
-p(b_1|a) = \frac{p(a,b_1)}{p(a)} = \frac{p(a|b_1)p(b_1)}{p(a)} = \frac{\frac{8}{12}\cdot\frac{1}{2}}{\frac{3}{4}} = \frac{4}{9}
-```
-"""
-)
-
-# ╔═╡ fc3151f9-e143-4e31-b7b7-3f25b4fe9dab
-md"""
-##### What is a Random Signal? (*)
-Is a speech signal a "probabilistic" (random) or a deterministic signal?
-"""
-
-# ╔═╡ 66ebe33c-8360-4938-9b51-625e5bed176c
-hide_solution(
-md"""
-That depends. The term “probabilistic” refers to a state-of-knowledge (or beliefs) about something—in this case, about the values of a speech signal. The key point is that the signal itself is neither inherently probabilistic nor deterministic; these labels describe our knowledge about it.
-
-If you had a perfect microphone and recorded the speech signal flawlessly at its source, you would know all its values exactly—no uncertainty—so you could call it deterministic.
-
-However, before making the recording, how would you represent your knowledge about the signal values you are going to measure? You face uncertainty, so the appropriate description is a probability distribution over all possible signal values.
-""")
-
-# ╔═╡ 5b681e41-ad14-4c58-8ea0-4b6d85885c51
-md"""
-##### Who Speaks the Truth? (***)
-The inhabitants of an island tell the truth one-third of the time. They lie with probability ``2/3``. On an occasion, after one of them made a statement, you ask another person "was that statement true?" and he says "yes". What is the probability that the statement was indeed true?
-
-"""
-
-# ╔═╡ 91dd40f0-c373-48b3-b83b-6e8df2c43e5a
-hide_solution(
-md"""
-We use variables ``S_1 \in \{\text{t},\text{f}\}`` and ``S_2 \in \{\text{y},\text{n}\}`` for statements 1 and 2 and shorthand "y", "n", "t" and "f" for "yes", "no", "true" and "false", respectively. The problem statement provides us with the following probabilities,
-```math		
-\begin{align}
-p(S_1=\text{t}) &= 1/3 \\
-p(S_1=\text{f}) &= 1 - p(S_1=\text{t}) = 2/3\\
-p(S_2=\text{y} | S_1=\text{t}) &= 1/3 \\
-p(S_2=\text{y} | S_1=\text{f}) &= 2/3
-\end{align}
-```
-We are asked to compute ``p(S_1=\text{t} | S_2=\text{y})``. Use Bayes rule,
-```math			
-\begin{align}
-p(S_1=\text{t} | S_2=\text{y}) &= \frac{p(S_1=\text{t},S_2=\text{y})}{p(S_2=\text{y})} \\
-&= \frac{\overbrace{p(S_2=\text{y}|S_1=\text{t})p(S_1=\text{t})}^{\text{both speak the truth}}}{\underbrace{p(S_2=\text{y}|S_1=\text{t})p(S_1=\text{t})}_{\text{both speak the truth}}+\underbrace{p(S_2=\text{y}|S_1=\text{f})p(S_1=\text{f})}_{\text{both lie}}}\\
-&= \frac{\frac{1}{3}\cdot\frac{1}{3}}{\frac{1}{3}\cdot\frac{1}{3}+\frac{2}{3}\cdot\frac{2}{3}} = \frac{1}{5}
-\end{align}
-```
-""")
-
-# ╔═╡ a8d4a517-84a7-426e-a49e-482c5fd047ae
-md"""
-##### The Likelihood Function is a Function of What? (*)
-
-When considering the distribution ``p(D|\theta)``, is it more correct to speak about the likelihood of the model parameters ``\theta`` than about the likelihood of the observed data set ``D``. And why?
-
-"""
-
-# ╔═╡ d3b003c6-70ca-419f-a343-e35b266323f3
-hide_solution(
-md"""
-Yes, it’s more correct to speak about the likelihood of the model parameters, not of the observed data set. Once ``D`` has been observed, it is no longer a random variable; it’s just a fixed outcome. What varies is ``\theta``, so ``L(\theta) = p(D|\theta)`` is a function of the parameters, not of the data.
-
-Saying “likelihood of the data” is misleading because it confuses likelihood with the sampling distribution ``p(D|\theta)`` seen as a function of ``D`` (where ``\theta`` is fixed). The latter is a probability distribution over possible data sets before observing them.
-""")
-
 # ╔═╡ dd31ec7c-708d-4fd7-958d-f9887798a5bc
 md"""
 # Code
@@ -1430,16 +1425,6 @@ result = (sensitivity * prevalence) / (sensitivity * prevalence + (1 - specifici
 # ╔═╡ 4a81342c-17c7-4eb9-933b-edb98df7b9c4
 n(x; digits=2) = @sprintf("%.*f", digits, x)
 
-# ╔═╡ 079157c9-5d97-4dbc-8c47-afa8b661db06
-let
-	θ_str = n(θ)
-	@mdx """
-	```math
-	p(y|\\theta=$(n(θ))) = \\begin{cases} $(n(1-θ)) & \\text{if }y=0 \\\\ $(n(θ)) & \\text{if } y=1 \\end{cases}
-	```
-	"""
-end
-
 # ╔═╡ 2156f96e-eebe-4190-8ce9-c76825c6da71
 if show_disease_diagnosis_solution
 	@mdx("""
@@ -1464,6 +1449,16 @@ Note that ``p(\\text{sick}|\\text{positive test}) = $(n(result))`` while ``p(\\t
 Many people have trouble distinguishing ``p(A|B)`` from ``p(B|A)`` in their heads. This has led to major negative consequences. For instance, unfounded convictions in the legal arena and numerous unfounded conclusions in the pursuit of scientific results. See [Ioannidis (2005)](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0020124) and [Clayton (2021)](https://aubreyclayton.com/bernoulli).
 
 """)
+end
+
+# ╔═╡ 079157c9-5d97-4dbc-8c47-afa8b661db06
+let
+	θ_str = n(θ)
+	@mdx """
+	```math
+	p(y|\\theta=$(n(θ))) = \\begin{cases} $(n(1-θ)) & \\text{if }y=0 \\\\ $(n(θ)) & \\text{if } y=1 \\end{cases}
+	```
+	"""
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -2761,7 +2756,6 @@ version = "1.9.2+0"
 # ╔═╡ Cell order:
 # ╟─3e17df5e-d294-11ef-38c7-f573724871d8
 # ╟─bcb4be20-0439-4809-a166-8c50b6b9206b
-# ╟─3e1803d0-d294-11ef-0304-df2b9b698cd1
 # ╟─61713e1c-8e37-45d9-9f58-c3db69e15b66
 # ╟─3e185ab0-d294-11ef-3f7d-9bd465518274
 # ╟─840ab4dc-0d2e-4bf8-acc7-5f1ee2b0dcaf
@@ -2772,6 +2766,51 @@ version = "1.9.2+0"
 # ╟─3e18d2ea-d294-11ef-35e9-2332dd31dbf0
 # ╟─4abbb3de-3b21-4c31-b015-e16c466a20aa
 # ╟─3e18e4bc-d294-11ef-38bc-cb97cb4e0963
+# ╟─3e1ab104-d294-11ef-1a98-412946949fba
+# ╟─fea8ae4c-8ef9-4b74-ad13-1314afef97de
+# ╟─3e1b4b1c-d294-11ef-0423-9152887cc403
+# ╟─3e1b5c9c-d294-11ef-137f-d75b3731eae4
+# ╟─3e1b7d14-d294-11ef-0d10-1148a928dd57
+# ╟─5377c5a4-77c4-4fa7-9f84-0c511e3bf708
+# ╟─3e1b8bf4-d294-11ef-04cc-6364e46fdd64
+# ╟─3e1b9ba8-d294-11ef-18f2-db8eed3d87d0
+# ╟─3e1babca-d294-11ef-37c1-cd821a6488b2
+# ╟─3e1bcb00-d294-11ef-2795-bd225bd00496
+# ╟─3e1bdd02-d294-11ef-19e8-2f44eccf58af
+# ╟─3e1bf116-d294-11ef-148b-f7a1ca3f3bad
+# ╟─16c2eb59-16b8-4347-9aab-6e4b99016c79
+# ╟─3e1d33c8-d294-11ef-0a08-bdc419949925
+# ╟─3e1b05ee-d294-11ef-33de-efed64d01c0d
+# ╟─b176ceae-884e-4460-9f66-020c1ac447f1
+# ╟─ab223dea-8ba8-4d30-94f4-72c8e070aadf
+# ╟─922770f4-ddc8-4089-b378-f14088276b43
+# ╟─3e1de32c-d294-11ef-1f63-f190c8361404
+# ╟─4c639e65-e06b-4c5e-b6e7-aabed6b6c0b4
+# ╟─ff9142ba-3a85-48cf-8b78-07e0b554e280
+# ╟─3e027ede-4ac1-4521-a026-dc00bfca4adf
+# ╟─3e1e2b96-d294-11ef-3a68-fdc78232142e
+# ╟─727dc817-0284-4c0f-9a92-21dcbea50807
+# ╟─fae6f2ce-ac8f-4ea6-b2cf-38b30a7e20d4
+# ╟─ea803646-b18e-4f13-ab6a-fc5080d44e92
+# ╟─3e1d6d00-d294-11ef-1081-e11b8397eb91
+# ╟─9b85a92b-c56b-48a3-97c1-6b1882e33a22
+# ╟─2156f96e-eebe-4190-8ce9-c76825c6da71
+# ╟─9b92fc89-2036-4525-979b-d296ab29329c
+# ╟─5da42e9a-4318-48ea-9f43-4c1e1c97bceb
+# ╟─03692f4d-0daf-4dfc-a7ff-6b954326e4d0
+# ╟─3a1d380e-df80-4727-9772-f199214cf05d
+# ╟─99d9099f-4908-4bb3-8d59-da9cb69af04c
+# ╟─3b1b0869-b815-4697-9dba-3c4b4cb5ac47
+# ╟─5f377237-d9a5-4778-aa4d-1c6ce109b705
+# ╟─5613e9b7-ff0d-435a-9de6-aaf293ebf592
+# ╟─fc3151f9-e143-4e31-b7b7-3f25b4fe9dab
+# ╟─66ebe33c-8360-4938-9b51-625e5bed176c
+# ╟─5b681e41-ad14-4c58-8ea0-4b6d85885c51
+# ╟─91dd40f0-c373-48b3-b83b-6e8df2c43e5a
+# ╟─a8d4a517-84a7-426e-a49e-482c5fd047ae
+# ╟─d3b003c6-70ca-419f-a343-e35b266323f3
+# ╟─be66b697-f920-4361-9ff2-b12cc50ae8c9
+# ╟─3e1803d0-d294-11ef-0304-df2b9b698cd1
 # ╟─3e18f18c-d294-11ef-33e4-b7f9495e0508
 # ╟─3e1906ea-d294-11ef-236e-c966a9474170
 # ╟─3e191b6c-d294-11ef-3174-d1b4b36e252b
@@ -2787,20 +2826,6 @@ version = "1.9.2+0"
 # ╟─3e1a69f4-d294-11ef-103e-efc47025fb8f
 # ╟─3e1a7c8e-d294-11ef-1f97-55e608d49141
 # ╟─3e1a8eca-d294-11ef-1ef0-c15b24d05990
-# ╟─3e1ab104-d294-11ef-1a98-412946949fba
-# ╟─fea8ae4c-8ef9-4b74-ad13-1314afef97de
-# ╟─3e1b4b1c-d294-11ef-0423-9152887cc403
-# ╟─3e1b5c9c-d294-11ef-137f-d75b3731eae4
-# ╟─3e1b7d14-d294-11ef-0d10-1148a928dd57
-# ╟─5377c5a4-77c4-4fa7-9f84-0c511e3bf708
-# ╟─3e1b8bf4-d294-11ef-04cc-6364e46fdd64
-# ╟─3e1b9ba8-d294-11ef-18f2-db8eed3d87d0
-# ╟─3e1babca-d294-11ef-37c1-cd821a6488b2
-# ╟─3e1bba8e-d294-11ef-1f61-295af16078ce
-# ╟─3e1bcb00-d294-11ef-2795-bd225bd00496
-# ╟─3e1bdd02-d294-11ef-19e8-2f44eccf58af
-# ╟─3e1bf116-d294-11ef-148b-f7a1ca3f3bad
-# ╟─16c2eb59-16b8-4347-9aab-6e4b99016c79
 # ╟─3e1bffec-d294-11ef-2a49-9ff0f6331add
 # ╟─3e1c0e80-d294-11ef-0d19-375e01988f16
 # ╟─3e1c1e3e-d294-11ef-0955-bdf9d0ba3c53
@@ -2810,9 +2835,6 @@ version = "1.9.2+0"
 # ╟─3e1c70be-d294-11ef-14ed-0d46515541c5
 # ╟─3e1c806a-d294-11ef-1fad-17e5625279f7
 # ╟─3e1c9184-d294-11ef-3e35-5393d97fbc44
-# ╟─3e1d33c8-d294-11ef-0a08-bdc419949925
-# ╟─3e1b05ee-d294-11ef-33de-efed64d01c0d
-# ╟─b176ceae-884e-4460-9f66-020c1ac447f1
 # ╟─e3157dc0-5a64-4479-a37a-40fe25cccc07
 # ╟─d93f73d4-2783-4777-b0ce-cdc0444cb300
 # ╟─079157c9-5d97-4dbc-8c47-afa8b661db06
@@ -2821,19 +2843,6 @@ version = "1.9.2+0"
 # ╟─b7445b9b-7fbb-4560-b947-a23af0fcf101
 # ╟─3e1d20e0-d294-11ef-2044-e1fe6590a600
 # ╠═fc733d61-fd0f-4a13-9afc-4505ac0253df
-# ╟─ab223dea-8ba8-4d30-94f4-72c8e070aadf
-# ╟─922770f4-ddc8-4089-b378-f14088276b43
-# ╟─3e1de32c-d294-11ef-1f63-f190c8361404
-# ╟─4c639e65-e06b-4c5e-b6e7-aabed6b6c0b4
-# ╟─ff9142ba-3a85-48cf-8b78-07e0b554e280
-# ╟─3e027ede-4ac1-4521-a026-dc00bfca4adf
-# ╟─3e1e2b96-d294-11ef-3a68-fdc78232142e
-# ╟─727dc817-0284-4c0f-9a92-21dcbea50807
-# ╟─fae6f2ce-ac8f-4ea6-b2cf-38b30a7e20d4
-# ╟─ea803646-b18e-4f13-ab6a-fc5080d44e92
-# ╟─3e1d6d00-d294-11ef-1081-e11b8397eb91
-# ╟─9b85a92b-c56b-48a3-97c1-6b1882e33a22
-# ╟─2156f96e-eebe-4190-8ce9-c76825c6da71
 # ╟─ef264651-854e-4374-8ea8-5476c85150c4
 # ╟─3e1e4dda-d294-11ef-33b7-4bbe3300ca22
 # ╟─3e1e5a5a-d294-11ef-2fdf-efee4eb1a0f2
@@ -2869,21 +2878,7 @@ version = "1.9.2+0"
 # ╟─db73766d-643c-41d7-a1eb-f376c657f860
 # ╟─3e1fb370-d294-11ef-1fb6-63a41a024691
 # ╟─317707a3-9ef1-4c67-b451-6adcfcff50f0
-# ╟─9b92fc89-2036-4525-979b-d296ab29329c
-# ╟─5da42e9a-4318-48ea-9f43-4c1e1c97bceb
-# ╟─03692f4d-0daf-4dfc-a7ff-6b954326e4d0
-# ╟─3a1d380e-df80-4727-9772-f199214cf05d
-# ╟─99d9099f-4908-4bb3-8d59-da9cb69af04c
-# ╟─3b1b0869-b815-4697-9dba-3c4b4cb5ac47
-# ╟─5f377237-d9a5-4778-aa4d-1c6ce109b705
-# ╟─5613e9b7-ff0d-435a-9de6-aaf293ebf592
-# ╟─fc3151f9-e143-4e31-b7b7-3f25b4fe9dab
-# ╟─66ebe33c-8360-4938-9b51-625e5bed176c
-# ╟─5b681e41-ad14-4c58-8ea0-4b6d85885c51
-# ╟─91dd40f0-c373-48b3-b83b-6e8df2c43e5a
-# ╟─a8d4a517-84a7-426e-a49e-482c5fd047ae
-# ╟─d3b003c6-70ca-419f-a343-e35b266323f3
-# ╟─dd31ec7c-708d-4fd7-958d-f9887798a5bc
+# ╠═dd31ec7c-708d-4fd7-958d-f9887798a5bc
 # ╠═eeb9a1f5-b857-4843-920b-2e4a9656f66b
 # ╠═5394e37c-ae00-4042-8ada-3bbf32fbca9e
 # ╠═b305a905-06c2-4a15-8042-72ef6375720f
