@@ -423,10 +423,10 @@ Let's now further work out the Kalman filter, starting from Eq. KF-1:
 ```math
 \begin{align*}
  \underbrace{\mathcal{N}(x_t|c z_t, \sigma_x^2)}_{\text{likelihood}} &\, \int \underbrace{\mathcal{N}(z_t\,|\,a z_{t-1},\sigma_z^2)}_{\substack{\text{state transition,} \\ \text{use (1)}} } \, \underbrace{\mathcal{N}(z_{t-1} \,|\, \mu_{t-1}, \sigma_{t-1}^2) }_{\text{prior}}  \mathrm{d}z_{t-1} = \\
-&= \mathcal{N}(x_t|c z_t, \sigma_x^2) \, \int \frac{1}{a}\underbrace{\mathcal{N}\left(z_{t-1}\bigm|  \frac{z_t}{a},\left(\frac{\sigma_z}{a}\right)^2 \right) \mathcal{N}(z_{t-1} \,|\, \mu_{t-1}, \sigma_{t-1}^2)}_{\text{use Gaussian multiplication formula SRG-6}} \mathrm{d}z_{t-1} \\
+&= \mathcal{N}(x_t|c z_t, \sigma_x^2) \, \int \frac{1}{a}\underbrace{\mathcal{N}\left(z_{t-1}\bigm|  \frac{z_t}{a},\left(\frac{\sigma_z}{a}\right)^2 \right) \mathcal{N}(z_{t-1} \,|\, \mu_{t-1}, \sigma_{t-1}^2)}_{\text{use Gaussian multiplication formula}} \mathrm{d}z_{t-1} \\
 &= \frac{1}{a} \mathcal{N}(x_t|c z_t, \sigma_x^2) \, \int \underbrace{\mathcal{N}\left(\mu_{t-1}\bigm|  \frac{z_t}{a},\left(\frac{\sigma_z}{a}\right)^2 + \sigma_{t-1}^2 \right)}_{\text{not a function of }z_{t-1}} \underbrace{\mathcal{N}(z_{t-1} \,|\, \cdot, \cdot)}_{\text{integrates to }1} \mathrm{d}z_{t-1} \\
 &= \frac{1}{a} \underbrace{\mathcal{N}(x_t|c z_t, \sigma_x^2)}_{\text{use (1))}} \, \underbrace{\mathcal{N}\left(\mu_{t-1}\bigm|  \frac{z_t}{a},\left(\frac{\sigma_z}{a}\right)^2 + \sigma_{t-1}^2 \right)}_{\text{use (1)}} \\
-&= \frac{1}{c} \underbrace{\mathcal{N}\left(z_t \bigm|  \frac{x_t}{c}, \left( \frac{\sigma_x}{c}\right)^2 \right) \mathcal{N}\left(z_t\, \bigm|\,a \mu_{t-1},\sigma_z^2 + \left(a \sigma_{t-1}\right)^2 \right)}_{\text{use SRG-6 again}} \\
+&= \frac{1}{c} \underbrace{\mathcal{N}\left(z_t \bigm|  \frac{x_t}{c}, \left( \frac{\sigma_x}{c}\right)^2 \right) \mathcal{N}\left(z_t\, \bigm|\,a \mu_{t-1},\sigma_z^2 + \left(a \sigma_{t-1}\right)^2 \right)}_{\text{use Gaussian multiplication formula}} \\
 &= \underbrace{\frac{1}{c} \mathcal{N}\left( \frac{x_t}{c} \bigm| a \mu_{t-1}, \left( \frac{\sigma_x}{c}\right)^2+ \sigma_z^2 + \left(a \sigma_{t-1}\right)^2\right)}_{\text{use (1)}} \, \mathcal{N}\left( z_t \,|\, \mu_t, \sigma_t^2\right)\\
   &= \underbrace{\mathcal{N}\left(x_t \,|\, ca \mu_{t-1}, \sigma_x^2 + c^2(\sigma_z^2+a^2\sigma_{t-1}^2) \right)}_{\text{evidence } p(x_t|x^{t-1})} \cdot \underbrace{\mathcal{N}\left( z_t \,|\, \mu_t, \sigma_t^2\right)}_{\text{posterior }p(z_t|x^t) }
 \end{align*}
