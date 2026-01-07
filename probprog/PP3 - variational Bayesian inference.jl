@@ -440,7 +440,6 @@ function get_data_file(name::String)
 		p
 	else
 		# ...otherwise download it from our github repo
-		Downloads.download("https://raw.githubusercontent.com/bmlip/course/refs/tags/v4/probprog/data/$(name)")
 		download("https://raw.githubusercontent.com/bmlip/course/refs/tags/v4/probprog/data/$(name)")
 	end
 end
