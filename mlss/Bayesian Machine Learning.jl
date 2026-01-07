@@ -31,7 +31,7 @@ using BmlipTeachingTools
 using MarkdownLiteral: @mdx
 
 # ╔═╡ 3f8fd1c3-202e-45a6-ab03-5229863db297
-using Distributions, Random, ExponentialFamily, LinearAlgebra, LogExpFunctions, StatsFuns, BayesBase, Optim, SpecialFunctions
+using Distributions, Random, ExponentialFamily, LinearAlgebra, LogExpFunctions, StatsFuns, BayesBase, Optim, SpecialFunctions, StableRNGs, Printf
 
 # ╔═╡ 3987d441-b9c8-4bb1-8b2d-0cc78d78819e
 using Plots, StatsPlots, LaTeXStrings, Plots.PlotMeasures
@@ -51,7 +51,6 @@ md"""
 ##### Problem 
 We observe the following sequence of heads (outcome ``=1``) and tails (outcome ``=0``) when tossing the same coin repeatedly.
 
-Number of tosses: $(@bind intro_N Slider(1:20; default=7, show_value=true))
 """
 
 # ╔═╡ daa1df0e-4ec5-4fb1-a355-a42c35bd35b9
@@ -621,18 +620,10 @@ The above integral computes the mean of a beta distribution, which is given by `
 
 """
 
-# ╔═╡ 5483148f-b385-4afa-ad85-70efe08ba299
-TODO("below should incorporate the slider again and execute the predictions for both models.")
-
-# ╔═╡ 6a2a0f18-d294-11ef-02c2-ef117377ca66
+# ╔═╡ 95a3e1f8-2ff5-4168-9988-b033fe35a751
 md"""
-Finally, we're ready to solve our challenge: for ``D=\{1011001\}`` and uniform prior (``\alpha=\beta=1``), we get
-
-```math
- p(x_\bullet=1|D)=\frac{n+1}{N+2} = \frac{4+1}{7+2} = \frac{5}{9}
-```
-
-In other words, given the model assumptions (the Bernoulli data-generating distribution and Beta prior as specified above), and the observations ``D=\{1011001\}``, the probability for observing heads (outcome=``1``) on the next toss is ``\frac{5}{9}``.
+#### Different priors
+If, instead of a _uniform prior_, we use our priors ``m_1`` and ``m_2``, we get:
 
 """
 
@@ -769,6 +760,9 @@ md"""
 Below, we plot ``40`` candidate functions, where each candidate corresponds to a draw from the posterior distribution ``p(w|D)``.
 """
 
+# ╔═╡ 74640c85-8589-4121-8fdf-d71cb29532b8
+N_bond
+
 # ╔═╡ 679ef9d1-cc1c-4fc1-bf82-caa967c196c2
 example("Bayesian Logistic Regression (Classification)",header_level=2)
 
@@ -835,15 +829,6 @@ md"""
 # ╔═╡ 9da43d0f-e605-41b7-9bc6-db5be95bc87f
 secret_distribution = Bernoulli(0.4);
 
-# ╔═╡ b791e819-f5a0-4c44-983b-07d8497516fb
-@mdx """
-
-```math
-D=\\{$(Int.(rand(MersenneTwister(234), secret_distribution, intro_N)))\\}\\,.
-```
-
-"""
-
 # ╔═╡ e47b6eb6-2bb3-4c2d-bda6-f1535f2f94c4
 priors = [
 	Beta(100., 500.), 
@@ -851,20 +836,10 @@ priors = [
 ];
 
 # ╔═╡ d1d2bb84-7083-435a-9c19-4c02074143e3
-n_tosses = 500;
 
-# ╔═╡ d484c41d-9834-4528-bf47-93ab4e35ebaa
-md"""
-Select iteration: $(@bind toss_index_1 Slider(0:n_tosses; show_value=true))
-"""
-
-# ╔═╡ ebcfcd1b-7fc8-42b7-a35e-4530f798cfdf
-md"""
-Select iteration: $(@bind toss_index_2 Slider(1:n_tosses; show_value=true))
-"""
 
 # ╔═╡ 9c751f8e-f7ed-464f-b63c-41e318bbff2d
-samples = rand(secret_distribution, n_tosses)
+precomputed_tosses = rand(StableRNG(234), secret_distribution, 500)
 
 # ╔═╡ e99e7650-bb72-4576-8f2a-c3994533b644
 function handle_coin_toss(prior::Beta, observation::Bool)
@@ -898,7 +873,7 @@ begin
 
 
 	# for every sample we want to update our posterior
-	for (N, sample) in enumerate(samples)
+	for (N, sample) in enumerate(precomputed_tosses)
 		# at every sample we want to update all distributions
 		for (i, prior) in enumerate(prior_distributions)
 
@@ -907,9 +882,9 @@ begin
 			
 			# add posterior to vector of posterior distributions
 			push!(posterior_distributions[i], posterior)
-			
+
 			# compute log evidence and add to vector
-			log_evidence = log_evidence_prior(posterior_distributions[i][N], N, sum(samples[1:N]))
+			log_evidence = log_evidence_prior(prior, N, sum(@view(precomputed_tosses[1:N])))
 			push!(log_evidences[i], log_evidence)
 	
 			# the prior for the next sample is the posterior from the current sample
@@ -917,26 +892,6 @@ begin
 		end
 	end
 end;
-
-# ╔═╡ 6a2b1106-d294-11ef-0d64-dbc26ba3eb44
-# Animate posterior distributions over time in a gif
-
-let i = toss_index_1
-    p = plot()
-    for (j,post) in enumerate(posterior_distributions)
-        plot!(post[i+1], xlims = (0, 1), fill=(0, .2,), label="Posterior model $j", linewidth=2, ylims=(0,28), xlabel="μ", legend=:topright)
-    end
-	vline!([mean(secret_distribution)]; style=:dash, color="purple", label="True parameter")
-end
-
-# ╔═╡ 188b5bea-6765-4dcf-9369-3b1fdbe94494
-let i = toss_index_2
-	evidences = map(model -> exp.(model), log_evidences)
-	
-	plot(ylims=(0, 1), legend=:topleft)
-    total = sum(e[i] for e in evidences)
-    bar!([(e[i] / total) for e in evidences], group=["Model $i" for i in eachindex(priors)])
-end
 
 # ╔═╡ 3437b7a6-56f3-4cfa-bec1-d5b39612d9d0
 md"""
@@ -956,10 +911,10 @@ const deterministic_randomness = MersenneTwister
 σ_w_prior² = σ_w_prior^2
 
 # ╔═╡ b4ba2dfd-13af-4e2c-a3a6-e3b92756c03b
-μ_basis = range(0.0, 1.0; length=10);
+const μ_basis = range(0.0, 1.0; length=10);
 
 # ╔═╡ b8b5601b-72e3-431d-b23a-e91936205320
-σ_basis² = 0.01;
+const σ_basis² = 0.01;
 
 # ╔═╡ 77c16302-e429-465f-80e7-6f9253c28607
 D = let
@@ -1045,6 +1000,150 @@ let
 	plot_data!(D)
 end
 
+# ╔═╡ d1521061-211f-49fc-9463-82f01c79e2f6
+
+
+# ╔═╡ 5ca4e81f-4a63-472e-bb9e-7b8200de579a
+md"""
+## 🪙 Coin toss sample controls
+"""
+
+# ╔═╡ 8c91dcc3-32e2-4c09-aea1-af8ce5c805dc
+N_tosses_bond = @bind N_tosses Slider([1:50..., 100:50:500...]; default=7, show_value=true);
+
+# ╔═╡ 6a2b1106-d294-11ef-0d64-dbc26ba3eb44
+# Animate posterior distributions over time in a gif
+
+let i = N_tosses
+    p = plot()
+    for (j,post) in enumerate(posterior_distributions)
+        plot!(post[i+1], xlims = (0, 1), fill=(0, .2,), label="Posterior model $j", linewidth=2, ylims=(0,28), xlabel="μ", legend=:topright)
+    end
+	vline!([mean(secret_distribution)]; style=:dash, color="purple", label="True parameter")
+end
+
+# ╔═╡ 188b5bea-6765-4dcf-9369-3b1fdbe94494
+let i = N_tosses
+	evidences = map(model -> exp.(model), log_evidences)
+	
+	plot(ylims=(0, 1), legend=:topleft, title="Relative Bayesian Evidence")
+    total = sum(e[i] for e in evidences)
+    bar!([(e[i] / total) for e in evidences], group=["Model $i" for i in eachindex(priors)])
+end
+
+# ╔═╡ 11cd5f2e-d64b-440a-bf88-6f7e09e5377c
+tosses = precomputed_tosses[1:N_tosses]
+
+# ╔═╡ 6a2a0f18-d294-11ef-02c2-ef117377ca66
+let
+	n = sum(tosses)
+	N = N_tosses
+	@mdx("""
+	Finally, we're ready to solve our challenge: for the generated ``D`` and **uniform prior** (``\\alpha=\\beta=1``), we get
+	
+	```math
+	 p(x_\\bullet=1|D)=\\frac{n+1}{N+2} = \\frac{$n+1}{$N+2} = \\frac{$(n+1)}{$(N+2)} \\approx $(@sprintf("%.3f", (n+1)/(N+2)))
+	```
+	
+	In other words, given the model assumptions (the Bernoulli data-generating distribution and Beta prior as specified above), and the observations ``D``, the probability for observing heads (outcome=``1``) on the next toss is ``\\frac{$(n+1)}{$(N+2)}``.
+	
+	""")
+end
+
+# ╔═╡ cb2d4c88-cc9c-4e56-8939-e0d2a4c9d1c3
+let
+	n = sum(tosses)
+	N = N_tosses
+	@mdx("""
+	
+	```math
+	\\begin{align}
+	 p(x_\\bullet=1|D,m_1) &= \\frac{n+100}{N+100+500} &\\approx $(@sprintf("%.3f", (n+100)/(N+100+500))) \\\\[.6em]
+
+	 
+	 p(x_\\bullet=1|D,m_2) &= \\frac{n+8}{N+8+13} &\\approx $(@sprintf("%.3f", (n+8)/(N+8+13)))
+	\\end{align}
+	```
+	
+	
+	""")
+end
+
+# ╔═╡ 26369851-1d00-4f48-9e64-6b576af61066
+tosses_latex = @mdx """
+
+```math
+D=\\{$(Int.(tosses))\\}\\,.
+```
+
+""";
+
+# ╔═╡ 280c69a5-b7a4-400f-a810-3b846ff27ec2
+# a simpler (less pretty) display that can automatically wrap when the line gets too long
+tosses_html = """
+D = {$(join(Int.(tosses), " "))}.
+
+""" |> HTML;
+
+# ╔═╡ 0a81b382-b01b-459a-8955-9ec8640a57d1
+D_sample_controls = PlutoUI.ExperimentalLayout.Div(
+	[
+		@htl("<h4 style='margin-bottom: .4em;'>🪙 Generate a sample</h4>"),
+	PlutoUI.ExperimentalLayout.Div(
+		[
+			PlutoUI.ExperimentalLayout.Div(
+			[
+				N_tosses_bond,
+				
+			];
+				style="""
+				flex: 0 0 auto;
+				"""
+			),
+			PlutoUI.ExperimentalLayout.Div(
+				[
+					N_tosses >= 50 ? tosses_html : tosses_latex
+				];
+				style=""""
+					display: flex;
+					width: 300px;
+					height: 50px;
+					overflow: hidden;
+					/* Make the font-size smaller when the number of tosses increases, to make sure everything is visible. */
+					font-size: $(1.2 * 300 / clamp(N_tosses, 25, 100))px;
+					""")
+		
+		]; 
+		style="""
+		display: flex;
+		flex-direction: row;
+		gap: 1em;
+	    align-items: center;
+	    justify-content: space-evenly;	
+		"""
+	)
+	];
+	style="""
+		padding: 1em;
+		background: #efbaab33;
+		border-radius: 1em;
+
+
+	"""
+)
+
+# ╔═╡ 49879bbf-ab9a-4bf0-b174-0a5be6eb0005
+D_sample_controls
+
+# ╔═╡ ab5a9411-972b-46b6-900e-839ba70a98b4
+D_sample_controls
+
+# ╔═╡ b596ea69-2b52-4755-9cbe-9062134b8c7e
+D_sample_controls
+
+# ╔═╡ bd0058fe-3b38-49f5-af3c-c1e7678dd431
+D_sample_controls
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -1058,8 +1157,10 @@ LogExpFunctions = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
 MarkdownLiteral = "736d6165-7244-6769-4267-6b50796e6954"
 Optim = "429524aa-4258-5aef-a3af-852621145aeb"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+StableRNGs = "860ef19b-820b-49d6-a774-d7a799459cd3"
 StatsFuns = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
 StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 
@@ -1074,6 +1175,7 @@ MarkdownLiteral = "~0.1.2"
 Optim = "~1.13.2"
 Plots = "~1.40.20"
 SpecialFunctions = "~2.6.1"
+StableRNGs = "~1.0.4"
 StatsFuns = "~1.5.0"
 StatsPlots = "~0.15.8"
 """
@@ -1082,9 +1184,9 @@ StatsPlots = "~0.15.8"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.1"
+julia_version = "1.12.2"
 manifest_format = "2.0"
-project_hash = "feb5a94a4ee0e9a6dd08087d77595a98fce8b9ae"
+project_hash = "d6218eb2285bcc74f7281a3e9ef17dc9240f171b"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "27cecae79e5cc9935255f90c53bb831cc3c870d7"
@@ -1518,7 +1620,7 @@ version = "0.7.16"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
+version = "1.7.0"
 
 [[deps.EnumX]]
 git-tree-sha1 = "bddad79635af6aec424f53ed8aad5d7555dc6f00"
@@ -1888,7 +1990,7 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.11.1+1"
+version = "8.15.0+0"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -2107,7 +2209,7 @@ version = "1.5.0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.1+0"
+version = "3.5.4+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -2424,9 +2526,9 @@ weakdeps = ["ChainRulesCore"]
 
 [[deps.StableRNGs]]
 deps = ["Random"]
-git-tree-sha1 = "95af145932c2ed859b63329952ce8d633719f091"
+git-tree-sha1 = "4f96c596b8c8258cc7d3b19797854d368f243ddc"
 uuid = "860ef19b-820b-49d6-a774-d7a799459cd3"
-version = "1.0.3"
+version = "1.0.4"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
@@ -2869,9 +2971,9 @@ uuid = "1317d2d5-d96f-522e-a858-c73665f53c3e"
 version = "2022.0.0+1"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "Libdl"]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.5.0+2"
+version = "17.7.0+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -2897,7 +2999,7 @@ version = "1.9.2+0"
 # ╟─6be2e966-4048-44d0-a37e-95060e3fe30b
 # ╟─eca027f8-40c9-4e53-85b5-d08b8fe9dd97
 # ╟─4f6a2d4f-bd89-4b0c-b544-397de2e34e72
-# ╟─b791e819-f5a0-4c44-983b-07d8497516fb
+# ╟─49879bbf-ab9a-4bf0-b174-0a5be6eb0005
 # ╟─daa1df0e-4ec5-4fb1-a355-a42c35bd35b9
 # ╟─6a24b9e4-d294-11ef-3ead-9d272fbf89be
 # ╟─6a24c3e6-d294-11ef-3581-2755a9ba15ba
@@ -2954,16 +3056,18 @@ version = "1.9.2+0"
 # ╟─b426df32-5629-4773-b862-101cfbd82d42
 # ╟─181ade96-8e1e-4186-9227-c1561352529d
 # ╟─6a2af90a-d294-11ef-07bd-018326577791
-# ╟─d484c41d-9834-4528-bf47-93ab4e35ebaa
+# ╟─ab5a9411-972b-46b6-900e-839ba70a98b4
 # ╟─6a2b1106-d294-11ef-0d64-dbc26ba3eb44
 # ╟─6a29d548-d294-11ef-1361-ad2230cad02b
-# ╟─ebcfcd1b-7fc8-42b7-a35e-4530f798cfdf
+# ╟─b596ea69-2b52-4755-9cbe-9062134b8c7e
 # ╟─188b5bea-6765-4dcf-9369-3b1fdbe94494
 # ╟─6a29e25e-d294-11ef-15ce-5bf3d8cdb64c
 # ╟─6a29f1c2-d294-11ef-147f-877f99e5b57c
 # ╟─6a2a000e-d294-11ef-17d6-bdcddeedc65d
-# ╠═5483148f-b385-4afa-ad85-70efe08ba299
+# ╟─bd0058fe-3b38-49f5-af3c-c1e7678dd431
 # ╟─6a2a0f18-d294-11ef-02c2-ef117377ca66
+# ╟─95a3e1f8-2ff5-4168-9988-b033fe35a751
+# ╟─cb2d4c88-cc9c-4e56-8939-e0d2a4c9d1c3
 # ╟─6a2a1daa-d294-11ef-2a67-9f2ac60a14c5
 # ╟─6a2a2af2-d294-11ef-0072-bdc3c6f95bb3
 # ╟─6a2a389e-d294-11ef-1b8c-b55de794b65c
@@ -2983,6 +3087,7 @@ version = "1.9.2+0"
 # ╟─29d9d0e8-7af0-430f-9cce-3f83e9cccb7e
 # ╟─7ab2cbcd-55c1-480e-a611-10e783358d1d
 # ╟─1211336b-5fb0-415e-92a8-6ba2b061cb43
+# ╟─74640c85-8589-4121-8fdf-d71cb29532b8
 # ╟─679ef9d1-cc1c-4fc1-bf82-caa967c196c2
 # ╟─b5d0f64a-82bf-4fe3-a1c8-696d6ef29d11
 # ╟─47842de0-d17e-460e-b3b7-b2e642569e25
@@ -3019,5 +3124,12 @@ version = "1.9.2+0"
 # ╠═cd1f1a99-0f28-4825-8e57-011550a3ae4b
 # ╠═a987582b-b4b3-4676-92ea-28ae4dc38f3f
 # ╠═e2b74ada-3dab-401f-aa44-a4ecda4d6496
+# ╟─d1521061-211f-49fc-9463-82f01c79e2f6
+# ╟─5ca4e81f-4a63-472e-bb9e-7b8200de579a
+# ╠═8c91dcc3-32e2-4c09-aea1-af8ce5c805dc
+# ╠═11cd5f2e-d64b-440a-bf88-6f7e09e5377c
+# ╠═26369851-1d00-4f48-9e64-6b576af61066
+# ╠═280c69a5-b7a4-400f-a810-3b846ff27ec2
+# ╠═0a81b382-b01b-459a-8955-9ec8640a57d1
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
