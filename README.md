@@ -223,7 +223,7 @@ You can access all lecture materials online through the links below:
             <td>🔴 Pick-up probabilistic programming assignment A2</td>
             <td></td>
             <td>
-            A2 (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
+            <a href="https://github.com/bmlip/course/blob/main/assignments/A2%20-%20Tracking%20satellites.jl">A2</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
             </td>
             <td></td>
          </tr>
