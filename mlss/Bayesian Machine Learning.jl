@@ -766,6 +766,33 @@ N_bond
 # ╔═╡ 679ef9d1-cc1c-4fc1-bf82-caa967c196c2
 example("Bayesian Logistic Regression (Classification)",header_level=2)
 
+# ╔═╡ 2be6440b-4f94-4632-8f9b-0d20bf69ac39
+TODO("introduction")
+
+# ╔═╡ 13cca61b-ee30-4cbc-b267-d77b1f51be6c
+begin
+	N2_bond = @bindname N2 Slider(8:200; default=120, show_value=true)
+end
+
+# ╔═╡ 3f6cf81b-8d43-4c46-a3dc-c7517f53322c
+md"""
+### Generative classification
+"""
+
+# ╔═╡ ed550951-58ad-4b29-baac-1cc6b8681b4b
+TODO("Feel free to remove this if not needed")
+
+# ╔═╡ 27d3631b-cd58-4098-9ea8-b8bbdb7bb8c2
+N2_bond
+
+# ╔═╡ a893baee-217a-4dfe-9641-2d98cd769956
+md"""
+### Discriminative classifcation
+"""
+
+# ╔═╡ 4d38fa93-ddac-4e73-b2c5-f1d8c6fb9b38
+N2_bond
+
 # ╔═╡ b5d0f64a-82bf-4fe3-a1c8-696d6ef29d11
 md"""
 See [Bayesian Logistic Regression lecture](https://bmlip.github.io/course/lectures/Discriminative%20Classification.html#Challenge-Revisited:-Bayesian-Logistic-Regression).
@@ -834,9 +861,6 @@ priors = [
 	Beta(100., 500.), 
 	Beta(8., 13.)
 ];
-
-# ╔═╡ d1d2bb84-7083-435a-9c19-4c02074143e3
-
 
 # ╔═╡ 9c751f8e-f7ed-464f-b63c-41e318bbff2d
 precomputed_tosses = rand(StableRNG(234), secret_distribution, 500)
@@ -1130,7 +1154,7 @@ D_sample_controls = PlutoUI.ExperimentalLayout.Div(
 
 
 	"""
-)
+);
 
 # ╔═╡ 49879bbf-ab9a-4bf0-b174-0a5be6eb0005
 D_sample_controls
@@ -1143,6 +1167,153 @@ D_sample_controls
 
 # ╔═╡ bd0058fe-3b38-49f5-af3c-c1e7678dd431
 D_sample_controls
+
+# ╔═╡ 830e8d28-2b0a-48f2-829b-6254fa6de065
+md"""
+### Discriminative classification
+"""
+
+# ╔═╡ 6c6b7c68-2e5f-44f8-be0b-11777e46a767
+function generate_dataset(N::Int64)
+	rng = StableRNG(984289)
+    # Generate dataset {(x1,y1),...,(xN,yN)}
+    # x is a 2d feature vector [x1;x2]
+    # y ∈ {false,true} is a binary class label
+    # p(x|y) is multi-modal (mixture of uniform and Gaussian distributions)
+	# srand(123)
+    X = Matrix{Float64}(undef,2,N); y = Vector{Bool}(undef,N)
+    for n=1:N
+        if (y[n]=(rand(rng)>0.6)) # p(y=true) = 0.6
+            # Sample class 1 conditional distribution
+            if rand(rng)<0.5
+                X[:,n] = [6.0; 0.5] .* rand(rng, 2) .+ [3.0; 6.0]
+            else
+                X[:,n] = sqrt(0.5) * randn(rng, 2) .+ [5.5, 0.0]
+            end
+        else
+            # Sample class 2 conditional distribution
+            X[:,n] = randn(rng, 2) .+ [1., 4.]
+        end
+    end
+
+    return (X, y)
+end
+
+# ╔═╡ d5955286-15c0-4723-b418-da54f675c59e
+X, y = generate_dataset(N2); # Generate data set, collect in matrix X and vector y
+
+# ╔═╡ fee6e410-3e62-42ae-80ba-8e774b7ceb1e
+X_c1 = X[:,findall(.!y)]' # Split X based on class label
+
+# ╔═╡ b75a418f-471c-421e-9eca-0f4157716cea
+X_c2 = X[:,findall(y)]'
+
+# ╔═╡ c1492ac3-4692-4bb9-8c51-ce3981af2aea
+X_test = [3.75; 1.0]; # Features of 'new' data point
+
+# ╔═╡ b11a03b6-3091-4031-a59c-5ae5a4cace3f
+function plot_dataset()
+    result = scatter(X_c1[:,1], X_c1[:,2],markersize=4, label=L"y=0", xlabel=L"x_1", ylabel=L"x_2", xlims=(-1.6, 9), ylims=(-2, 7))
+    scatter!(X_c2[:,1], X_c2[:,2],markersize=4, label=L"y=1")
+    scatter!([X_test[1]], [X_test[2]], markersize=7, marker=:star, label=L"y=?") 
+	plot!(legend=:bottomright)
+    return result  
+end
+
+# ╔═╡ ccbf6bd8-3b77-4a3b-9272-6e63495ddaf3
+plot_dataset()
+
+# ╔═╡ 4093dea9-2ad3-4384-a414-06a6726d4660
+let
+	d1 = fit_mle(MvNormal, X_c1')
+	d2 = fit_mle(MvNormal, X_c2')
+
+	plot_dataset()
+	
+	xrange = range(-1.6, 9; length=20)
+	yrange = range(-2, 7; length=15)
+	
+	contour!(
+		xrange, yrange,
+		(x,y) -> pdf(d1, [x,y]);
+		opacity=.4,
+		color=:blues,
+	)
+
+	
+	contour!(
+		xrange, yrange,
+		(x,y) -> pdf(d2, [x,y]);
+		opacity=.4,
+		color=:red,
+		colorbar=nothing,
+	)
+end
+
+# ╔═╡ f2340f0e-a170-4386-a616-47edd748704d
+"""
+Computes the predictive posterior eq. B-4.152 using the given approximation to the sigmoid function.
+"""
+function predictive_posterior(x, weight_posterior)
+	λsq = π / 8
+	wN = mean(weight_posterior)
+	μ = wN' * x
+	σ = x' * cov(weight_posterior) * x
+	query_point = μ / (sqrt(inv(λsq) + σ ))
+	return normcdf(0, 1, query_point)
+end
+
+# ╔═╡ 6e6abac8-8800-4f33-8530-3a8f2c797259
+logσ(x) = -softplus(x)
+
+# ╔═╡ 36d658eb-2244-4290-adc6-84ca4327931e
+function log_likelihood(w, X, y)
+	return sum(logσ.((2*y .- 1) .* (X' * w)))
+end
+
+# ╔═╡ 598a32fa-99cc-4a4c-a622-6fb992916e6a
+"""
+This  function computes the posterior distribution over regression weights using the Laplace Approximation. We use `logσ` as a numerically stable alternative to `logistic`, and we avoid matrix inversions by computing the precision matrix of the posterior distribution instead of the covariance.
+
+The math in this function corresponds to eq. B-4.143
+"""
+function bayesian_discrimination_boundary(prior_w, X::Matrix, y::Vector{Bool})
+	m_0 = mean(prior_w)
+	p_0 = precision(prior_w)
+	negative_unnormalized_posterior = w -> -log_likelihood(w, X, y) - logpdf(prior_w, w)
+	MAP_w = Optim.minimizer(optimize(negative_unnormalized_posterior, zeros(3)))
+	σ_n = logistic.((2y .- 1) .* (X' * MAP_w))
+	inv_Σ = p_0
+	for i in 1:length(y)
+		slice = view(X, :, i)
+		inv_Σ .+= σ_n[i] * (1.0 - σ_n[i]) .* (slice * slice')
+	end
+		
+	return MvNormalMeanPrecision(MAP_w, inv_Σ)
+end
+
+# ╔═╡ 60095e6e-be1e-411c-8c89-753bc8604950
+let
+	X_ext = vcat(X, ones(1, length(y)))
+
+	# Define a prior distribution over parameters, play with this to see the result change!
+	prior = MvNormalMeanCovariance(zeros(3), 100 .* diagm(ones(3)))
+	posterior = bayesian_discrimination_boundary(prior, X_ext, y)
+
+	# Plot 50% boundary
+	θ = mean(posterior)
+	disc_boundary(x1) = -1 / θ[2] * (θ[1]*x1 + θ[3])
+	plot_dataset()
+	plot!([-2., 10.], disc_boundary; label="Discr. boundary", linewidth=2)
+
+	# Plot heatmap
+	xrange = range(-1.6, 9; length=50)
+	yrange = range(-2, 7; length=30)
+	heatmap!(
+		xrange, yrange, (x,y) -> predictive_posterior([x, y, 1], posterior);
+		alpha=0.5, color=:redblue,
+	)
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -3089,6 +3260,16 @@ version = "1.9.2+0"
 # ╟─1211336b-5fb0-415e-92a8-6ba2b061cb43
 # ╟─74640c85-8589-4121-8fdf-d71cb29532b8
 # ╟─679ef9d1-cc1c-4fc1-bf82-caa967c196c2
+# ╟─2be6440b-4f94-4632-8f9b-0d20bf69ac39
+# ╟─13cca61b-ee30-4cbc-b267-d77b1f51be6c
+# ╟─ccbf6bd8-3b77-4a3b-9272-6e63495ddaf3
+# ╟─3f6cf81b-8d43-4c46-a3dc-c7517f53322c
+# ╟─ed550951-58ad-4b29-baac-1cc6b8681b4b
+# ╟─27d3631b-cd58-4098-9ea8-b8bbdb7bb8c2
+# ╟─4093dea9-2ad3-4384-a414-06a6726d4660
+# ╟─a893baee-217a-4dfe-9641-2d98cd769956
+# ╟─4d38fa93-ddac-4e73-b2c5-f1d8c6fb9b38
+# ╟─60095e6e-be1e-411c-8c89-753bc8604950
 # ╟─b5d0f64a-82bf-4fe3-a1c8-696d6ef29d11
 # ╟─47842de0-d17e-460e-b3b7-b2e642569e25
 # ╟─b273c8bc-3819-4f63-801a-acf0ee78ef1d
@@ -3101,10 +3282,9 @@ version = "1.9.2+0"
 # ╠═3f8fd1c3-202e-45a6-ab03-5229863db297
 # ╠═3987d441-b9c8-4bb1-8b2d-0cc78d78819e
 # ╟─7a764a14-a5df-4f76-8836-f0a571fc3519
-# ╠═c28b7130-f7fb-41ee-852e-9964b091d7fb
+# ╟─c28b7130-f7fb-41ee-852e-9964b091d7fb
 # ╠═9da43d0f-e605-41b7-9bc6-db5be95bc87f
 # ╠═e47b6eb6-2bb3-4c2d-bda6-f1535f2f94c4
-# ╠═d1d2bb84-7083-435a-9c19-4c02074143e3
 # ╠═9c751f8e-f7ed-464f-b63c-41e318bbff2d
 # ╠═3a903a4d-1fb0-4566-8151-9c86dfc40ceb
 # ╠═e99e7650-bb72-4576-8f2a-c3994533b644
@@ -3131,5 +3311,16 @@ version = "1.9.2+0"
 # ╠═26369851-1d00-4f48-9e64-6b576af61066
 # ╠═280c69a5-b7a4-400f-a810-3b846ff27ec2
 # ╠═0a81b382-b01b-459a-8955-9ec8640a57d1
+# ╟─830e8d28-2b0a-48f2-829b-6254fa6de065
+# ╟─6c6b7c68-2e5f-44f8-be0b-11777e46a767
+# ╠═d5955286-15c0-4723-b418-da54f675c59e
+# ╠═fee6e410-3e62-42ae-80ba-8e774b7ceb1e
+# ╠═b75a418f-471c-421e-9eca-0f4157716cea
+# ╠═c1492ac3-4692-4bb9-8c51-ce3981af2aea
+# ╟─b11a03b6-3091-4031-a59c-5ae5a4cace3f
+# ╟─598a32fa-99cc-4a4c-a622-6fb992916e6a
+# ╟─f2340f0e-a170-4386-a616-47edd748704d
+# ╟─6e6abac8-8800-4f33-8530-3a8f2c797259
+# ╟─36d658eb-2244-4290-adc6-84ca4327931e
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
