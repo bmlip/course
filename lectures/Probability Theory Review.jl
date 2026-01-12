@@ -69,7 +69,7 @@ md"""
   - [3Blue1Brown, YouTube video on Bayes theorem (2019)](https://youtu.be/HZGCoVF3YvM?si=JaXdesPjU8B_BtrC)
     - Nice animated tutorial on Bayes rule.
       
-  - [Edwin Jaynes, Probability Theory–The Logic of Science (2003)](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf). 
+  - **Edwin Jaynes, Probability Theory–The Logic of Science (2003)**
     - Brilliant book on the Bayesian view of probability theory. Just for fun, scan the annotated bibliography and references.
 
   - [Aubrey Clayton, Bernoulli's Fallacy–Statistical Illogic and the Crisis of Modern Science (2021)](https://aubreyclayton.com/bernoulli)
