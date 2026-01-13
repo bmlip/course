@@ -172,7 +172,7 @@ q(z,π,μ,Λ) = \prod_{i=1}^{N} q(z_i) \prod_{k=1}^K q(π_k)q(μ_k)q(Λ_k)
 ```
 This constraint is available as a standalone function: `MeanField()`.
 
-See also the [RxInfer documentation - page on constraint specification](https://docs.rxinfer.com/stable/manuals/constraints-specification/).
+See also the [RxInfer documentation - page on constraint specification](https://docs.rxinfer.com/stable/manuals/variational/constraints-specification/).
 """
 
 # ╔═╡ a8fd6aae-0ee4-44cb-bc80-ba8c76ddd3f9
