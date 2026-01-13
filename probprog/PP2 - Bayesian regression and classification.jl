@@ -374,7 +374,7 @@ The following cell is disabled, you can enable it by pressing the circle with th
 # ╠═╡ disabled = true
 # ╠═╡ skip_as_script = true
 #=╠═╡
-begin
+let
 	cix = collect(features_viz_2)
 
 	m_cix = mean(prior)[cix]
@@ -384,15 +384,6 @@ begin
 	m_cix = mean(results_classifier.posteriors[:w])[cix]
 	S_cix = cov( results_classifier.posteriors[:w])[cix,cix]
 	post_cix = MvNormal(m_cix, S_cix)
-
-	common_kwargs = (;
-		fillalpha=0,
-		linecolor=:red,
-		linewidth=3,
-		xlim=(-.5,.5),
-		ylim=(-.5,.5),
-		n_std=[.15,.3,.6,1,2],
-	)
 	
 	p2a = covellipse_many(prior_cix,
 					xlabel="feature $(cix[1])",
