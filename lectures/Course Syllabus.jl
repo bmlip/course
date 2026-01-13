@@ -54,7 +54,7 @@ md"""
 
 Please bookmark the following three websites:
 
-1. The course homepage [http://bmlip.nl](http://bmlip.nl) contains links to all materials, such as lecture notes and video lectures.
+1. The course homepage [https://bmlip.nl](https://bmlip.nl) contains links to all materials, such as lecture notes and video lectures.
 2. The [Piazza course site](https://piazza.com/tue.nl/winter2026/5ssd0/home) will be used for Q&A and communication.
 3. The [Canvas course site](https://canvas.tue.nl/courses/33478) will be sparingly used for communication (mostly by ESA staff)
 
@@ -64,7 +64,7 @@ Please bookmark the following three websites:
 md"""
 ## Materials
 
-All materials can be accessed from the [course homepage](http://bmlip.nl). The materials consist of the following resources:
+All materials can be accessed from the [course homepage](https://bmlip.nl). The materials consist of the following resources:
 
 ##### Mandatory materials for the exam
 
@@ -86,7 +86,7 @@ Source materials are available at GitHub repo at [https://github.com/bmlip/cours
 
 # ╔═╡ ab61d2fe-312c-4aca-9029-e446aaf2bfa2
 keyconcept("",
-md""" All study materials are accessible at the course homepage [`http://bmlip.nl`](http://bmlip.nl).""")
+md""" All study materials are accessible at the course homepage [`https://bmlip.nl`](https://bmlip.nl).""")
 
 # ╔═╡ 0d016cf8-d294-11ef-0c84-336979a02dd7
 md"""
