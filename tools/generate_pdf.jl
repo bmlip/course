@@ -86,8 +86,8 @@ function output_path(i, url, prefix, base_url_pattern)
     output_path = joinpath(output_dir, "$(prefix)$(lpad(i-1, 2, '0')) $(name).pdf")
 end
 
-function generate_pdf_collection(urls, prefix, base_url_pattern, collection_name)
-    @info "📚 Processing $(collection_name) collection"
+function generate_pdf_collection(urls, prefix, base_url_pattern)
+    @info "📚 Processing $(prefix) collection"
     
     # Generate individual PDFs
     for (i, url) in enumerate(urls)
@@ -97,9 +97,9 @@ function generate_pdf_collection(urls, prefix, base_url_pattern, collection_name
     end
     
     # Merge PDFs
-    @info "🗂️ Merging $(collection_name) PDFs"
+    @info "🗂️ Merging $(prefix) PDFs"
     files = [output_path(i, url, prefix, base_url_pattern) for (i, url) in enumerate(urls)]
-    output = joinpath(output_dir, "BMLIP $(prefix) Lectures.pdf")
+    output = joinpath(output_dir, "BMLIP_$(prefix)_Lectures.pdf")
     try
         run(`pdfunite $(files) $output`)
         @info "✅ Output PDF file: $(output)"
@@ -116,7 +116,6 @@ generate_pdf_collection(
     lecture_urls,
     "B",
     "https://bmlip.github.io/course/lectures/",
-    "B Lectures"
 )
 
 # Generate W Lectures
@@ -124,7 +123,6 @@ generate_pdf_collection(
     prop_prog_urls,
     "W",
     "https://bmlip.github.io/course/probprog/",
-    "W Lectures"
 )
 
 
