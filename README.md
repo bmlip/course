@@ -270,7 +270,7 @@ You can access all lecture materials online through the links below:
             <td></td>
          </tr>
          <tr>
-            <td > 26-apr-2026 (Thu) </td>
+            <td > 16-apr-2026 (Thu) </td>
             <td colspan="5">🔵 resit written examination (18:00-21:00)</td>
          </tr>
          <!-- <tr>
