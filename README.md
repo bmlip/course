@@ -31,7 +31,8 @@ News and Announcements
 <!---
 - See Piazza
 --->
-- (12-Nov-2025) Please sign up for Piazza (Q&A platform) at [signup link](https://piazza.com/tue.nl/winter2026/5ssd0). As much as possible, we will use the Piazza site for new announcements as well.
+- (2 March 2026) See [this note on the Resit exam](https://piazza.com/class/mh9arwinped720/post/63). 
+
 
 
 ## Instructors
