@@ -254,7 +254,7 @@ You can access all lecture materials online through the links below:
             <td colspan="5">🔵 written examination (13:30-16:30)</td>
          </tr>
          <tr>
-            <td> - </td>
+            <td> 20-Mar-2026 (Fri)  </td>
             <td>🔴 Pick-up resit programming assignment</td>
             <td></td>
             <td>not available yet
@@ -262,7 +262,7 @@ You can access all lecture materials online through the links below:
             <td></td>
          </tr>
          <tr>
-            <td> - </td>
+            <td> 3-Apr-2026 (Fri) </td>
             <td>🔴 Submission deadline resit assignment</td>
             <td></td>
             <td><a href="mailto:w.m.kouw@tue.nl?subject=5SSD0_Programming assignment resit">submit</a>
