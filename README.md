@@ -258,7 +258,7 @@ You can access all lecture materials online through the links below:
             <td> 20-Mar-2026 (Fri)  </td>
             <td>🔴 Pick-up resit programming assignment</td>
             <td></td>
-            <td><a href="https://github.com/bmlip/course/blob/main/assignments/Resit%-%robot%localization.jl">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
+            <td><a href="https://github.com/bmlip/course/blob/main/assignments/Resit%20-%20robot%20localization.jl">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
             </td>
             <td></td>
          </tr>
