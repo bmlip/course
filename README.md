@@ -258,7 +258,7 @@ You can access all lecture materials online through the links below:
             <td> 20-Mar-2026 (Fri)  </td>
             <td>🔴 Pick-up resit programming assignment</td>
             <td></td>
-            <td>not available yet
+            <td><a href="https://github.com/bmlip/course/blob/main/assignments/Resit%-%robot%localization.jl">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
             </td>
             <td></td>
          </tr>
@@ -266,7 +266,7 @@ You can access all lecture materials online through the links below:
             <td> 3-Apr-2026 (Fri) </td>
             <td>🔴 Submission deadline resit assignment</td>
             <td></td>
-            <td><a href="mailto:w.m.kouw@tue.nl?subject=5SSD0_Programming assignment resit">submit</a>
+            <td><a href="https://canvas.tue.nl/courses/33478/assignments/155532">submit</a>
             </td>
             <td></td>
          </tr>
