@@ -263,7 +263,7 @@ You can access all lecture materials online through the links below:
             <td></td>
          </tr>
          <tr>
-            <td> 16-Apr-2026 (Fri) </td>
+            <td> 15-Apr-2026 (Wed) </td>
             <td>🔴 Submission deadline resit assignment</td>
             <td></td>
             <td><a href="https://canvas.tue.nl/courses/33478/assignments/155532">submit</a>
