@@ -1,20 +1,23 @@
-if !isdir("pluto-slider-server-environment") || length(ARGS) != 2
+if !isdir("pluto-deployment-environment") || length(ARGS) != 2
     error("""
     Run me from the root of the repository directory, using:
 
     julia tools/update_notebook_packages.jl <level> <run_notebooks>
     
     Where <level> is one of: PATCH, MINOR, MAJOR
-    And <run_notebooks> is true or false to run all notebooks with Pluto at the end
+    And <run_notebooks> is true or false to run all notebooks with Pluto at the end. This will ensure that cells are stored in the correct order.
     """)
 end
 
-if !(v"1.12.0-aaa" < VERSION < v"1.13.0")
-    error("Our notebook package environments need to be updated with Julia 1.12. Go to julialang.org/downloads to install it.")
+begin
+    import TOML
+    manifest_version = TOML.parsefile("./pluto-deployment-environment/Manifest.toml")["julia_version"]
+    
+    @assert manifest_version == string(VERSION) "This repository uses Julia version $(manifest_version) (in pluto-deployment-environment), but this is Julia $(VERSION). Start a new Julia session with the correct version, or create a new Manifest.toml."
 end
 
 import Pkg
-Pkg.activate("./pluto-slider-server-environment")
+Pkg.activate("./pluto-deployment-environment")
 Pkg.instantiate()
 
 import Pluto

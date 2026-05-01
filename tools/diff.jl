@@ -22,7 +22,7 @@ end
 cd(source)
 
 using Pkg
-Pkg.activate(joinpath(source, "pluto-slider-server-environment"))
+Pkg.activate(joinpath(source, "pluto-deployment-environment"))
 Pkg.instantiate()
 
 using PlutoNotebookComparison

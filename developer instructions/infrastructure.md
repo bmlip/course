@@ -59,7 +59,7 @@ I modified the `/usr/local/bin/pluto-slider-server.sh` script to use JSON loggin
 export JULIA_PKG_USE_CLI_GIT=true
 
 cd /home/fplasvande/BMLIP-course
-julia --project="pluto-slider-server-environment" -e "import Pkg; Pkg.instantiate(); using LoggingFormats, LoggingExtras; global_logger(FormatLogger(LoggingFormats.JSON(), stderr)); import PlutoSliderServer; PlutoSliderServer.run_git_directory(\".\")"
+julia --project="pluto-deployment-environment" -e "import Pkg; Pkg.instantiate(); using LoggingFormats, LoggingExtras; global_logger(FormatLogger(LoggingFormats.JSON(), stderr)); import PlutoSliderServer; PlutoSliderServer.run_git_directory(\".\")"
 ```
 
 
@@ -70,9 +70,9 @@ julia --project="pluto-slider-server-environment" -e "import Pkg; Pkg.instantiat
 
 Vector.yaml:
 
-```
+```yaml
 
-# Forwarding logs to S1215127.eu-nbg-2.betterstackdata.com
+# Forwarding logs to s1509838.eu-nbg-2.betterstackdata.com
 # --------------------------------------------------------
 # Generated on 2025-02-24: https://telemetry.betterstack.com/vector-yaml/ubuntu/TOKENHIDDEN
 # Learn more about Vector configuration: https://vector.dev/docs/reference/configuration/

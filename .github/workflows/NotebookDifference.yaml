@@ -15,21 +15,21 @@ jobs:
         runs-on: ubuntu-24.04
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                 fetch-depth: 0
                 path: source
 
 
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                 ref: gh-pages
                 path: gh_pages_dir
 
 
             - name: Install Julia
-              uses: julia-actions/setup-julia@v2
+              uses: julia-actions/setup-julia@v3
               with:
                   # note: this version should match the version in the other actions in this repo
                   version: "1.12"
