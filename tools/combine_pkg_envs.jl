@@ -1,4 +1,4 @@
-if !isdir("pluto-slider-server-environment") || length(ARGS) != 1
+if !isdir("pluto-deployment-environment") || length(ARGS) != 1
     error("""
     Run me from the root of the repository directory, using:
 
@@ -11,7 +11,7 @@ end
 update = parse(Bool, ARGS[1])
 
 import Pkg
-Pkg.activate("./pluto-slider-server-environment")
+Pkg.activate("./pluto-deployment-environment")
 Pkg.instantiate()
 import Pluto
 ENV["JULIA_PKG_PRECOMPILE_AUTO"] = 0

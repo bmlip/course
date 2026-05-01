@@ -1,4 +1,4 @@
-if !isdir("pluto-slider-server-environment")
+if !isdir("pluto-deployment-environment")
     error("""
     Run me from the root of the repository directory, using:
 
@@ -19,7 +19,7 @@ end
 import Pkg
 
 project = mktempdir()
-cp("./pluto-slider-server-environment", project; force=true)
+cp("./pluto-deployment-environment", project; force=true)
 Pkg.activate(project)
 Pkg.add(["URIs", "PlutoPDF"])
 Pkg.instantiate()
