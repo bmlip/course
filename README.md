@@ -3,7 +3,7 @@
 
 
 > [!WARNING]
-> This site is currently under construction. This is the class for 12 Nov 2025 - 29 Jan 2026 (2nd quarter).
+> This site is currently under construction. This is the class for 11 Nov 2026 - 28 Jan 2027 (2nd quarter).
 
 
 <img src="https://github.com/bmlip/course/blob/main/assets/figures/5SSD0-banner.png?raw=true">
