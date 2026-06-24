@@ -194,7 +194,7 @@ You can access all lecture materials online through the links below:
             <td><a href="https://youtu.be/pVWdm9fQT6Y">B10.1</a>, <a href="https://youtu.be/mg9HGykqEbw">B10.2</a></td>
          </tr>
          <tr>
-            <td>18-Dec-202</td>
+            <td>18-Dec-2026 </td>
             <td>🔴 Submission deadline assignment A1</td>
             <td></td>
             <td><a href="https://canvas.tue.nl/courses/33478/assignments/149316">submit</a>
