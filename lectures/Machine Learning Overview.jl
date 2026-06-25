@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.1
 
 #> [frontmatter]
 #> image = "https://github.com/bmlip/course/blob/v2/assets/figures/scientific-inquiry-loop.png?raw=true"
@@ -308,6 +308,12 @@ md"""
 
 # ╔═╡ f47f4370-4d6f-4e36-bbef-63f806130dbe
 keyconceptsummary()
+
+# ╔═╡ 85c004d5-a2b8-4bca-914b-def9ab143f82
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Course%20Syllabus.html",
+	"https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html"
+)
 
 # ╔═╡ 86a2a956-fee6-4306-b8cb-f4b977ad3dbd
 md"""
@@ -679,6 +685,7 @@ version = "1.64.0+1"
 # ╟─3ced839a-d294-11ef-3dd0-1f8c5ef11b75
 # ╟─438981cd-8450-4678-8b61-9cc5c0c0ebf1
 # ╟─f47f4370-4d6f-4e36-bbef-63f806130dbe
+# ╟─85c004d5-a2b8-4bca-914b-def9ab143f82
 # ╟─86a2a956-fee6-4306-b8cb-f4b977ad3dbd
 # ╠═a5d43e01-8f73-4c48-b565-f10eb807a9ab
 # ╟─fa1d5123-db02-4fda-93d2-3e5e2efed515

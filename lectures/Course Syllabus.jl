@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.1
 
 #> [frontmatter]
 #> description = "Course Syllabus"
@@ -56,7 +56,7 @@ Please bookmark the following three websites:
 
 1. The course homepage [https://bmlip.nl](https://bmlip.nl) contains links to all materials, such as lecture notes and video lectures.
 2. The [Piazza course site](https://piazza.com/tue.nl/winter2026/5ssd0/home) will be used for Q&A and communication.
-3. The [Canvas course site](https://canvas.tue.nl/courses/33478) will be sparingly used for communication (mostly by ESA staff)
+3. The [Canvas course site](https://canvas.tue.nl/courses/37173) will be sparingly used for communication (mostly by ESA staff)
 
 """
 
@@ -548,7 +548,7 @@ version = "1.64.0+1"
 # ╟─0d019cde-d294-11ef-0563-6b41bc2ca80f
 # ╟─f0a4b221-b4cd-425c-9a35-44c68c64e341
 # ╟─9b1342f1-fcc9-469a-abfe-ed73a5b56d75
-# ╠═46446ecd-006a-4f18-a61f-d50d5c198637
+# ╟─46446ecd-006a-4f18-a61f-d50d5c198637
 # ╟─f3b97e01-f8d2-4865-ae81-2df412f7515a
 # ╠═f96d047f-9efa-4889-8b4e-a8d96677d072
 # ╟─00000000-0000-0000-0000-000000000001
