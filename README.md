@@ -150,8 +150,7 @@ You can access all lecture materials online through the links below:
             <td>04-Dec-2026</td>
             <td>🔴 Submission deadline assignment A0</td>
             <td></td>
-            <td><a href="https://canvas.tue.nl/courses/33478/assignments/149317">submit</a>
-            </td>
+            <td><a href="">submit</a></td>
             <td></td>
          </tr>
          </tr>
