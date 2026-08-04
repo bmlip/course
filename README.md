@@ -73,214 +73,210 @@ Please follow the [software installation instructions](https://github.com/bmlip/
 
 You can access all lecture materials online through the links below:
 
-<table border = "1">
-         <tr>
-            <th rowspan = "2"; style="text-align:center">Date</th>
-            <th rowspan = "2"; style="text-align:center">lesson</th>
-            <th colspan = "3"; style="text-align:center">materials</th>
-         </tr>
-         <tr>
-            <th style="text-align:center">lecture notes</th>
-            <th style="text-align:center">assignments</th>
-            <th style="text-align:center">video recordings (2023/24)</th>
-         </tr>
-         <tr>
-            <td>11-Nov-2026 <em>(Wed)</em></td>
-            <td>⚪️ B0: Course Syllabus<br/>
-            ⚪️ B1: Machine Learning Overview</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Course%20Syllabus.html">B0</a>, <a href="https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html">B1</a></td>
-            <td></td>
-            <td> <a href="https://youtu.be/GtukVrtcXe8">B0</a>,  <a href="https://youtu.be/mPc3j7XgZHM">B1</a></td>
-         </tr>
-         <tr>
-            <td>13-Nov-2026 <em>(Fri)</em></td>
-            <td>⚪️ B2: Probability Theory Review</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html">B2</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/PGbN5rv6HL4">B2.1</a>, <a href="https://youtu.be/LKh2ypFVGwY">B2.2</a></td>
-         </tr>
-         <tr>
-            <td>18-Nov-2026 <em>(Wed)</em></td>
-            <td>⚪️ B3: Bayesian Machine Learning</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html">B3</a></td>
-            <td></td>
-            <td> <a href="https://youtu.be/OPGrqnnEfU0">B3.1</a>, <a href="https://youtu.be/BOUmzY1Nx5g">B3.2</a> </td>
-         </tr>
-         <tr>
-            <td >20-Nov-2026 <em>(Fri)</em></td>
-            <td >⚪️ B4: Factor Graphs and the Sum-Product Algorithm</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Factor%20Graphs.html">B4</a></td>
-             <td></td>
-             <td><a href="https://youtu.be/C2vvsf_Ts2g">B4.1</a>, <a href="https://youtu.be/HbUuYBMZOKw">B4.2</a></td>
-         </tr>
-         <tr>
-            <td>25-Nov-2026 <em>(Wed)</em></td>
-            <td>🟢 Introduction to Julia</td>
-            <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
-            <td></td>
-            <td></td>
-         </tr>
-         <tr>
-            <td>27-Nov-2026 <em>(Fri)</em></td>
-            <td>🔴 Pick-up Julia programming assignment A0</td>
-            <td><td><a href="https://github.com/bmlip/course/blob/main/assignments/A0%20-%20Julia%20Programming.jl">A0</a></td>
-            <td></td>
-         </tr>
-         <tr>
-            <td>27-Nov-2026 <em>(Fri)</em></td>
-            <td>⚪️ B5: Continuous Data and the Gaussian Distribution</td>
-            <td><a href="https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html">B5</a></td>
-            <td></td>
-            <td> <a href="https://youtu.be/WS6gWO5vgtc">B5.1</a>, <a href="https://youtu.be/Ma3jXNbNCyc">B5.2 </a> </td>
-         </tr>
-         <tr>
-            <td>02-Dec-2026 <em>(Wed)</em> </td>
-            <td>⚪️ B6: Discrete Data and the Multinomial Distribution</td>
-            <td><a href="https://bmlip.github.io/course/lectures/The%20Multinomial%20Distribution.html">B6</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/vyh8RvXxnT8">B6</a> </td>
-         <tr >
-            <td>04-Dec-2026 <em>(Fri)</em></td>
-            <td>🟢 Probabilistic Programming 1 - Bayesian inference with conjugate models</td>
-            <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
-            <td></td>
-            <td> <a href="https://youtu.be/ynfvgtjOnqo">W1.1</a>, <a href="https://youtu.be/h9nODl50m_M">W1.2 </a> </td>
-                     </tr>
-          <tr>
-            <td>04-Dec-2026</td>
-            <td>🔴 Submission deadline assignment A0</td>
-            <td></td>
-            <td><a href="">submit</a></td>
-            <td></td>
-         </tr>
-         </tr>
-         <tr>
-            <td>04-Dec-2026</td>
-            <td>🔴 Pick-up probabilistic programming assignment A1</td>
-            <td></td>
-            <td>
-            <a href="https://github.com/bmlip/course/blob/main/assignments/A1%20-%20Observational%20astronomy.jl">A1</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
-            </td>
-            <td></td>
-         </tr>
-         <tr>
-            <td>09-Dec-2026 <em>(Wed)</em></td>
-            <td>⚪️ B7: Regression</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Regression.html">B7</a></td>
-            <td></td>
-            <td> <a href="https://youtu.be/2llpaRSN2Wc">B7.1</a>, <a href="https://youtu.be/TSoYnO6oXhw">B7.2 </a></td>
-         </tr>
-         <tr>
-            <td>11-Dec-2026 <em>(Fri)</em></td>
-            <td>⚪️ B8: Generative Classification <br/>⚪️ B9: Discriminative Classification
-            </td>
-            <td><a href="https://bmlip.github.io/course/lectures/Generative%20Classification.html">B8</a>, <a href="https://bmlip.github.io/course/lectures/Discriminative%20Classification.html">B9</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/IzNDzIcrhLA">B8</a>, <a href="https://youtu.be/Y7q0JQKNfjM">B9</a></td>
-         </tr>
-         <tr>
-            <td>16-Dec-2026 <em>(Wed)</em></td>
-            <td>🟢 Probabilistic Programming 2 - Bayesian regression & classification</td>
-            <td><a href="https://bmlip.github.io/course/probprog/PP2%20-%20Bayesian%20regression%20and%20classification.html">W2</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/TKvI5uUYY8A">W2.1</a>, <a href="https://youtu.be/WCtInHz5-zA">W2.2</a></td>
-         </tr>
-         <tr>
-            <td>18-Dec-2026 <em>(Fri)</em></td>
-            <td>⚪️ B10: Latent Variable Models and Variational Bayes</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Latent%20Variable%20Models%20and%20VB.html">B10</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/pVWdm9fQT6Y">B10.1</a>, <a href="https://youtu.be/mg9HGykqEbw">B10.2</a></td>
-         </tr>
-         <tr>
-            <td>18-Dec-2026 </td>
-            <td>🔴 Submission deadline assignment A1</td>
-            <td></td>
-            <td><a href="https://canvas.tue.nl/courses/33478/assignments/149316">submit</a>
-            </td>
-            <td></td>
-         </tr>
-         <tr>
-            <td colspan="6" style="text-align:center">🔵 break</td>
-         </tr>
-         <tr>
-            <td>06-Jan-2027 <em>(Wed)</em></td>
-            <td>🟢 Probabilistic Programming 3 - Variational Bayesian inference</td>
-            <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/z_hKaRqpNQM">W3.1</a>, <a href="https://youtu.be/FLKbzyiQlLo">W3.2</a></td>
-         </tr>
-         <tr>
-         <tr>
-            <td>08-Jan-2027 <em>(Fri)</em></td>
-            <td>⚪️ B11: Dynamic Models</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Dynamic%20Models.html">B11</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/W1AkZJAjvqI">B11</a></td>
-         </tr>
-         <tr>
-            <td>08-Jan-2027</td>
-            <td>🔴 Pick-up probabilistic programming assignment A2</td>
-            <td></td>
-            <td>
-            <a href="https://github.com/bmlip/course/blob/main/assignments/A2%20-%20Tracking%20satellites.jl">A2</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
-            </td>
-            <td></td>
-         </tr>
-         <tr>
-            <td>13-Jan-2027 <em>(Wed)</em></td>
-            <td>⚪️ B12: Intelligent Agents and Active Inference</td>
-            <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B12,</a><br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2025-AIF-lecture.ppsx">slides</a> </td>
-            <td></td>
-            <td><a href="https://youtu.be/fBm1oAzlv0w">B12.1</a>,  <a href="https://youtu.be/UbOuLxv9EdI">B12.2</a> </td>
-         </tr>
-         <tr>
-            <td>15-Jan-2027 <em>(Fri)</em></td>
-            <td>🟢 Probabilistic Programming 4 - Bayesian filters & smoothers</td>
-            <td><a href="https://bmlip.github.io/course/probprog/PP4%20-%20Bayesian%20filtering%20and%20smoothing.html">W4</a></td>
-            <td></td>
-            <td><a href="https://youtu.be/Yp2vhndnjng">W4.1</a>, <a href="https://youtu.be/qnWofDRh5eo">W4.2</a></td>
-         </tr>
-         <tr>
-            <td>22-Jan-2027 <em>(Fri)</em></td>
-            <td>🔴 Submission deadline assignment A2</td>
-            <td></td>
-            <td><a href="https://canvas.tue.nl/courses/33478/assignments/149318">submit</a>
-            </td>
-            <td></td>
-         </tr>
-         <tr>
-            <td>28-Jan-2027 (Thu)</td>
-            <td colspan="5">🔵 written examination (13:30-16:30)</td>
-         </tr>
-         <tr>
-            <td> TBD  </td>
-            <td>🔴 Pick-up resit programming assignment</td>
-            <td></td>
-            <td><a href="https://github.com/bmlip/course/blob/main/assignments/Resit%20-%20robot%20localization.jl">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)
-            </td>
-            <td></td>
-         </tr>
-         <tr>
-            <td> TBD </td>
-            <td>🔴 Submission deadline resit assignment</td>
-            <td></td>
-            <td><a href="https://canvas.tue.nl/courses/33478/assignments/155532">submit</a>
-            </td>
-            <td></td>
-         </tr>
-         <tr>
-            <td > TBD </td>
-            <td colspan="5">🔵 resit written examination (18:00-21:00)</td>
-         </tr>
-         <!-- <tr>
-            <td></td>
-            <td>M1: Bonus Lecture: What is Life?</td>
-            <td><a href="https://youtu.be/MGusn1JzqVs">M1.1</a>, <a href="https://youtu.be/Gk225kuulOE">M1.2</a> </td>
-            <td><a href="https://github.com/bertdv/BMLIP/raw/master/lessons/notebooks/MKoudahl-March2020-What-is-life.pdf">M1</a></td>
-            <td></td>
-         </tr> -->
-      </table>
+<table>
+  <tr>
+    <th style="text-align:center">date</th>
+    <th style="text-align:center">topic</th>
+    <th style="text-align:center">lecture notes</th>
+    <th style="text-align:center">assignments</th>
+    <th style="text-align:center">video recordings (2023/24)</th>
+  </tr>
+  <tr>
+    <td>11-Nov-2026 <em>(Wed)</em></td>
+    <td>⚪️ B0: Course Syllabus<br/>
+    ⚪️ B1: Machine Learning Overview</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Course%20Syllabus.html">B0</a>, <a href="https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html">B1</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/GtukVrtcXe8">B0</a>, <a href="https://youtu.be/mPc3j7XgZHM">B1</a></td>
+  </tr>
+  <tr>
+    <td>13-Nov-2026 <em>(Fri)</em></td>
+    <td>⚪️ B2: Probability Theory Review</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html">B2</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/PGbN5rv6HL4">B2.1</a>, <a href="https://youtu.be/LKh2ypFVGwY">B2.2</a></td>
+  </tr>
+  <tr>
+    <td>18-Nov-2026 <em>(Wed)</em></td>
+    <td>⚪️ B3: Bayesian Machine Learning</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html">B3</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/OPGrqnnEfU0">B3.1</a>, <a href="https://youtu.be/BOUmzY1Nx5g">B3.2</a></td>
+  </tr>
+  <tr>
+    <td>20-Nov-2026 <em>(Fri)</em></td>
+    <td>⚪️ B4: Factor Graphs and the Sum-Product Algorithm</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Factor%20Graphs.html">B4</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/C2vvsf_Ts2g">B4.1</a>, <a href="https://youtu.be/HbUuYBMZOKw">B4.2</a></td>
+  </tr>
+  <tr>
+    <td>25-Nov-2026 <em>(Wed)</em></td>
+    <td>🟢 Introduction to Julia</td>
+    <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>27-Nov-2026 <em>(Fri)</em></td>
+    <td>🔴 Pick-up Julia programming assignment A0</td>
+    <td></td>
+    <td><a href="https://github.com/bmlip/course/blob/main/assignments/A0%20-%20Julia%20Programming.jl">A0</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>27-Nov-2026 <em>(Fri)</em></td>
+    <td>⚪️ B5: Continuous Data and the Gaussian Distribution</td>
+    <td><a href="https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html">B5</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/WS6gWO5vgtc">B5.1</a>, <a href="https://youtu.be/Ma3jXNbNCyc">B5.2</a></td>
+  </tr>
+<!---  <tr>
+    <td>02-Dec-2026 <em>(Wed)</em></td>
+    <td>⚪️ B6: Discrete Data and the Multinomial Distribution</td>
+    <td><a href="https://bmlip.github.io/course/lectures/The%20Multinomial%20Distribution.html">B6</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/vyh8RvXxnT8">B6</a></td>
+  </tr> --->
+  <tr>
+    <td>02-Dec-2026 <em>(Wed)</em></td>
+    <td>🟢 Probabilistic Programming 1 - Bayesian inference with conjugate models</td>
+    <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/ynfvgtjOnqo">W1.1</a>, <a href="https://youtu.be/h9nODl50m_M">W1.2</a></td>
+  </tr>
+  <tr>
+    <td>04-Dec-2026 <em>(Fri)</em></td>
+    <td>⚪️ B6: Regression</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Regression.html">B6</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/2llpaRSN2Wc">B6.1</a>, <a href="https://youtu.be/TSoYnO6oXhw">B6.2</a></td>
+  </tr>
+  <tr>
+    <td>04-Dec-2026</td>
+    <td>🔴 Submission deadline assignment A0</td>
+    <td></td>
+    <td><a href="">submit</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>04-Dec-2026</td>
+    <td>🔴 Pick-up probabilistic programming assignment A1</td>
+    <td></td>
+    <td><a href="https://github.com/bmlip/course/blob/main/assignments/A1%20-%20Observational%20astronomy.jl">A1</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>09-Dec-2026 <em>(Wed)</em></td>
+    <td>⚪️ B7: Generative Classification <br/>⚪️ B8: Discriminative Classification</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Generative%20Classification.html">B7</a>, <a href="https://bmlip.github.io/course/lectures/Discriminative%20Classification.html">B8</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/IzNDzIcrhLA">B7</a>, <a href="https://youtu.be/Y7q0JQKNfjM">B8</a></td>
+  </tr>
+  <tr>
+    <td>11-Dec-2026 <em>(Fri)</em></td>
+    <td>🟢 Probabilistic Programming 2 - Bayesian regression &amp; classification</td>
+    <td><a href="https://bmlip.github.io/course/probprog/PP2%20-%20Bayesian%20regression%20and%20classification.html">W2</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/TKvI5uUYY8A">W2.1</a>, <a href="https://youtu.be/WCtInHz5-zA">W2.2</a></td>
+  </tr>
+  <tr>
+    <td>16-Dec-2026 <em>(Wed)</em></td>
+    <td>⚪️ B9: Latent Variable Models and Variational Bayes</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Latent%20Variable%20Models%20and%20VB.html">B9</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/pVWdm9fQT6Y">B9.1</a>, <a href="https://youtu.be/mg9HGykqEbw">B9.2</a></td>
+  </tr>
+  <tr>
+    <td>18-Dec-2026 <em>(Fri)</em></td>
+    <td>🟢 Probabilistic Programming 3 - Variational Bayesian inference</td>
+    <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/z_hKaRqpNQM">W3.1</a>, <a href="https://youtu.be/FLKbzyiQlLo">W3.2</a></td>
+  </tr>
+  <tr>
+    <td>18-Dec-2026</td>
+    <td>🔴 Submission deadline assignment A1</td>
+    <td></td>
+    <td><a href="https://canvas.tue.nl/courses/33478/assignments/149316">submit</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td colspan="5" style="text-align:center">🔵 break</td>
+  </tr>
+  <tr>
+    <td>06-Jan-2027 <em>(Wed)</em></td>
+    <td>⚪️ B10: Dynamic Models</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Dynamic%20Models.html">B10</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/W1AkZJAjvqI">B10</a></td>
+  </tr>
+  <tr>
+    <td>08-Jan-2027 <em>(Fri)</em></td>
+    <td>⚪️ B11: Intelligent Agents and Active Inference</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B11</a>,<br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2025-AIF-lecture.ppsx">slides</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/fBm1oAzlv0w">B11.1</a>, <a href="https://youtu.be/UbOuLxv9EdI">B11.2</a></td>
+  </tr>
+  <tr>
+    <td>08-Jan-2027</td>
+    <td>🔴 Pick-up probabilistic programming assignment A2</td>
+    <td></td>
+    <td><a href="https://github.com/bmlip/course/blob/main/assignments/A2%20-%20Tracking%20satellites.jl">A2</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>13-Jan-2027 <em>(Wed)</em></td>
+    <td>🟢 Probabilistic Programming 4 - Bayesian filters &amp; smoothers</td>
+    <td><a href="https://bmlip.github.io/course/probprog/PP4%20-%20Bayesian%20filtering%20and%20smoothing.html">W4</a></td>
+    <td></td>
+    <td><a href="https://youtu.be/Yp2vhndnjng">W4.1</a>, <a href="https://youtu.be/qnWofDRh5eo">W4.2</a></td>
+  </tr>
+  <tr>
+    <td>15-Jan-2027 <em>(Fri)</em></td>
+    <td>🟢 TO BE DETERMINED</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>22-Jan-2027 <em>(Fri)</em></td>
+    <td>🔴 Submission deadline assignment A2</td>
+    <td></td>
+    <td><a href="https://canvas.tue.nl/courses/33478/assignments/149318">submit</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>28-Jan-2027 <em>(Thu)</em></td>
+    <td colspan="4">🔵 written examination (13:30-16:30)</td>
+  </tr>
+  <tr>
+    <td>TBD</td>
+    <td>🔴 Pick-up resit programming assignment</td>
+    <td></td>
+    <td><a href="https://github.com/bmlip/course/blob/main/assignments/Resit%20-%20robot%20localization.jl">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TBD</td>
+    <td>🔴 Submission deadline resit assignment</td>
+    <td></td>
+    <td><a href="https://canvas.tue.nl/courses/33478/assignments/155532">submit</a></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TBD</td>
+    <td colspan="4">🔵 resit written examination (18:00-21:00)</td>
+  </tr>
+  <!-- <tr>
+    <td></td>
+    <td>M1: Bonus Lecture: What is Life?</td>
+    <td><a href="https://youtu.be/MGusn1JzqVs">M1.1</a>, <a href="https://youtu.be/Gk225kuulOE">M1.2</a></td>
+    <td><a href="https://github.com/bertdv/BMLIP/raw/master/lessons/notebooks/MKoudahl-March2020-What-is-life.pdf">M1</a></td>
+    <td></td>
+  </tr> -->
+</table>
+
 
 ### Mini lectures
 Throughout the course, you can read _Minis_ that deep-dive into specific topics. You can find the full list of minis here:
