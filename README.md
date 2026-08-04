@@ -121,7 +121,7 @@ You can access all lecture materials online through the links below:
     <td>27-Nov-2026 <em>(Fri)</em></td>
     <td>🔴 Pick-up Julia programming assignment A0</td>
     <td></td>
-    <td><a href="https://github.com/bmlip/course/blob/main/assignments/A0%20-%20Julia%20Programming.jl">A0</a></td>
+    <td><a href="">A0</a></td>
     <td></td>
   </tr>
   <tr>
@@ -163,7 +163,7 @@ You can access all lecture materials online through the links below:
     <td>04-Dec-2026</td>
     <td>🔴 Pick-up probabilistic programming assignment A1</td>
     <td></td>
-    <td><a href="https://github.com/bmlip/course/blob/main/assignments/A1%20-%20Observational%20astronomy.jl">A1</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a href="">A1</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td></td>
   </tr>
   <tr>
@@ -198,7 +198,7 @@ You can access all lecture materials online through the links below:
     <td>18-Dec-2026</td>
     <td>🔴 Submission deadline assignment A1</td>
     <td></td>
-    <td><a href="https://canvas.tue.nl/courses/33478/assignments/149316">submit</a></td>
+    <td><a href="">submit</a></td>
     <td></td>
   </tr>
   <tr>
@@ -222,7 +222,7 @@ You can access all lecture materials online through the links below:
     <td>08-Jan-2027</td>
     <td>🔴 Pick-up probabilistic programming assignment A2</td>
     <td></td>
-    <td><a href="https://github.com/bmlip/course/blob/main/assignments/A2%20-%20Tracking%20satellites.jl">A2</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a href="">A2</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td></td>
   </tr>
   <tr>
@@ -243,7 +243,7 @@ You can access all lecture materials online through the links below:
     <td>22-Jan-2027 <em>(Fri)</em></td>
     <td>🔴 Submission deadline assignment A2</td>
     <td></td>
-    <td><a href="https://canvas.tue.nl/courses/33478/assignments/149318">submit</a></td>
+    <td><a href="">submit</a></td>
     <td></td>
   </tr>
   <tr>
@@ -254,27 +254,21 @@ You can access all lecture materials online through the links below:
     <td>TBD</td>
     <td>🔴 Pick-up resit programming assignment</td>
     <td></td>
-    <td><a href="https://github.com/bmlip/course/blob/main/assignments/Resit%20-%20robot%20localization.jl">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a href="">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td></td>
   </tr>
   <tr>
     <td>TBD</td>
     <td>🔴 Submission deadline resit assignment</td>
     <td></td>
-    <td><a href="https://canvas.tue.nl/courses/33478/assignments/155532">submit</a></td>
+    <td><a href="">submit</a></td>
     <td></td>
   </tr>
   <tr>
     <td>TBD</td>
     <td colspan="4">🔵 resit written examination (18:00-21:00)</td>
   </tr>
-  <!-- <tr>
-    <td></td>
-    <td>M1: Bonus Lecture: What is Life?</td>
-    <td><a href="https://youtu.be/MGusn1JzqVs">M1.1</a>, <a href="https://youtu.be/Gk225kuulOE">M1.2</a></td>
-    <td><a href="https://github.com/bertdv/BMLIP/raw/master/lessons/notebooks/MKoudahl-March2020-What-is-life.pdf">M1</a></td>
-    <td></td>
-  </tr> -->
+
 </table>
 
 
