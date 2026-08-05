@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> description = "Review of probability theory as a foundation for rational reasoning and Bayesian inference."
@@ -69,7 +69,7 @@ md"""
   - [3Blue1Brown, YouTube video on Bayes theorem (2019)](https://youtu.be/HZGCoVF3YvM?si=JaXdesPjU8B_BtrC)
     - Nice animated tutorial on Bayes rule.
       
-  - **Edwin Jaynes, Probability Theory–The Logic of Science (2003)**
+  - [Edwin Jaynes, Probability Theory–The Logic of Science (2003)](https://bayes.wustl.edu/etj/science.pdf.html)
     - Brilliant book on the Bayesian view of probability theory. Just for fun, scan the annotated bibliography and references.
 
   - [Aubrey Clayton, Bernoulli's Fallacy–Statistical Illogic and the Crisis of Modern Science (2021)](https://aubreyclayton.com/bernoulli)
@@ -100,7 +100,7 @@ blockquote(
 
 The story above is not just my own, but is the all too common experience of many scientists. Fortunately, it doesn’t have to be like this. What we were not told in our undergraduate lectures is that there is an alternative approach to the whole subject of data analysis which uses only probability theory. In one sense, it makes the topic of statistics entirely superfluous. In another, it provides the logical justification for many of the prevalent statistical tests and procedures, making explicit the conditions and approximations implicitly assumed in their use."
 """,
-	# "D.S. Sivia"
+	"D.S. Sivia"
 )
 
 # ╔═╡ f8c8ba53-df36-48a6-afde-2952cbcfbe48
@@ -365,29 +365,6 @@ If ``X`` is *continuously* valued, then ``p(X=x)`` is a probability *density* fu
 
 """
 
-# ╔═╡ 3e1fc4da-d294-11ef-12f5-d51f9728fcc0
-md"""
-## Notational Conventions
-
-Here is a notational convention that you should be precise about (but many authors are not).
-
-If you want to write that a variable ``x`` is distributed as a Gaussian with mean ``\mu`` and covariance matrix ``\Sigma``, you can write this in either of two ways:
-
-```math
-\begin{align*} 
-p(x) &= \mathcal{N}(x|\mu,\Sigma) \\
-x &\sim \mathcal{N}(\mu,\Sigma)
-\end{align*}
-```
-
-In the second version, the symbol ``\sim`` can be interpreted as "is distributed as" (a Gaussian with parameters ``\mu`` and ``\Sigma``).
-
-Don't write ``p(x) = \mathcal{N}(\mu,\Sigma)`` because ``p(x)`` is a function of ``x`` but ``\mathcal{N}(\mu,\Sigma)`` is not. 
-
-Also, ``x \sim \mathcal{N}(x|\mu,\Sigma)`` is not entirely proper because you already named the argument on the right-hand-site. On the other hand, ``x \sim \mathcal{N}(\cdot|\mu,\Sigma)`` is fine, as is the shorter ``x \sim \mathcal{N}(\mu,\Sigma)``.
-
-"""
-
 # ╔═╡ 3e1ab104-d294-11ef-1a98-412946949fba
 md"""
 # $(HTML("<span id='PT-calculus'>Probability Theory Calculus</span>"))
@@ -492,13 +469,15 @@ If a set of events ``A_1, A_2, \ldots, A_n`` is both **mutually exclusive** and 
 
 # ╔═╡ 3e1b5c9c-d294-11ef-137f-d75b3731eae4
 md"""
-We mentioned before that every inference problem in PT can be evaluated through the sum and product rules. Next, we present two useful corollaries: (1) *Marginalization* and (2) *Bayes rule*. 
+We mentioned before that every inference problem in PT can be evaluated through the sum and product rules. Next, we present two useful corollaries: 
+ - (1) *Marginalization* 
+ - (2) *Bayes rule*. 
 
 """
 
 # ╔═╡ 3e1b7d14-d294-11ef-0d10-1148a928dd57
 md"""
-## Marginalization
+## Marginalization (through the Law of Total Probability)
 
 Let ``A`` and ``B_1,B_2,\ldots,B_n`` be events, where ``B_1,B_2,\ldots,B_n`` partitions the universe. Then
 
@@ -722,7 +701,7 @@ keyconcept(
 	"",
 	md"""
 	All valid probabilistic relations can be derived from just two fundamental principles: the **sum rule** and the **product rule**. These two rules form the foundation of probability theory, from which more complex constructs such as conditional probabilities, Bayes’ theorem, and marginalization naturally follow.
-	
+
 	"""
 )
 
@@ -940,9 +919,25 @@ The **covariance** matrix between *vectors* ``x`` and ``y`` is a mixed central m
 
 Clearly, if ``x`` and ``y`` are independent, then ``\Sigma_{xy} = 0``, since in that case ``\mathbb{E}[x y^T] = \mathbb{E}[x] \mathbb{E}[y^T] = \mu_x \mu_y^T``.
 
-Home exercise: Prove that ``\Sigma_{xy} = \Sigma_{yx}^{T}`` (making use of ``(AB)^T = B^TA^T``).
-
 """
+
+# ╔═╡ 6fafc778-c2c8-4e23-8d2e-6dc02e49e935
+md"""
+Exercise: Prove that ``\Sigma_{xy} = \Sigma_{yx}^{T}``
+"""
+
+# ╔═╡ 2292c667-862e-4924-8f15-de0a8893c439
+hide_solution(
+md"""
+```math
+\begin{align*}
+	\Sigma_{yx}^T &\triangleq \Big( \mathbb{E}\left[ (y-\mu_y)(x-\mu_x)^T \right] \Big)^T \\
+	&= \mathbb{E}\left[ \big((y-\mu_y)(x-\mu_x)^T \big)^T\right] \\
+	&= \mathbb{E}\left[ (x-\mu_x)(y-\mu_y)^T \right] \quad \text{using }(AB)^T = B^TA^T \\
+	&= \Sigma_{xy}
+\end{align*}	
+```
+"""		)
 
 # ╔═╡ 3e1e9224-d294-11ef-38b3-137c2be22400
 md"""
@@ -1167,6 +1162,9 @@ let
 	plot!(range_grid, t -> pdf(z,t), label=L"p_z", fill=(0, 0.1))
 end
 
+# ╔═╡ 0aff48a2-b070-425d-b1df-9c04fce8cdf5
+
+
 # ╔═╡ 3e1f4f46-d294-11ef-29b8-69e546763781
 md"""
 ## PDF for the Product of Two Variables
@@ -1254,9 +1252,11 @@ If the transformation ``y=h(x)`` is not invertible, then ``x=g(y)`` does not exi
 md"""
 $(exercise_statement("Transformation of a Gaussian Variable"; big=true, header_level=2))  
 
-##### Problem
-
-Let ``p_x(x) = \mathcal{N}(x|\mu,\sigma^2)`` and ``y = \frac{x-\mu}{\sigma}``. 
+Let ``p_x(x) = \mathcal{N}(x|\mu,\sigma^2)`` where
+```math
+\mathcal{N}(x|\mu,\Sigma) \triangleq \frac{1}{\sigma \sqrt{2\pi}} \,\exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
+```
+is a [Gaussian distribution](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#The-Gaussian-Distribution). Let ``y = \frac{x-\mu}{\sigma}``. 
 Evaluate ``p_y(y)`` as a Gaussian distribution. 
 
 """
@@ -1270,8 +1270,8 @@ Note that ``h(x)`` is invertible with ``x = g(y) = \sigma y + \mu``. The change-
 \begin{align*}
 p_y(y) &= p_x(g(y)) \cdot g^\prime(y) \\
   &= p_x(\sigma y + \mu) \cdot \sigma \\
-  &= \frac{1}{\sigma\sqrt(2 \pi)} \exp\left( - \frac{(\sigma y + \mu - \mu)^2}{2\sigma^2}\right) \cdot \sigma \\
-  &=  \frac{1}{\sqrt(2 \pi)} \exp\left( - \frac{y^2 }{2}\right)\\
+  &= \frac{1}{\sigma\sqrt{2 \pi}} \exp\left( - \frac{(\sigma y + \mu - \mu)^2}{2\sigma^2}\right) \cdot \sigma \\
+  &=  \frac{1}{\sqrt{2 \pi}} \exp\left( - \frac{y^2 }{2}\right)\\
   &= \mathcal{N}(y|0,1) 
 \end{align*}
 ```
@@ -1446,7 +1446,7 @@ md"""
   - Given is a disease with a prevalence of $(prevalence_bond) and a test procedure with sensitivity ('true positive' rate) of $(sensitivity_bond), and specificity ('true negative' rate) of $(specificity_bond). What is the chance that somebody who tests positive actually has the disease?
 
 ##### Solution
-  - Use probabilistic inference, to be discussed in this lecture. 
+  - [See later in this lecture](#Challenge-Revisited:-Disease-Diagnosis). We will use probabilistic inference, which we will discuss next. 
 """
 
 # ╔═╡ 3e1d6d00-d294-11ef-1081-e11b8397eb91
@@ -2852,7 +2852,6 @@ version = "1.13.0+0"
 # ╟─3e1a69f4-d294-11ef-103e-efc47025fb8f
 # ╟─3e1a7c8e-d294-11ef-1f97-55e608d49141
 # ╟─3e1a8eca-d294-11ef-1ef0-c15b24d05990
-# ╟─3e1fc4da-d294-11ef-12f5-d51f9728fcc0
 # ╟─3e1ab104-d294-11ef-1a98-412946949fba
 # ╟─fea8ae4c-8ef9-4b74-ad13-1314afef97de
 # ╟─3e1b4b1c-d294-11ef-0423-9152887cc403
@@ -2904,6 +2903,8 @@ version = "1.13.0+0"
 # ╟─3e1e4dda-d294-11ef-33b7-4bbe3300ca22
 # ╟─3e1e5a5a-d294-11ef-2fdf-efee4eb1a0f2
 # ╟─3e1e7742-d294-11ef-1204-f9be24da07ab
+# ╟─6fafc778-c2c8-4e23-8d2e-6dc02e49e935
+# ╟─2292c667-862e-4924-8f15-de0a8893c439
 # ╟─3e1e9224-d294-11ef-38b3-137c2be22400
 # ╟─d2202628-e4f9-4289-b48e-23b5a0073f94
 # ╟─726e7e9f-3d68-4d02-9954-1edd98b74fdc
@@ -2926,6 +2927,7 @@ version = "1.13.0+0"
 # ╟─218d3b6e-50b6-4b98-a00c-a19dd33d2c03
 # ╠═e836f877-5ed6-4865-ba3a-1ca5a86b2349
 # ╟─c0ea3253-a06b-426c-91a3-a6dd33e42779
+# ╠═0aff48a2-b070-425d-b1df-9c04fce8cdf5
 # ╟─3e1f4f46-d294-11ef-29b8-69e546763781
 # ╟─3e1f68fa-d294-11ef-31b2-e7670da8c08c
 # ╟─3e1f7d5e-d294-11ef-2878-05744036f32c

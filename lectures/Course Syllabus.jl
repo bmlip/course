@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v1.0.1
+# v1.0.3
 
 #> [frontmatter]
 #> description = "Course Syllabus"

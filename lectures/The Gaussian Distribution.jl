@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://github.com/bmlip/course/blob/v2/assets/figures/fig-linear-system.png?raw=true"
@@ -225,6 +225,31 @@ Why is the Gaussian distribution so ubiquitously used in science and engineering
   - Once the Gaussian has been attained, this form tends to be preserved. 		   
 		   
 """)
+
+# ╔═╡ 4632225a-cbfc-4ec9-a978-21037d8253b6
+md"""
+## A Notational Convention
+
+As an aside, here is a notational convention that you should be precise about (but many authors are not).
+
+If you want to write that a variable ``x`` is distributed as a Gaussian with mean ``\mu`` and covariance matrix ``\Sigma``, you can write this in either of two ways:
+
+```math
+\begin{align*} 
+p(x) &= \mathcal{N}(x|\mu,\Sigma) \\
+x &\sim \mathcal{N}(\mu,\Sigma)
+\end{align*}
+```
+
+In the second version, the symbol ``\sim`` can be interpreted as "is distributed as" (a Gaussian with parameters ``\mu`` and ``\Sigma``).
+
+Don't write ``p(x) = \mathcal{N}(\mu,\Sigma)`` because ``p(x)`` is a function of ``x`` but ``\mathcal{N}(\mu,\Sigma)`` is not. 
+
+Also, ``x \sim \mathcal{N}(x|\mu,\Sigma)`` is not entirely proper because you already named the argument on the right-hand-site. On the other hand, ``x \sim \mathcal{N}(\cdot|\mu,\Sigma)`` is fine, as is the shorter ``x \sim \mathcal{N}(\mu,\Sigma)``.
+
+This notational convention of course applies in the same way to other distributions.
+
+"""
 
 # ╔═╡ 9501922f-b928-46e2-8f23-8eb9c64f6198
 md"""
@@ -1278,9 +1303,12 @@ let
 	plot!(post_scale, θ*ones(n + 1), linewidth=2, label=L"θ")
 end
 
+# ╔═╡ a52aa1d6-fd53-4ac4-99f0-891049da8020
+
+
 # ╔═╡ b9ac7486-d294-11ef-13e5-29b7ffb440bc
 md"""
-# Summary
+# Recap
 
 A **linear transformation** ``z=Ax+b`` of a Gaussian variable ``x \sim \mathcal{N}(\mu_x,\Sigma_x)`` is Gaussian distributed as
 
@@ -3245,11 +3273,12 @@ version = "1.13.0+0"
 # ╟─55380883-d269-4f61-bec6-2944765db271
 # ╟─02853a5c-f6aa-4af8-8a25-bfffd4b96afc
 # ╟─71f1c8ee-3b65-4ef8-b36f-3822837de410
-# ╟─b9a4eb62-d294-11ef-06fa-af1f586cbc15
+# ╠═b9a4eb62-d294-11ef-06fa-af1f586cbc15
 # ╟─b9a50d0c-d294-11ef-0e60-2386cf289478
 # ╟─b9a52b18-d294-11ef-2d42-19c5e3ef3549
 # ╟─b9a5589a-d294-11ef-3fc3-0552a69df7b2
 # ╟─085233ee-f5ad-4731-89bb-84773182bba6
+# ╟─4632225a-cbfc-4ec9-a978-21037d8253b6
 # ╟─9501922f-b928-46e2-8f23-8eb9c64f6198
 # ╟─b9a5889c-d294-11ef-266e-d90225222e10
 # ╟─56510a09-073c-4fc8-b0b7-17b20dbb95f0
@@ -3328,7 +3357,8 @@ version = "1.13.0+0"
 # ╠═85b15f0a-650f-44be-97ab-55d52cb817ed
 # ╠═115eabf2-c476-40f8-8d7b-868a7359c1b6
 # ╠═61764e4a-e5ef-4744-8c71-598b2155f4d9
-# ╟─b9ac7486-d294-11ef-13e5-29b7ffb440bc
+# ╠═a52aa1d6-fd53-4ac4-99f0-891049da8020
+# ╠═b9ac7486-d294-11ef-13e5-29b7ffb440bc
 # ╟─b89360b8-39fa-46e9-96c8-7eece50fcb90
 # ╟─a439c0a7-afa1-4d9a-8737-58d341744016
 # ╟─79a99a22-3bb5-431b-bf84-5dce5cccfe25
