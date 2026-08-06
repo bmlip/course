@@ -1410,6 +1410,12 @@ Yes, it’s more correct to speak about the likelihood of the model parameters, 
 Saying “likelihood of the data” is misleading because it confuses likelihood with the sampling distribution ``p(D|\theta)`` seen as a function of ``D`` (where ``\theta`` is fixed). The latter is a probability distribution over possible data sets before observing them.
 """)
 
+# ╔═╡ d0f672bd-74c9-4be1-b5ea-8d4040edb5df
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html",
+	"https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html"
+)
+
 # ╔═╡ dd31ec7c-708d-4fd7-958d-f9887798a5bc
 md"""
 # Code
@@ -2934,6 +2940,7 @@ version = "1.13.0+0"
 # ╟─91dd40f0-c373-48b3-b83b-6e8df2c43e5a
 # ╟─a8d4a517-84a7-426e-a49e-482c5fd047ae
 # ╟─d3b003c6-70ca-419f-a343-e35b266323f3
+# ╟─d0f672bd-74c9-4be1-b5ea-8d4040edb5df
 # ╟─dd31ec7c-708d-4fd7-958d-f9887798a5bc
 # ╠═eeb9a1f5-b857-4843-920b-2e4a9656f66b
 # ╠═5394e37c-ae00-4042-8ada-3bbf32fbca9e

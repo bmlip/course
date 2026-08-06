@@ -1575,6 +1575,12 @@ In principle, the observation ``x=1`` favors model ``m_2``, since ``p(m_2|x=1) =
 
 """)
 
+# ╔═╡ 75718e3e-5c43-4164-9704-c2e902931a4f
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html",
+	"https://bmlip.github.io/course/lectures/Factor%20Graphs.html"
+)
+
 # ╔═╡ 6a2cb25e-d294-11ef-1d88-1fc784b33df0
 md"""
 # Optional Slides
@@ -1606,16 +1612,6 @@ Return to the [Parameter Estimation](#2.-Parameter-Estimation) cell.
 
 
 """
-
-# ╔═╡ 1edae118-dcc7-4169-95cf-f36025f2c336
-md"""
-## Working with Distributions in code
-
-Take a look at this mini lecture to see some simple examples of using distributions in Julia:
-"""
-
-# ╔═╡ 275a9a69-3135-4cbd-8a35-b1abee4af83f
-NotebookCard("https://bmlip.github.io/course/minis/Distributions%20in%20Julia.html")
 
 # ╔═╡ 6a2ccd16-d294-11ef-22ee-a5cff62ccd9c
 md"""
@@ -3245,7 +3241,7 @@ version = "1.13.0+0"
 # ╟─6a27951c-d294-11ef-2e1a-b5a4ce84aceb
 # ╟─6a27a28a-d294-11ef-1f33-41b444761429
 # ╟─55dec435-aa78-41ba-aad5-9d79ce292f42
-# ╠═6a27b114-d294-11ef-099d-1d55968934a6
+# ╟─6a27b114-d294-11ef-099d-1d55968934a6
 # ╟─6a27beca-d294-11ef-1895-d57b11b827c1
 # ╟─cc8af69e-6d00-4327-aaa2-0b1023052b8a
 # ╟─c454be00-05e7-42f6-a243-bf559ed6eff7
@@ -3307,7 +3303,7 @@ version = "1.13.0+0"
 # ╟─e9b32823-efd2-4a27-b529-4f49752c00bb
 # ╟─56b9aba3-6ead-498c-8670-ad93a1953b2a
 # ╟─c28b7130-f7fb-41ee-852e-9964b091d7fb
-# ╠═3a903a4d-1fb0-4566-8151-9c86dfc40ceb
+# ╟─3a903a4d-1fb0-4566-8151-9c86dfc40ceb
 # ╠═e99e7650-bb72-4576-8f2a-c3994533b644
 # ╟─7a624d2f-812a-47a0-a609-9fe299de94f5
 # ╟─51829800-1781-49ae-8ee7-ac15c0bfcb88
@@ -3346,10 +3342,9 @@ version = "1.13.0+0"
 # ╟─de08c2a1-c5e3-4add-8b22-2c633247da48
 # ╟─6a2cb25e-d294-11ef-1d88-1fc784b33df0
 # ╟─37f60e77-060e-4b0e-aa02-5ff7ec0df3c7
-# ╟─1edae118-dcc7-4169-95cf-f36025f2c336
-# ╟─275a9a69-3135-4cbd-8a35-b1abee4af83f
 # ╟─6a2ccd16-d294-11ef-22ee-a5cff62ccd9c
 # ╟─f5d8d021-3157-464f-93a2-b3054779e55f
+# ╟─75718e3e-5c43-4164-9704-c2e902931a4f
 # ╟─1f92c406-6792-4af6-9132-35efd8223bc5
 # ╠═b32d2d36-f3a5-406f-adf6-c7b8ebe6cc77
 # ╠═17182feb-2c58-4485-aadc-114003376607

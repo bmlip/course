@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://github.com/bmlip/course/blob/v2/assets/figures/ffg-example-1.png?raw=true"
@@ -1134,6 +1134,12 @@ m = v * (0/4 + y1_hat/1.0 + y2_hat/2.0)
 
 # ╔═╡ 578ec319-337d-4396-bb75-eaf99d95a38d
 Text("Manual result: p(x|y1,y2) = \n\t𝒩($(m), $(v))")
+
+# ╔═╡ ef2727ca-f084-4c5c-a055-b2a5dba282a9
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html",
+	"https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html"
+)
 
 # ╔═╡ 89da2fc0-a7c8-4a9d-82d9-622a311d010d
 md"""
@@ -3275,6 +3281,7 @@ version = "1.13.0+0"
 # ╠═86e67c05-068d-4de4-80f3-1a20cc8a43ea
 # ╠═fffa27d5-eb68-4dd3-9995-4a53fba6c1e4
 # ╟─578ec319-337d-4396-bb75-eaf99d95a38d
+# ╟─ef2727ca-f084-4c5c-a055-b2a5dba282a9
 # ╟─89da2fc0-a7c8-4a9d-82d9-622a311d010d
 # ╠═5a8dcadb-f0c2-4fb0-b8cd-db8cf49cc292
 # ╠═965a08f4-d294-11ef-0604-1586ff37c0d4
