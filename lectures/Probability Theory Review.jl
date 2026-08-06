@@ -733,10 +733,10 @@ md"""
 """
 
 # ╔═╡ fc733d61-fd0f-4a13-9afc-4505ac0253df
-f(y,θ) = θ.^y .* (1 .- θ).^(1 .- y) # p(y|θ)
-
-# ╔═╡ ab223dea-8ba8-4d30-94f4-72c8e070aadf
-θ_bond = @bind θ Scrubbable(0.0:0.02:1; format=".2f");
+begin
+	f(y,θ) = θ.^y .* (1 .- θ).^(1 .- y); # p(y|θ)
+	θ_bond = @bind θ Scrubbable(0.0:0.02:1; format=".2f");
+end;
 
 # ╔═╡ d93f73d4-2783-4777-b0ce-cdc0444cb300
 md"""
@@ -1079,16 +1079,6 @@ md"""
 
 """
 
-# ╔═╡ e5902178-6df2-4eb4-ac13-7370b3d00c9c
-md"""
-## Working with Distributions in code
-
-Take a look at this mini lecture to see some simple examples of using distributions in Julia:
-"""
-
-# ╔═╡ 6bc443b4-1a07-4f56-99fb-c30a4370da92
-NotebookCard("https://bmlip.github.io/course/minis/Distributions%20in%20Julia.html")
-
 # ╔═╡ 3e1f225a-d294-11ef-04c6-f3ca018ab286
 md"""
 $(code_example("Sum of Two Gaussian-distributed Variables"; big=true, header_level=2))  
@@ -1161,9 +1151,6 @@ let
 	plot!(range_grid, t -> pdf(y,t), label=L"p_y", fill=(0, 0.1))
 	plot!(range_grid, t -> pdf(z,t), label=L"p_z", fill=(0, 0.1))
 end
-
-# ╔═╡ 0aff48a2-b070-425d-b1df-9c04fce8cdf5
-
 
 # ╔═╡ 3e1f4f46-d294-11ef-29b8-69e546763781
 md"""
@@ -1254,7 +1241,7 @@ $(exercise_statement("Transformation of a Gaussian Variable"; big=true, header_l
 
 Let ``p_x(x) = \mathcal{N}(x|\mu,\sigma^2)`` where
 ```math
-\mathcal{N}(x|\mu,\Sigma) \triangleq \frac{1}{\sigma \sqrt{2\pi}} \,\exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
+\mathcal{N}(x|\mu,\sigma^2) \triangleq \frac{1}{\sigma \sqrt{2\pi}} \,\exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
 ```
 is a [Gaussian distribution](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#The-Gaussian-Distribution). Let ``y = \frac{x-\mu}{\sigma}``. 
 Evaluate ``p_y(y)`` as a Gaussian distribution. 
@@ -1299,7 +1286,7 @@ Derive the general sum rule,
 ```math
 p(A + B) = p(A) + p(B) - p(A,B)
 ```
-from the elementary sum rule ``p(A) + p(\bar A) = 1`` and the sum and product rules.
+from the _elementary_ sum rule ``p(A) + p(\bar A) = 1`` and the product rule. 
  
 """
 
@@ -2885,8 +2872,7 @@ version = "1.13.0+0"
 # ╟─8a7dd8b7-5faf-4091-8451-9769f842accb
 # ╟─b7445b9b-7fbb-4560-b947-a23af0fcf101
 # ╟─3e1d20e0-d294-11ef-2044-e1fe6590a600
-# ╠═fc733d61-fd0f-4a13-9afc-4505ac0253df
-# ╟─ab223dea-8ba8-4d30-94f4-72c8e070aadf
+# ╟─fc733d61-fd0f-4a13-9afc-4505ac0253df
 # ╟─922770f4-ddc8-4089-b378-f14088276b43
 # ╟─3e1de32c-d294-11ef-1f63-f190c8361404
 # ╟─4c639e65-e06b-4c5e-b6e7-aabed6b6c0b4
@@ -2914,8 +2900,6 @@ version = "1.13.0+0"
 # ╟─3e1eba72-d294-11ef-2f53-b56f1862fcbb
 # ╟─3e1ed1a4-d294-11ef-2de4-d7cc540e06a1
 # ╟─3e1eeb14-d294-11ef-1702-f5d2cf6fe60a
-# ╟─e5902178-6df2-4eb4-ac13-7370b3d00c9c
-# ╟─6bc443b4-1a07-4f56-99fb-c30a4370da92
 # ╟─3e1f225a-d294-11ef-04c6-f3ca018ab286
 # ╟─98fa17a6-7c8b-46e4-b32d-52db183d88f8
 # ╠═27ec154a-a4c3-4d71-b2a0-45f2b456a8e4
@@ -2927,7 +2911,6 @@ version = "1.13.0+0"
 # ╟─218d3b6e-50b6-4b98-a00c-a19dd33d2c03
 # ╠═e836f877-5ed6-4865-ba3a-1ca5a86b2349
 # ╟─c0ea3253-a06b-426c-91a3-a6dd33e42779
-# ╠═0aff48a2-b070-425d-b1df-9c04fce8cdf5
 # ╟─3e1f4f46-d294-11ef-29b8-69e546763781
 # ╟─3e1f68fa-d294-11ef-31b2-e7670da8c08c
 # ╟─3e1f7d5e-d294-11ef-2878-05744036f32c

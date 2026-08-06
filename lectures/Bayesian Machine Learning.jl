@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://github.com/bmlip/course/blob/v2/assets/figures/scientific-inquiry-loop-w-BML-eqs.png?raw=true"
@@ -166,13 +166,15 @@ md"""
 md"""
 ## 2. Parameter Estimation
 
-You must now specify a likelihood function for the parameters from the data-generating distribution. Note that, for a given (i.e., *observed*) data set ``D=\{x_1,x_2,\dots,x_N\}`` with *independent* observations ``x_n``, the likelihood factorizes as 
+You must now specify a likelihood function for the parameters from the data-generating distribution. Note that, for a given (i.e., *observed*) data set ``D=\{x_1,x_2,\dots,x_N\}`` with *independent* observations ``x_n`` for a given coin (whose properties are represented by ``\theta``), the likelihood factorizes as 
 
 ```math
  p(D|\theta) = \prod_{n=1}^N p(x_n|\theta)\,.
 ```
 
-So, usually you select the data-generating distribution for one observation ``x_n`` and then use (in-)dependence assumptions to combine these models into a likelihood function for the model parameters.
+(See [this optional slide below ](#Revisiting-the-Likelihood-Function) for more information on this factorization.)
+
+In practice, you usually first specify the data-generating distribution ``p(x_n|\theta)`` for one observation and then combine these models for individual throws into a likelihood function for the model parameters.
 
 """
 
@@ -1174,9 +1176,6 @@ let i = toss_index_2
     bar!([(e[i] / total) for e in evidences], group=["Model $i" for i in eachindex(priors)])
 end
 
-# ╔═╡ ee4006aa-e54b-4501-93ee-60b34bdf5c7b
-exercise_statement("Convergence to 0"; header_level=4)
-
 # ╔═╡ 6a2b9676-d294-11ef-241a-89ff7aa676f9
 md"""
 Over time, the relative evidence of model ``m_1`` converges to ``0``. Can you explain this behavior?
@@ -1579,6 +1578,32 @@ In principle, the observation ``x=1`` favors model ``m_2``, since ``p(m_2|x=1) =
 # ╔═╡ 6a2cb25e-d294-11ef-1d88-1fc784b33df0
 md"""
 # Optional Slides
+
+"""
+
+# ╔═╡ 37f60e77-060e-4b0e-aa02-5ff7ec0df3c7
+md"""
+## Revisiting the Likelihood Function
+
+In the [Parameter Estimation](#2.-Parameter-Estimation) cell above, we mentioned that the likelihood function $p(D|\theta)$ often factorizes as 
+
+```math
+ p(D|\theta) = \prod_{n=1}^N p(x_n|\theta)\,.
+```
+
+Let's analyze this assumption in more detail. The assumption here is that to characterize your knowledge of the outcome ``x_n``, you need to know which coin is being used, as specified by ``\theta``. Once ``\theta`` is known, the outcomes of the other tosses ``x_m``, where ``m \neq n``, provide no additional information about ``x_n``. Thus, the coin tosses are _conditionally independent_ given ``\theta``.
+
+This is not the same as assuming that coin tosses are (unconditionally) independent. We did not assume that
+
+```math
+ p(D) = \prod_{n=1}^N p(x_n)\,.
+```
+because the different coin tosses are _not_ independent if they are thrown by the same coin. It is important to understand the difference between these two assumptions. 
+
+Return to the [Parameter Estimation](#2.-Parameter-Estimation) cell.
+
+
+
 
 """
 
@@ -3220,7 +3245,7 @@ version = "1.13.0+0"
 # ╟─6a27951c-d294-11ef-2e1a-b5a4ce84aceb
 # ╟─6a27a28a-d294-11ef-1f33-41b444761429
 # ╟─55dec435-aa78-41ba-aad5-9d79ce292f42
-# ╟─6a27b114-d294-11ef-099d-1d55968934a6
+# ╠═6a27b114-d294-11ef-099d-1d55968934a6
 # ╟─6a27beca-d294-11ef-1895-d57b11b827c1
 # ╟─cc8af69e-6d00-4327-aaa2-0b1023052b8a
 # ╟─c454be00-05e7-42f6-a243-bf559ed6eff7
@@ -3293,7 +3318,6 @@ version = "1.13.0+0"
 # ╟─6a2b3ba4-d294-11ef-3c28-176be260cb15
 # ╟─188b5bea-6765-4dcf-9369-3b1fdbe94494
 # ╟─ebcfcd1b-7fc8-42b7-a35e-4530f798cfdf
-# ╟─ee4006aa-e54b-4501-93ee-60b34bdf5c7b
 # ╟─6a2b9676-d294-11ef-241a-89ff7aa676f9
 # ╟─9c5d7c89-f65c-4f52-9e49-14692bed2452
 # ╟─6a2bb18a-d294-11ef-23bb-99082caf6e01
@@ -3321,6 +3345,7 @@ version = "1.13.0+0"
 # ╟─ecb036da-a0a2-4919-b1aa-bc33b6ba7e73
 # ╟─de08c2a1-c5e3-4add-8b22-2c633247da48
 # ╟─6a2cb25e-d294-11ef-1d88-1fc784b33df0
+# ╟─37f60e77-060e-4b0e-aa02-5ff7ec0df3c7
 # ╟─1edae118-dcc7-4169-95cf-f36025f2c336
 # ╟─275a9a69-3135-4cbd-8a35-b1abee4af83f
 # ╟─6a2ccd16-d294-11ef-22ee-a5cff62ccd9c
