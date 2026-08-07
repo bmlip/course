@@ -1575,12 +1575,6 @@ In principle, the observation ``x=1`` favors model ``m_2``, since ``p(m_2|x=1) =
 
 """)
 
-# ╔═╡ 75718e3e-5c43-4164-9704-c2e902931a4f
-navigate_prev_next(
-	"https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html",
-	"https://bmlip.github.io/course/lectures/Factor%20Graphs.html"
-)
-
 # ╔═╡ 6a2cb25e-d294-11ef-1d88-1fc784b33df0
 md"""
 # Optional Slides
@@ -1621,6 +1615,12 @@ md"""
 
 # ╔═╡ f5d8d021-3157-464f-93a2-b3054779e55f
 NotebookCard("https://bmlip.github.io/course/minis/KL%20Divergence.html")
+
+# ╔═╡ 75718e3e-5c43-4164-9704-c2e902931a4f
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html",
+	"https://bmlip.github.io/course/lectures/Factor%20Graphs.html"
+)
 
 # ╔═╡ 1f92c406-6792-4af6-9132-35efd8223bc5
 md"""
