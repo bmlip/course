@@ -297,7 +297,7 @@ md"""
 
 where we used the fact that the [maximum of the Dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution#Mode) ``\mathrm{Dir}(\{\alpha_1,\ldots,\alpha_K\})`` is obtained at  ``(\alpha_k-1)/(\sum_k\alpha_k - K)``.
 
-		""")
+""")
 
 # ╔═╡ d844bcfa-d294-11ef-0874-b154f3ed810b
 md"""
@@ -849,7 +849,7 @@ version = "1.64.0+1"
 # ╔═╡ Cell order:
 # ╟─d8422bf2-d294-11ef-0144-098f414c6454
 # ╟─1c6d16be-e8e8-45f1-aa32-c3fb08af19ce
-# ╠═d8424e52-d294-11ef-0083-fbb77df4d853
+# ╟─d8424e52-d294-11ef-0083-fbb77df4d853
 # ╟─d842ad86-d294-11ef-3266-253f80ecf4b7
 # ╟─d842d368-d294-11ef-024d-45e58ca994e0
 # ╟─f9977fc0-0d3f-467e-822d-72f3a338f717
