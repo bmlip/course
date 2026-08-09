@@ -24,9 +24,6 @@ macro bind(def, element)
     #! format: on
 end
 
-# ╔═╡ 9edd80d4-d088-4b2f-8843-abaa7a5d9c5e
-using Random
-
 # ╔═╡ 5638c1d0-db95-49e4-bd80-528f79f2947e
 using HCubature, LinearAlgebra# Numerical integration package
 
@@ -67,9 +64,11 @@ md"""
       * These lecture notes
   * Optional
 
-      * [Bishop PRML book](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) (2006), pp. 85-93
+      * [Bishop PRML book on Gaussian Distributions](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) (2006), pp. 85-93
+      * [Bishop PRML book on Bernoulli and Categorial Distributions](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) (2006), pp. 67-70, 74-76, 93-94
 
       * [MacKay - 2006 - The Humble Gaussian Distribution](https://github.com/bmlip/course/blob/main/assets/files/Mackay-2006-The-humble-Gaussian-distribution.pdf) (highly recommended!)
+
       * [Ariel Caticha - 2012 - Entropic Inference and the Foundations of Physics](https://github.com/bmlip/course/blob/main/assets/files/Caticha-2012-Entropic-Inference-and-the-Foundations-of-Physics.pdf), pp.30-34, section 2.8, the Gaussian distribution
   * References
 
@@ -159,7 +158,7 @@ Why is the Gaussian distribution so ubiquitously used in science and engineering
 2. Once the Gaussian has been attained, this form tends to be preserved. e.g.,   
 
     * The convolution of two Gaussian functions is another Gaussian function (useful in the sum of 2 variables and linear transformations)
-    * The product of two Gaussian functions is another Gaussian function (useful in Bayes rule).
+    * The product of two Gaussian functions is another Gaussian function (useful in Bayes rule where multiplication of Gaussian Likelihood and prior leads to a Gaussian posterior).
     * The Fourier transform of a Gaussian function is another Gaussian function.
 
 See also [Jaynes, section 7.14](https://github.com/bmlip/course/blob/main/assets/files/Jaynes%20-%202003%20-%20Probability%20theory%20-%20ch-7%20-%20Gaussian%20distribution.pdf), and the whole chapter 7 in his book for more details on why the Gaussian distribution is so useful.
@@ -817,7 +816,7 @@ Now let's proceed with learning the parameters for a model for ``N`` independent
 md"""
 ## Model specification
 
-#### data-generating distribution
+#### likelihood function
 
 The outcomes ``x_n`` are encoded as
 ```math
@@ -951,6 +950,48 @@ p(D_m|\mu) =\frac{N!}{m_1! m_2!\ldots m_K!} \,\prod_k \mu_k^{m_k}\,.
 md"""
 (We insert this slide only to alert you to the difference between using one-hot encoded outcomes ``D=\{x_1,x_2,\ldots,x_N\}`` as the data, versus using counts ``D_m = \{m_1,m_2,\ldots,m_K\}`` as the data. When used as a likelihood function for ``\mu``, it makes no difference whether you use ``p(D|\mu)`` or ``p(D_m|\mu)``.)
 
+"""
+
+# ╔═╡ f8b57f11-f014-4a4a-aa41-8217b1a5b21d
+md"""
+## Multinomial Maximum Likelihood Estimation
+
+#### Maximum likelihood as a special case of Bayesian estimation
+
+We can obtain the maximum likelihood estimate for ``\mu_k`` based on ``N`` throws of a ``K``-sided die within the Bayesian framework by letting the prior for ``\mu`` approach a uniform distribution. For a Dirichlet prior ``\mathrm{Dir}(\mu | \alpha)``, this corresponds to setting
+``\alpha \rightarrow (1, 1, \dots, 1)``.
+
+
+Prove for yourself that 
+
+```math
+\begin{align*}
+\hat{\mu}_k &= \arg\max_{\mu_k} p(D|\mu) = \frac{m_k}{N}\,.
+\end{align*}
+```
+
+"""
+
+# ╔═╡ bed4962d-cd5f-4bff-bf25-68e524b20183
+hide_proof(
+md"""
+```math
+\begin{align*}
+\hat{\mu}_k &= \arg\max_{\mu_k} p(D|\mu) \\
+&= \arg\max_{\mu_k} p(D|\mu) \cdot \underbrace{\left.\mathrm{Dir}(\mu|\alpha)\right|_{\alpha=(1,1,\ldots,1)}}_{\text{uniform distr.}} \\
+&= \arg\max_{\mu_k} \left.p(\mu|D,\alpha)\right|_{\alpha=(1,1,\ldots,1)}  \\
+&= \arg\max_{\mu_k} \left.\mathrm{Dir}\left( \mu | m + \alpha \right)\right|_{\alpha=(1,1,\ldots,1)} \\
+&= \frac{m_k}{\sum_k m_k} = \frac{m_k}{N}
+\end{align*}
+```
+
+where we used the fact that the [maximum of the Dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution#Mode) ``\mathrm{Dir}(\{\alpha_1,\ldots,\alpha_K\})`` is obtained at  ``(\alpha_k-1)/(\sum_k\alpha_k - K)``.
+
+		""")
+
+# ╔═╡ bed7072c-53b0-47f7-bf77-32deed55b3e5
+md"""
+In practice, maximum likelihood estimation (MLE) is, of course, not executed by first doing full Bayesian estimation and then considering MLE as a special case. In the [optional slide below](#Multinomial-Maximum-Likelihood-Estimation-by-Optimizing-a-Constrained-Log-likelihood), you can verify that direct minimization of the likelihood function leads to the same answer.
 """
 
 # ╔═╡ b89360b8-39fa-46e9-96c8-7eece50fcb90
@@ -1273,6 +1314,72 @@ Now we work out ``\Sigma_{x\theta}``:
 
 		
 """)
+
+# ╔═╡ 32a7da22-7dba-41eb-8125-a9c8409a968e
+md"""
+
+#### Laplace's Generalized Rule of Succession (**) 
+
+Show that Laplace's generalized rule of succession can be worked out to a prediction that is composed of a prior prediction and data-based correction term.
+
+
+"""
+
+# ╔═╡ a0a96322-d71e-4e5c-95a4-fcc01c0db542
+hide_solution(
+md"""
+
+```math
+\begin{align*}
+p(&x_{\bullet,k}=1|D) = \frac{m_k + \alpha_k }{ N+ \sum_k \alpha_k} \\
+&= \frac{m_k}{N+\sum_k \alpha_k}  + \frac{\alpha_k}{N+\sum_k \alpha_k}\\
+&= \frac{m_k}{N+\sum_k \alpha_k} \cdot \frac{N}{N} + \frac{\alpha_k}{N+\sum_k \alpha_k}\cdot \frac{\sum_k \alpha_k}{\sum_k\alpha_k} \\
+&= \frac{N}{N+\sum_k \alpha_k} \cdot \frac{m_k}{N} + \frac{\sum_k \alpha_k}{N+\sum_k \alpha_k} \cdot \frac{\alpha_k}{\sum_k\alpha_k} \\
+&= \frac{N}{N+\sum_k \alpha_k} \cdot \frac{m_k}{N} + \bigg( \frac{\sum_k \alpha_k}{N+\sum_k \alpha_k} + \underbrace{\frac{N}{N+\sum_k \alpha_k} - \frac{N}{N+\sum_k \alpha_k}}_{0}\bigg) \cdot \frac{\alpha_k}{\sum_k\alpha_k} \\
+&= \frac{N}{N+\sum_k \alpha_k} \cdot \frac{m_k}{N} + \bigg( 1 - \frac{N}{N+\sum_k \alpha_k}\bigg) \cdot \frac{\alpha_k}{\sum_k\alpha_k} \\
+&= \underbrace{\frac{\alpha_k}{\sum_k\alpha_k}}_{\text{prior prediction}} + \underbrace{\frac{N}{N+\sum_k \alpha_k} \cdot \underbrace{\left(\frac{m_k}{N} - \frac{\alpha_k}{\sum_k\alpha_k}\right)}_{\text{prediction error}}}_{\text{data-based correction}}
+\end{align*}
+```
+
+(If you know how to do it shorter and more elegantly, please post in Piazza.)
+
+This decomposition is the natural consequence of doing Bayesian estimation, which always involves a prior-based prediction term and a likelihood-based (or data-based) correction term that can be interpreted as a (precision-weighted) prediction error. 
+		
+		""")
+
+# ╔═╡ ff9e3293-0a49-4c51-b118-cf7af45e4bcb
+md"""
+
+#### Evidence for the Multinomial-Dirichlet model (**) 
+
+As above, consider the following model assumptions for $N$ tosses with a $K$-sided die with parameters $\mu = (\mu_1,\mu_2, \ldots,\mu_K)$.  
+
+```math
+\begin{align}
+p(D|\mu) &= \prod_{n=1}^N \mathrm{Cat}(x_n|\mu) = \prod_{k=1}^{K} \mu_k^{m_k} \tag{likelihood}\\
+p(\mu|\alpha) &= \mathrm{Dir}(\mu|\alpha) = \frac{1}{B(\alpha)} \prod_{k=1}^{K} \mu_k^{\alpha_k -1}   \tag{prior}
+\end{align}
+```
+where $B(\alpha) = \frac{\prod_k \Gamma(\alpha_k)}{\Gamma(\sum_k \alpha_k)}$ is known as the [Beta function](https://en.wikipedia.org/wiki/Beta_function).
+
+Work out both the model evidence and the posterior distribution for $\mu$.
+"""
+
+# ╔═╡ fded7c8c-feed-4630-a50d-5a854536cab3
+hide_solution(
+	md"""
+
+	```math
+	\begin{align}
+	\overbrace{\prod_{k=1}^{K} \mu_k^{m_k}}^{\text{likelihood }p(D|\mu)} \cdot \overbrace{\frac{1}{B(\alpha)} \prod_{k=1}^{K} \mu_k^{\alpha_k -1}}^{\text{prior }p(\mu|\alpha)}  
+	&= \frac{1}{B(\alpha)} \prod_{k=1}^{K} \mu_k^{m_k + \alpha_k -1} \\
+	&= \frac{B(m+\alpha)}{B(\alpha)} \frac{1}{B(m+\alpha)}\prod_{k=1}^{K} \mu_k^{m_k + \alpha_k -1} \\
+	&= \underbrace{\frac{B(m+\alpha)}{B(\alpha)}}_{\text{evidence }p(D|\alpha)} \,\underbrace{\mathrm{Dir}(\mu|m+\alpha)}_{\text{posterior }p(\mu|D,\alpha)} 
+	\end{align} 
+	```
+
+	This equation is the equivalent of the [Gaussian multiplication formula](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#(Multivariate)-Gaussian-Multiplication) for discrete data. Note that the evidence is a scalar normalizer for given observations $m$ and pseudo-observations ("prior" observations) $\alpha$.
+	""")
 
 # ╔═╡ 6dfc31a0-d0d7-4901-a876-890df9ab4258
 md"""
@@ -1655,320 +1762,59 @@ In short, Gaussian-distributed variables remain Gaussian in linear systems, but 
 
 """
 
-# ╔═╡ 97080395-fad1-46a2-aae9-0b69811c6f34
+# ╔═╡ f07d505a-5fc3-45fb-9a55-b8d397d1280e
 md"""
-# To Be Deleted
+## Multinomial Maximum Likelihood Estimation by Optimizing a Constrained Log-likelihood
 """
 
-# ╔═╡ b9aa930a-d294-11ef-37ec-8d17be226c74
+# ╔═╡ d66ab614-f672-490f-896c-565b70a21e48
 md"""
-## Kalman Filtering (simple case)
 
-##### Problem
-
-Consider a signal 
-
-```math
-x_t=\theta+\epsilon_t \, \text{,    with    } \epsilon_t \sim \mathcal{N}(0,\sigma^2)\,,
-```
-where ``D_t= \left\{x_1,\ldots,x_t\right\}`` is observed *sequentially* (over time). Derive a **recursive** algorithm for 
-```math
-p(\theta|D_t) \,,
-```
-i.e., an update rule for (posterior) ``p(\theta|D_t)``, based on (prior) ``p(\theta|D_{t-1})`` and (a new observation) ``x_t``.
-
-"""
-
-# ╔═╡ b9aabe9a-d294-11ef-2489-e9fc0dbb760a
-md"""
-#### Model specification
-
-The data-generating distribution is given as
-```math
-p(x_t|\theta) = \mathcal{N}(x_t\,|\, \theta,\sigma^2)\,.
-```
-
-For a given new measurement ``x_t`` and given ``\sigma^2``, this equation can also be read as a likelihood function for $\theta$. 
-
-We now need a prior for $\theta$. Let's define the estimate for $\theta$ after ``t`` observations (i.e., our *solution* ) as ``p(\theta|D_t) = \mathcal{N}(\theta\,|\,\mu_t,\sigma_t^2)``. The prior is then given by
-
-```math
-p(\theta|D_{t-1}) = \mathcal{N}(\theta\,|\,\mu_{t-1},\sigma_{t-1}^2)\,.
-```
-
-"""
-
-# ╔═╡ b9aad50e-d294-11ef-23d2-8d2bb3b47574
-md"""
-#### Inference
-
-Use Bayes rule,
+The log-likelihood for the multinomial distribution is given by
 
 ```math
 \begin{align*}
-p(\theta|D_t) &= p(\theta|x_t,D_{t-1}) \\
-  &\propto p(x_t,\theta | D_{t-1}) \\
-  &= p(x_t|\theta) \, p(\theta|D_{t-1}) \\
-  &= \mathcal{N}(x_t|\theta,\sigma^2) \, \mathcal{N}(\theta\,|\,\mu_{t-1},\sigma_{t-1}^2) \\
-  &= \mathcal{N}(\theta|x_t,\sigma^2) \, \mathcal{N}(\theta\,|\,\mu_{t-1},\sigma_{t-1}^2) \;\;\text{(note this trick)}\\
-  &\propto \mathcal{N}(\theta|\mu_t,\sigma_t^2) \;\;\text{(use Gaussian multiplication formula)}
-\end{align*}
-```
-
-with
-
-```math
-\begin{align*}
-K_t &= \frac{\sigma_{t-1}^2}{\sigma_{t-1}^2+\sigma^2} \qquad \text{(Kalman gain)}\\
-\mu_t &= \mu_{t-1} + K_t \cdot (x_t-\mu_{t-1})\\
-\sigma_t^2 &= \left( 1-K_t \right) \sigma_{t-1}^2 
+\mathrm{L}(\mu) &\triangleq \log p(D_m|\mu) \propto \log \prod_k \mu_k^{m_k} =  \sum_k m_k \log \mu_k 
 \end{align*}
 ```
 
 """
 
-# ╔═╡ b9aaee4a-d294-11ef-2ed7-0dcb360d8bb7
+# ╔═╡ bd4b4266-82c4-4355-afba-302d39f7c30b
 md"""
-This online (recursive) estimator of the mean and variance of Gaussian observations is known as the **Kalman filter**.
-
-In this simplified case, the process mean (``\theta``) is assumed to remain constant. In the general Kalman filter, however, the mean may evolve over time; see the [Dynamic Models lecture](https://bmlip.github.io/course/lectures/Dynamic%20Models.html) for details.
-
-
-
-"""
-
-# ╔═╡ b9aafc6e-d294-11ef-1b1a-df718c1f1a58
-md"""
-Note that the so-called Kalman gain ``K_t`` serves as a "learning rate" (step size) in the update equation for the posterior mean ``\mu_t``.
-
-"""
-
-# ╔═╡ e2fc4945-4f88-4520-b56c-c7208b62c29d
-keyconcept("", md"Bayesian inference does not require manual tuning of a learning rate; instead, it adapts its own effective learning rate via balancing prior beliefs with incoming evidence.")
- 
-
-# ╔═╡ b9ab0b46-d294-11ef-13c5-8314655f7867
-md"""
-Note that the uncertainty about ``\theta`` decreases over time (since ``0<(1-K_t)<1``). If we assume that the statistics of the system do not change (stationarity), each new sample provides new information about the process, so the uncertainty decreases. 
-
-"""
-
-# ╔═╡ b9ab1dd4-d294-11ef-2e86-31c4a4389475
-md"""
-Recursive Bayesian estimation as discussed here is the basis for **adaptive signal processing** algorithms such as the [Least Mean Squares](https://en.wikipedia.org/wiki/Least_mean_squares_filter) (LMS) filter and the [Recursive Least Squares](https://en.wikipedia.org/wiki/Recursive_least_squares_filter) (RLS) filter. Both RLS and LMS are special cases of Recursive Bayesian estimation.
-
-"""
-
-# ╔═╡ b9ab2e32-d294-11ef-2ccc-9760ead59972
-md"""
-$(code_example("Kalman Filtering"))
-
-Let's implement the Kalman filter described above. We'll use it to recursively estimate the value of ``\theta`` based on noisy observations.
-
-"""
-
-# ╔═╡ 3a53f67c-f291-4530-a2ba-f95a97b27960
-@bindname N_data_kalman Slider(1:100; default=100, show_value=true)
-
-# ╔═╡ b9ab9e28-d294-11ef-3a73-1f5cefdab3d8
-md"""
-The shaded area represents 2 standard deviations of posterior ``p(\theta|D)``. The variance of the posterior is guaranteed to decrease monotonically for the standard Kalman filter.
-
-"""
-
-# ╔═╡ ffa570a9-ceda-4a21-80a7-a193de12fa2c
-md"""
-### Implementation
-Here is the implementation, but feel free to skip this part.
-"""
-
-# ╔═╡ 85b15f0a-650f-44be-97ab-55d52cb817ed
-begin
-	n = N_data_kalman  # number of observations
-	θ = 2.0            # true value of the parameter we would like to estimate
-	noise_σ2 = 0.3     # variance of observation noise
-	observations = noise_σ2 * randn(MersenneTwister(1), n) .+ θ	
-end;
-
-# ╔═╡ 115eabf2-c476-40f8-8d7b-868a7359c1b6
-function perform_kalman_step(prior :: Normal, x :: Float64, noise_σ2 :: Float64)
-    K = prior.σ / (noise_σ2 + prior.σ)          # compute the Kalman gain
-    posterior_μ = prior.μ + K*(x - prior.μ)     # update the posterior mean
-    posterior_σ = prior.σ * (1.0 - K)           # update the posterior standard deviation
-    return Normal(posterior_μ, posterior_σ)     # return the posterior
-end;
-
-# ╔═╡ 61764e4a-e5ef-4744-8c71-598b2155f4d9
-begin
-	post_μ = fill!(Vector{Float64}(undef,n + 1), NaN)     # means of p(θ|D) over time
-	post_σ2 = fill!(Vector{Float64}(undef,n + 1), NaN)    # variances of p(θ|D) over time
-
-	# specify the prior distribution (you can play with the parameterization of this to get a feeling of how the Kalman filter converges)
-	prior = Normal(0, 1)
-
-	# save prior mean and variance to show these in plot
-	post_μ[1] = prior.μ
-	post_σ2[1] = prior.σ
-	
-	
-	# note that this loop demonstrates Bayesian learning on streaming data; we update the prior distribution using observation(s), after which this posterior becomes the new prior for future observations
-	for (i, x) in enumerate(observations)
-		# compute the posterior distribution given the observation
-	    posterior = perform_kalman_step(prior, x, noise_σ2)
-		# save the mean of the posterior distribution
-	    post_μ[i + 1] = posterior.μ
-		# save the variance of the posterior distribution
-	    post_σ2[i + 1] = posterior.σ
-		# the posterior becomes the prior for future observations
-	    prior = posterior
-	end
-end
-
-# ╔═╡ 661082eb-f0c9-49a9-b046-8705f4342b37
-let
-	obs_scale = collect(2:n+1)
-	# scatter the observations
-	scatter(obs_scale, observations, label=L"D", )  
-	post_scale = collect(1:n+1)
-	# lineplot our estimated means of intermediate posterior distributions
-	plot!(post_scale, post_μ, ribbon=sqrt.(post_σ2), linewidth=3, label=L"p(θ | D_t)")
-	# plot the true value of θ
-	plot!(post_scale, θ*ones(n + 1), linewidth=2, label=L"θ")
-end
-
-# ╔═╡ b9a85716-d294-11ef-10e0-a7b08b800a98
-md"""
-## Maximum Likelihood Estimation (MLE) Revisited
-
-##### MLE as a special case of Bayesian Inference
-
-To determine the MLE of ``\mu`` as a special case of Bayesian inference, we let ``\sigma_0^2 \rightarrow \infty`` in the Bayesian posterior for ``\mu`` (Eq. B-2.141) to get a uniform prior for ``\mu``. This yields
+When doing ML estimation, we must obey the constraint ``\sum_k \mu_k  = 1``, which can be accomplished by a [Lagrange multiplier](https://en.wikipedia.org/wiki/Lagrange_multiplier). The **constrained log-likelihood** with Lagrange multiplier is then
 
 ```math
-\begin{align}
- \mu_{\text{ML}} = \left.\mu_N\right\vert_{\sigma_0^2 \rightarrow \infty} = \frac{1}{N} \sum_{n=1}^N x_n 
-\end{align}
+\tilde{\mathrm{L}}(\mu) = \sum_k m_k \log \mu_k  + \lambda \cdot \big(1 - \sum_k \mu_k \big)
 ```
 
+The method of Lagrange multipliers is a mathematical method for transforming a constrained optimization problem to an unconstrained optimization problem (see [Bishop App.E](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf#page=727)). Unconstrained optimization problems can be solved by setting the derivative to zero. 
 
 """
 
-# ╔═╡ 0d303dba-51d4-4413-8001-73ed98bf74df
-hide_proof(
+# ╔═╡ bc16a308-c04e-4416-9a62-c741bc4e9911
 md"""
+Setting the derivative of ``\tilde{\mathrm{L}}(\mu)`` to zero yields the **sample proportion** for ``\mu_k`` 
+
 ```math
-\begin{align}
- \mu_{\text{ML}} &= \left.\mu_N\right\vert_{\sigma_0^2 \rightarrow \infty} = \Bigg.  \underbrace{\left(\frac{1}{\sigma_0^2} + \sum_n \frac{1}{\sigma^2}\right)^{-1}}_{\text{Eq. B-2.142}} \cdot \underbrace{\left( \frac{1}{\sigma_0^2} \mu_0 + \sum_n \frac{1}{\sigma^2} x_n  \right)}_{\text{Eq. B-2.141 }} \Bigg\vert_{\sigma_0^2 \rightarrow \infty}  \\
-&=  \left(\sum_n \frac{1}{\sigma^2}\right)^{-1} \cdot \left( \sum_n \frac{1}{\sigma^2} x_n  \right)  \\
-&= \left(\frac{N}{\sigma^2}\right)^{-1} \cdot \left( \frac{1}{\sigma^2} \sum_n  x_n  \right) \\
-&= \frac{1}{N} \sum_{n=1}^N x_n 
-\end{align}
+\begin{equation*}
+\nabla_{\mu_k}   \tilde{\mathrm{L}}(\mu) = \frac{m_k }
+{\hat\mu_k } - \lambda  \overset{!}{=} 0 \; \Rightarrow \; \hat\mu_k = \frac{m_k }{N}
+\end{equation*}
 ```
-		""")
 
-# ╔═╡ 4a2cd378-0960-4089-81ad-87bf1be9a3b2
-md"""
-This is a reassuring result: it matches the maximum likelihood estimate for ``\mu`` that we [previously derived by setting the gradient of the log-likelihood function to zero](#Maximum-Likelihood-Estimation).
+where we get ``\lambda`` from the constraint 
 
-Of course, in practical applications, the maximum likelihood estimate is not obtained by first computing the full Bayesian posterior and then applying simplifications. This derivation (see proof) is included solely to illuminate the connection between Bayesian inference and maximum likelihood estimation.
+```math
+\begin{equation*}
+\sum_k \hat \mu_k = \sum_k \frac{m_k}
+{\lambda} = \frac{N}{\lambda} \overset{!}{=}  1
+\end{equation*}
+```
+
+
 
 """
-
-# ╔═╡ d05975bb-c5cc-470a-a6f3-60bc43c51e89
-hide_proof( 
-md"""		
-```math
-\begin{align*}
-\mu_N  &= \sigma_N^2 \, \left( \frac{1}{\sigma_0^2} \mu_0 + \sum_n \frac{1}{\sigma^2} x_n  \right) \tag{B-2.141 } \\
-  &= \frac{\sigma_0^2 \sigma^2}{N\sigma_0^2 + \sigma^2} \, \left( \frac{1}{\sigma_0^2} \mu_0 + \sum_n \frac{1}{\sigma^2} x_n  \right) \tag{used B-2.142}\\
-  &= \frac{ \sigma^2}{N\sigma_0^2 + \sigma^2}   \mu_0 + \frac{N \sigma_0^2}{N\sigma_0^2 + \sigma^2} \mu_{\text{ML}}   \\
-  &= \mu_0 + \frac{N \sigma_0^2}{N \sigma_0^2 + \sigma^2}\cdot \left(\mu_{\text{ML}} - \mu_0 \right)
-\end{align*}
-```
-""")		
-
-# ╔═╡ e8e26e57-ae94-478a-8bb2-2868de5d99e0
-md"""
-
-Hence, the posterior mean always lies somewhere between the prior mean ``\mu_0`` and the maximum likelihood estimate (the "data" mean) ``\mu_{\text{ML}}``.
-
-"""
-
-# ╔═╡ 08b1736f-1f18-47e3-a482-bde436f5de3e
-md"""
-#### Discrete Distributions (*)
-
-Show that
-
-- (a) the categorial distribution is a special case of the multinomial for ``N=1``.  
-
-- (b) the Bernoulli is a special case of the categorial distribution for ``K=2``.    
-
-- (c) the binomial is a special case of the multinomial for ``K=2``.
-
-"""
-
-# ╔═╡ e45c79df-4a46-4aa9-845e-f022473f79e6
-hide_solution(
-md"""
-
-- (a) The probability mass function of a **multinomial distribution** is 
-```math 
-	p(D_m|\mu) =\frac{N!}{m_1! m_2!\ldots m_K!} \,\prod_k \mu_k^{m_k}
-```
-over the data frequencies ``D_m=\{m_1,\ldots,m_K\}`` with constraints that ``\sum_k \mu_k = 1`` and ``\sum_k m_k=N``. 
-
-Setting ``N=1``, we see that ``p(D_m|\mu) \propto \prod_k \mu_k^{m_k}`` with ``\sum_k m_k=1``, making the sample-space one-hot coded. This is the **categorical distribution**.       
-		
-- (b) When ``K=2``, the constraint for the categorical distribution takes the form ``m_1=1-m_2`` leading to 
-
-```math
-	p(D_m|\mu) \propto \mu_1^{m_1}(1-\mu_1)^{1-m_1}
-```
-which is associated with the **Bernoulli distribution**.       
-
-- (c) Plugging ``K=2`` into the multinomial distribution leads to ``p(D_m|\mu) =\frac{N!}{m_1! m_2!}\mu_1^{m_1}\left(\mu_2^{m_2}\right)`` with the constraints ``m_1+m_2=N`` and ``\mu_1+\mu_2=1``. Then plugging the constraints back in we obtain 
-```math
-	p(D_m|\mu) = \frac{N!}{m_1! (N-m1)!}\mu_1^{m_1}\left(1-\mu_1\right)^{N-m_1}
-```
-which is the **binomial distribution**.
-
-
-""")
-
-# ╔═╡ 4417e7d4-1fbf-481e-8bae-584ec459613c
-md"""
-
-#### Evidence for the Multinomial-Dirichlet model (**) 
-
-As above, consider the following model assumptions for $N$ tosses with a $K$-sided die with parameters $\mu = (\mu_1,\mu_2, \ldots,\mu_K)$.  
-
-```math
-\begin{align}
-p(D|\mu) &= \prod_{n=1}^N \mathrm{Cat}(x_n|\mu) = \prod_{k=1}^{K} \mu_k^{m_k} \tag{likelihood}\\
-p(\mu|\alpha) &= \mathrm{Dir}(\mu|\alpha) = \frac{1}{B(\alpha)} \prod_{k=1}^{K} \mu_k^{\alpha_k -1}   \tag{prior}
-\end{align}
-```
-where $B(\alpha) = \frac{\prod_k \Gamma(\alpha_k)}{\Gamma(\sum_k \alpha_k)}$ is known as the [Beta function](https://en.wikipedia.org/wiki/Beta_function).
-
-Work out both the model evidence and the posterior distribution for $\mu$.
-"""
-
-# ╔═╡ 8d83b366-e65b-412a-9c19-2cec0e0b0634
-hide_solution(
-	md"""
-
-	```math
-	\begin{align}
-	\overbrace{\prod_{k=1}^{K} \mu_k^{m_k}}^{\text{likelihood }p(D|\mu)} \cdot \overbrace{\frac{1}{B(\alpha)} \prod_{k=1}^{K} \mu_k^{\alpha_k -1}}^{\text{prior }p(\mu|\alpha)}  
-	&= \frac{1}{B(\alpha)} \prod_{k=1}^{K} \mu_k^{m_k + \alpha_k -1} \\
-	&= \frac{B(m+\alpha)}{B(\alpha)} \frac{1}{B(m+\alpha)}\prod_{k=1}^{K} \mu_k^{m_k + \alpha_k -1} \\
-	&= \underbrace{\frac{B(m+\alpha)}{B(\alpha)}}_{\text{evidence }p(D|\alpha)} \,\underbrace{\mathrm{Dir}(\mu|m+\alpha)}_{\text{posterior }p(\mu|D,\alpha)} 
-	\end{align} 
-	```
-
-	This equation is the equivalent of the [Gaussian multiplication formula](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#(Multivariate)-Gaussian-Multiplication) for discrete data. Note that the evidence is a scalar normalizer for given observations $m$ and pseudo-observations ("prior" observations) $\alpha$.
-	""")
 
 # ╔═╡ f78bc1f5-cf7b-493f-9c5c-c2fbd6788616
 md"""
@@ -2017,7 +1863,6 @@ LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 MarkdownLiteral = "736d6165-7244-6769-4267-6b50796e6954"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [compat]
@@ -2036,7 +1881,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.12.6"
 manifest_format = "2.0"
-project_hash = "3220e8fff80e0d34fd1cf8d4c692796b1ec07cbe"
+project_hash = "ca090de1f994feb02c2134a2580b745a22666ee8"
 
 [[deps.AbstractPlutoDingetjes]]
 git-tree-sha1 = "6c3913f4e9bdf6ba3c08041a446fb1332716cbc2"
@@ -3422,6 +3267,9 @@ version = "1.13.0+0"
 # ╟─53a1e971-d774-46fb-b328-4cd71585ee75
 # ╟─55c101f3-90f3-4a1a-9e65-72a35db254a9
 # ╟─f7ae238e-8a9f-4510-85f7-e7cdae100f99
+# ╟─f8b57f11-f014-4a4a-aa41-8217b1a5b21d
+# ╟─bed4962d-cd5f-4bff-bf25-68e524b20183
+# ╟─bed7072c-53b0-47f7-bf77-32deed55b3e5
 # ╟─b89360b8-39fa-46e9-96c8-7eece50fcb90
 # ╟─a439c0a7-afa1-4d9a-8737-58d341744016
 # ╟─79a99a22-3bb5-431b-bf84-5dce5cccfe25
@@ -3435,6 +3283,10 @@ version = "1.13.0+0"
 # ╟─fa197526-6706-47ce-b84b-5675eee00610
 # ╟─645308ac-c9e3-4d6f-bcff-82327fbb8edf
 # ╟─03c399e1-d0d8-493a-9f95-4209918d132a
+# ╟─32a7da22-7dba-41eb-8125-a9c8409a968e
+# ╟─a0a96322-d71e-4e5c-95a4-fcc01c0db542
+# ╟─ff9e3293-0a49-4c51-b118-cf7af45e4bcb
+# ╟─fded7c8c-feed-4630-a50d-5a854536cab3
 # ╟─6dfc31a0-d0d7-4901-a876-890df9ab4258
 # ╟─b9a885a8-d294-11ef-079e-411d3f1cda03
 # ╟─b9a9565c-d294-11ef-1b67-83d1ab18035b
@@ -3457,34 +3309,11 @@ version = "1.13.0+0"
 # ╟─b9abdc7e-d294-11ef-394a-a708c96c86fc
 # ╟─b9abf984-d294-11ef-1eaa-3358379f8b44
 # ╟─b9ac09c4-d294-11ef-2cb8-270289d01f25
-# ╟─97080395-fad1-46a2-aae9-0b69811c6f34
-# ╟─b9aa930a-d294-11ef-37ec-8d17be226c74
-# ╟─b9aabe9a-d294-11ef-2489-e9fc0dbb760a
-# ╟─b9aad50e-d294-11ef-23d2-8d2bb3b47574
-# ╟─b9aaee4a-d294-11ef-2ed7-0dcb360d8bb7
-# ╟─b9aafc6e-d294-11ef-1b1a-df718c1f1a58
-# ╟─e2fc4945-4f88-4520-b56c-c7208b62c29d
-# ╟─b9ab0b46-d294-11ef-13c5-8314655f7867
-# ╟─b9ab1dd4-d294-11ef-2e86-31c4a4389475
-# ╟─b9ab2e32-d294-11ef-2ccc-9760ead59972
-# ╟─3a53f67c-f291-4530-a2ba-f95a97b27960
-# ╟─661082eb-f0c9-49a9-b046-8705f4342b37
-# ╟─b9ab9e28-d294-11ef-3a73-1f5cefdab3d8
-# ╟─ffa570a9-ceda-4a21-80a7-a193de12fa2c
-# ╠═9edd80d4-d088-4b2f-8843-abaa7a5d9c5e
-# ╠═85b15f0a-650f-44be-97ab-55d52cb817ed
-# ╠═115eabf2-c476-40f8-8d7b-868a7359c1b6
-# ╠═61764e4a-e5ef-4744-8c71-598b2155f4d9
-# ╟─b9a85716-d294-11ef-10e0-a7b08b800a98
-# ╟─0d303dba-51d4-4413-8001-73ed98bf74df
-# ╟─4a2cd378-0960-4089-81ad-87bf1be9a3b2
-# ╟─d05975bb-c5cc-470a-a6f3-60bc43c51e89
-# ╟─e8e26e57-ae94-478a-8bb2-2868de5d99e0
-# ╟─08b1736f-1f18-47e3-a482-bde436f5de3e
-# ╟─e45c79df-4a46-4aa9-845e-f022473f79e6
-# ╟─4417e7d4-1fbf-481e-8bae-584ec459613c
-# ╟─8d83b366-e65b-412a-9c19-2cec0e0b0634
-# ╠═f78bc1f5-cf7b-493f-9c5c-c2fbd6788616
+# ╟─f07d505a-5fc3-45fb-9a55-b8d397d1280e
+# ╟─d66ab614-f672-490f-896c-565b70a21e48
+# ╟─bd4b4266-82c4-4355-afba-302d39f7c30b
+# ╟─bc16a308-c04e-4416-9a62-c741bc4e9911
+# ╟─f78bc1f5-cf7b-493f-9c5c-c2fbd6788616
 # ╟─026da6b9-dee1-485e-af00-3b9e35f71b6b
 # ╠═6ffabd68-4c38-4024-a21b-1d6fa7c3a6d7
 # ╠═ce16666b-aa90-42ae-b3a7-690e71301024
