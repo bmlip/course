@@ -126,7 +126,7 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>27-Nov-2026 <em>(Fri)</em></td>
-    <td>⚪️ B5: Elementary Bayesian Density Estimation</td>
+    <td>⚪️ B5: Density Estimation</td>
     <td><a href="https://bmlip.github.io/course/lectures/Density%20Estimation.html">B5</a></td>
     <td></td>
     <td><a href="https://youtu.be/WS6gWO5vgtc">B5.1</a>, <a href="https://youtu.be/Ma3jXNbNCyc">B5.2</a>, <a href="https://youtu.be/vyh8RvXxnT8">B5.3</a></td>
