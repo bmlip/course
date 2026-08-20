@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://imgur.com/TGISnuj.png"
@@ -644,6 +644,12 @@ Substituting this into the right-most form of (4.57) we obtain (4.65), with ``w`
 
 """)
 
+# ╔═╡ a42ec280-a88a-485b-9f34-219b370e5784
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Regression.html",
+	"https://bmlip.github.io/course/lectures/Discriminative%20Classification.html",
+)
+
 # ╔═╡ e65e0e33-3e4f-4765-84ea-a4fb5d43269e
 md"""
 # Code
@@ -864,7 +870,7 @@ Plots = "~1.41.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "6d1799f252855be0f18fc1ca832f8f19cdc722a4"
 
@@ -969,7 +975,7 @@ version = "1.0.2"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1477,7 +1483,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -2237,6 +2243,7 @@ version = "1.13.0+0"
 # ╟─66172ab6-7df8-4068-a748-b33b3f345d6d
 # ╟─7e5213d6-4a68-4843-ab4c-77ea3ed8b0cd
 # ╟─ef1e5885-7153-4b55-9f97-1e984c2504e6
+# ╟─a42ec280-a88a-485b-9f34-219b370e5784
 # ╟─e65e0e33-3e4f-4765-84ea-a4fb5d43269e
 # ╠═f1a40378-a27c-4aa0-a62c-600ffde0032f
 # ╠═6631c0e4-4941-442e-8dd4-fa307ee7a8c0

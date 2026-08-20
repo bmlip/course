@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://imgur.com/FlRMz2f.png"
@@ -628,6 +628,12 @@ The challenge is computational efficiency: the human brain runs on about 20 [W],
 
 """
 
+# ╔═╡ e2f92fdc-2503-4b56-835b-f5e4b41f8880
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Dynamic%20Models.html",
+	nothing,
+)
+
 # ╔═╡ be0dc5c0-6340-4d47-85ae-d70e06df1676
 md"""
 # Code
@@ -648,7 +654,7 @@ RxInfer = "~5.5.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "0cc3b732cf0faa744007c541dcc521f80d7301ef"
 
@@ -846,7 +852,7 @@ version = "1.1.0"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.CompositeTypes]]
 git-tree-sha1 = "bce26c3dab336582805503bed209faab1c279768"
@@ -1490,7 +1496,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -1982,6 +1988,7 @@ version = "17.7.0+0"
 # ╟─54cc2500-f06f-4f39-95f3-8d9d09c37234
 # ╟─b900b7d4-3a49-4651-a94b-74fdbbf094d9
 # ╟─cd2dafbe-5131-4ee0-8eb7-33bd04f3133f
+# ╟─e2f92fdc-2503-4b56-835b-f5e4b41f8880
 # ╟─be0dc5c0-6340-4d47-85ae-d70e06df1676
 # ╠═97a0384a-0596-4714-a3fc-bf422aed4474
 # ╟─00000000-0000-0000-0000-000000000001

@@ -1816,6 +1816,12 @@ where we get ``\lambda`` from the constraint
 
 """
 
+# ╔═╡ c3a886ee-4a10-485c-8b4c-2c205ed87cfb
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Factor%20Graphs.html",
+	"https://bmlip.github.io/course/lectures/Regression.html",
+)
+
 # ╔═╡ f78bc1f5-cf7b-493f-9c5c-c2fbd6788616
 md"""
 # Code
@@ -1879,7 +1885,7 @@ SpecialFunctions = "~2.8.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "ca090de1f994feb02c2134a2580b745a22666ee8"
 
@@ -1989,7 +1995,7 @@ version = "1.0.2"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -2498,7 +2504,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -3313,6 +3319,7 @@ version = "1.13.0+0"
 # ╟─d66ab614-f672-490f-896c-565b70a21e48
 # ╟─bd4b4266-82c4-4355-afba-302d39f7c30b
 # ╟─bc16a308-c04e-4416-9a62-c741bc4e9911
+# ╟─c3a886ee-4a10-485c-8b4c-2c205ed87cfb
 # ╟─f78bc1f5-cf7b-493f-9c5c-c2fbd6788616
 # ╟─026da6b9-dee1-485e-af00-3b9e35f71b6b
 # ╠═6ffabd68-4c38-4024-a21b-1d6fa7c3a6d7

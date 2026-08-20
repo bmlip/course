@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://github.com/bmlip/course/blob/v2/assets/figures/Faragher-2012-cart-1.png?raw=true"
@@ -770,6 +770,12 @@ Using the methods of the previous lessons, it is possible to create your own new
 
 """
 
+# ╔═╡ 226e0d55-31ad-4ec5-a6c9-2a722cf2cc89
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Latent%20Variable%20Models%20and%20VB.html",
+	"https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html",
+)
+
 # ╔═╡ f44e0303-dd28-48ad-9de2-7f7882f3923d
 md"""
 # Code
@@ -972,7 +978,7 @@ StatsPlots = "~0.15.8"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "acdec6f444da009c65e4bbe38c566cbf0b1a8591"
 
@@ -1305,7 +1311,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.CompositeTypes]]
 git-tree-sha1 = "bce26c3dab336582805503bed209faab1c279768"
@@ -2504,7 +2510,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -3660,6 +3666,7 @@ version = "1.13.0+0"
 # ╟─0c65804b-bd3f-40b7-9752-96f730dbdc96
 # ╟─272b07f8-d294-11ef-3bfe-bffd9e3623aa
 # ╟─272b17b6-d294-11ef-1e58-a75484ab56d9
+# ╟─226e0d55-31ad-4ec5-a6c9-2a722cf2cc89
 # ╟─f44e0303-dd28-48ad-9de2-7f7882f3923d
 # ╠═e66b2193-87c8-4645-bfcc-643ee006383a
 # ╠═f2a42c4d-9607-4f50-bbda-9a9a4942faab

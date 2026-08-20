@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://github.com/bmlip/course/blob/v2/assets/figures/Figure4.9.png?raw=true"
@@ -673,6 +673,12 @@ Setting ``\exp(w^T x) \overset{!}{=} 1``, leads to
 for the discrimination boundary, which is a line. 
 		""")
 
+# ╔═╡ 0e713a7c-f4fa-4b86-abb3-26520e24d989
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Generative%20Classification.html",
+	"https://bmlip.github.io/course/lectures/Latent%20Variable%20Models%20and%20VB.html",
+)
+
 # ╔═╡ 6eee35ee-fd55-498f-9441-f18c2508de19
 md"""
 # Code
@@ -864,7 +870,7 @@ StatsFuns = "~1.5.2"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "d42eedebdcb2dd59ea859dc90c68d5b35ff9f88c"
 
@@ -1076,7 +1082,7 @@ version = "0.3.1"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.CompositeTypes]]
 git-tree-sha1 = "bce26c3dab336582805503bed209faab1c279768"
@@ -1763,7 +1769,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -2559,6 +2565,7 @@ version = "1.13.0+0"
 # ╟─a00c545c-2274-4086-94ca-319d1436fa26
 # ╟─b94644f8-725d-49bf-9641-3dad8b647f45
 # ╟─9554ed0b-69dd-443c-9538-03a4117eeb78
+# ╟─0e713a7c-f4fa-4b86-abb3-26520e24d989
 # ╟─6eee35ee-fd55-498f-9441-f18c2508de19
 # ╠═e379cc2a-43f8-432f-84fc-a88fd4f3ad0a
 # ╠═a759653c-0da4-40b7-9e9e-1e3d2e4df4ea
