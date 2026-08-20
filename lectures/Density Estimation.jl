@@ -66,7 +66,7 @@ md"""
 
       * These lecture notes
   * Optional
-
+      * The [Formula Cheatsheet for this course](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf) contains lots of material on the Gaussian distribution. (This cheatsheet will be made available to you at the written exam.)
       * [Bishop PRML book on Gaussian Distributions](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) (2006), pp. 85-93
       * [Bishop PRML book on Bernoulli and Categorial Distributions](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) (2006), pp. 67-70, 74-76, 93-94
 
