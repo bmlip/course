@@ -43,7 +43,7 @@ using Distributions, Plots, LaTeXStrings
 using SpecialFunctions
 
 # ╔═╡ b9a38e20-d294-11ef-166b-b5597125ed6d
-title("Continuous Data and the Gaussian Distribution")
+title("THIS LECTURE WILL BE REMOVED. Continuous Data and the Gaussian Distribution")
 
 # ╔═╡ 5e9a51b1-c6e5-4fb5-9df3-9b189f3302e8
 PlutoUI.TableOfContents()
@@ -1932,7 +1932,7 @@ SpecialFunctions = "~2.8.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "3220e8fff80e0d34fd1cf8d4c692796b1ec07cbe"
 
@@ -2042,7 +2042,7 @@ version = "1.0.2"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -2551,7 +2551,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
