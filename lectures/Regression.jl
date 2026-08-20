@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://i.imgur.com/azbCpRW.png"
@@ -797,10 +797,10 @@ Set derivative to zero for MAP estimate leads to
 """)
 
 # ╔═╡ 234f7254-d294-11ef-316a-05ef2edb9699
-md"""
-# Optional Slides
-
-"""
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Density%20Estimation.html",
+	"https://bmlip.github.io/course/lectures/Generative%20Classification.html",
+)
 
 # ╔═╡ c6532830-3161-4b2a-97c4-6d27d24762c9
 md"""
@@ -918,7 +918,7 @@ Plots = "~1.41.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "75acce8c3101551433a277462cda30e8e96cbc11"
 
@@ -1009,7 +1009,7 @@ version = "0.13.1"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1511,7 +1511,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]

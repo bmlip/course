@@ -1138,7 +1138,7 @@ Text("Manual result: p(x|y1,y2) = \n\t𝒩($(m), $(v))")
 # ╔═╡ ef2727ca-f084-4c5c-a055-b2a5dba282a9
 navigate_prev_next(
 	"https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html",
-	"https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html"
+	"https://bmlip.github.io/course/lectures/Density%20Estimation.html"
 )
 
 # ╔═╡ 89da2fc0-a7c8-4a9d-82d9-622a311d010d

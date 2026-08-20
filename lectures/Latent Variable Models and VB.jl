@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.3
 
 #> [frontmatter]
 #> image = "https://imgur.com/oS96z4w.png"
@@ -1268,6 +1268,12 @@ For a more complete overview of message passing as Bethe Free Energy minimizatio
 
 """
 
+# ╔═╡ c563de07-0036-4dc4-87ee-e8363e9b6b1b
+navigate_prev_next(
+	"https://bmlip.github.io/course/lectures/Discriminative%20Classification.html",
+	"https://bmlip.github.io/course/lectures/Dynamic%20Models.html",
+)
+
 # ╔═╡ 55570464-89c8-4d9b-b667-dfa64ac62294
 md"""
 # Code
@@ -1879,7 +1885,7 @@ StatsPlots = "~0.15.8"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "159b1696530cceecbdb05c365898389ccdadac5b"
 
@@ -2041,7 +2047,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -2627,7 +2633,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -3482,6 +3488,7 @@ version = "1.13.0+0"
 # ╟─90fbe618-fc81-480b-b685-69cd97e5b8ed
 # ╟─32f0bbb4-dfc7-431e-9a3d-80162439edac
 # ╟─26c9121e-d294-11ef-18e6-ed8105503adc
+# ╟─c563de07-0036-4dc4-87ee-e8363e9b6b1b
 # ╟─55570464-89c8-4d9b-b667-dfa64ac62294
 # ╠═df171940-eb54-48e2-a2b8-1a8162cabf3e
 # ╠═c90176ea-918b-4643-a10f-cef277c5ea75
