@@ -1117,16 +1117,6 @@ md"""
 Let's plot the distributions for ``X``, ``Y``, and ``Z``.
 """
 
-# ╔═╡ c330abc1-f333-494f-8a1d-247f884b9fa6
-# PlutoUI.ExperimentalLayout.grid(
-# 	[
-# 		@bindname(μx, Scrubbable(2.0)) @bindname(σx, Scrubbable(1.0))
-# 		@bindname(μy, Scrubbable(2.0)) @bindname(σy, Scrubbable(0.5))
-# 	];
-# 	fill_width = false,
-# 	row_gap = "2rem",
-# )
-
 # ╔═╡ 3e1f4f46-d294-11ef-29b8-69e546763781
 md"""
 ## PDF for the Product of Two Variables
@@ -2949,7 +2939,6 @@ version = "1.13.0+0"
 # ╠═34f1f3cb-9346-4bd3-ae9f-a25b4d5de781
 # ╟─218d3b6e-50b6-4b98-a00c-a19dd33d2c03
 # ╟─c0ea3253-a06b-426c-91a3-a6dd33e42779
-# ╟─c330abc1-f333-494f-8a1d-247f884b9fa6
 # ╟─3e1f4f46-d294-11ef-29b8-69e546763781
 # ╟─3e1f68fa-d294-11ef-31b2-e7670da8c08c
 # ╟─3e1f7d5e-d294-11ef-2878-05744036f32c
