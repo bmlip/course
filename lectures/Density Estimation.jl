@@ -33,6 +33,9 @@ using MarkdownLiteral: @mdx
 # ╔═╡ c97c495c-f7fe-4552-90df-e2fb16f81d15
 using BmlipTeachingTools
 
+# ╔═╡ 4484429b-5f31-4a8c-89ed-2f67a1ac869e
+using Random
+
 # ╔═╡ 3ec821fd-cf6c-4603-839d-8c59bb931fa9
 using Distributions, Plots, LaTeXStrings
 
@@ -73,6 +76,55 @@ md"""
   * References
 
       * [E.T. Jaynes - 2003 - The central, Gaussian or normal distribution, ch.7 in: Probability Theory, The Logic of Science](https://github.com/bmlip/course/blob/main/assets/files/Jaynes%20-%202003%20-%20Probability%20theory%20-%20ch-7%20-%20Gaussian%20distribution.pdf) (Very insightful chapter in Jaynes' book on the Gaussian distribution.)
+"""
+
+# ╔═╡ 6f35e623-7e53-4fc7-a0be-5e9dc6f378b4
+challenge_statement("Gaussian Density Estimation",header_level=1)
+
+# ╔═╡ 7001ad0f-c3bd-424f-91db-d18c5a4c15f9
+md"""
+
+Consider a data set as shown in the figure below
+
+"""
+
+# ╔═╡ 61624ee2-948f-464f-a1f7-ea95bcac7881
+md"""
+
+##### Setup 
+
+We have a dataset `D` of observations. `D` is a Matrix, where each column is an observation ``\in \mathbb{R}^2``:
+"""
+
+# ╔═╡ 5194faba-2db0-4a28-9151-3e6582b1036a
+md"""
+We now draw an extra observation ``x_\bullet = (a,b)`` from the same data-generating process:
+"""
+
+# ╔═╡ b20fa50e-ef09-43fc-93d7-76bf91cce696
+md"""
+``D`` and ``x_\bullet`` are shown in the plot above.
+"""
+
+# ╔═╡ 01c050ed-e29e-431b-bfd6-f2fdcb9687fd
+md"""
+##### Problem 
+
+What is the probability that ``x_\bullet`` lies within the shaded rectangle 
+```math
+S = \{ (x,y) \in \mathbb{R}^2 | 0 \leq x \leq 2, 1 \leq y \leq 2 \} \;?
+```
+"""
+
+# ╔═╡ e12d7cf3-7e78-4472-8efa-528223668661
+S = [[0.0, 2.0], [1.0, 2.0]]
+
+# ╔═╡ 6adc446b-1e00-4a98-b68d-3e356682341d
+md"""
+
+##### Solution 
+
+- See [later in this lecture](#Challenge-Revisited:-Gaussian-Density-Estimation). 
 """
 
 # ╔═╡ 71f1c8ee-3b65-4ef8-b36f-3822837de410
@@ -994,6 +1046,16 @@ md"""
 In practice, maximum likelihood estimation (MLE) is, of course, not executed by first doing full Bayesian estimation and then considering MLE as a special case. In the [optional slide below](#Multinomial-Maximum-Likelihood-Estimation-by-Optimizing-a-Constrained-Log-likelihood), you can verify that direct minimization of the likelihood function leads to the same answer.
 """
 
+# ╔═╡ 71c09b1e-de5c-404d-8099-965433e85481
+challenge_solution("Gaussian Density Estimation", header_level=1)
+
+# ╔═╡ eb901f4d-2ecd-44fb-baf2-80e65489186e
+md"""
+
+Let's solve the challenge from the beginning of the lecture. We apply maximum likelihood estimation to fit a 2-dimensional Gaussian model (``m``) to data set ``D``. Next, we evaluate ``p(x_\bullet \in S | m)`` by (numerical) integration of the Gaussian pdf over ``S``: ``p(x_\bullet \in S | m) = \int_S p(x|m) \mathrm{d}x``.
+
+"""
+
 # ╔═╡ b89360b8-39fa-46e9-96c8-7eece50fcb90
 md"""
 # Summary
@@ -1829,6 +1891,19 @@ md"""
 # ╔═╡ 6ffabd68-4c38-4024-a21b-1d6fa7c3a6d7
 d(x; kwargs...) = PlutoUI.ExperimentalLayout.Div([x]; kwargs...)
 
+# ╔═╡ 69ee7a67-84a8-4d90-9020-f0a76a7c5d58
+begin
+	intro_bonds = PlutoUI.ExperimentalLayout.Div([
+	d(@bindname(N, Slider(3:100; default=90, show_value=true)); style="flex: 1 0 max-content"),
+	d(@bind(redraw_button_clicked_count, CounterButton("Redraw x.")); style="flex: 1 1 50%")
+];
+	style="display: flex; flex-drection: row; flex-wrap: wrap;
+    ")
+end
+
+# ╔═╡ 654909ff-2b56-4f81-97e3-a74e9028ada1
+intro_bonds
+
 # ╔═╡ ce16666b-aa90-42ae-b3a7-690e71301024
 # macro StableRandom(x=nothing)
 # 	:(MersenneTwister($(hash(__source__)) + hash($(esc(x)))))
@@ -1840,6 +1915,12 @@ stable_rand(args...; seed=nothing) = rand(MersenneTwister(543432 + hash(seed)), 
 # ╔═╡ 92efa7c1-dde6-4b21-bf3b-0fa91931620c
 secret_generative_dist = MvNormal([0,1.], [0.8 0.5; 0.5 1.0]);
 
+# ╔═╡ ecac6e86-03f4-485e-b2ce-c502dec52cf5
+D = stable_rand(secret_generative_dist, N)
+
+# ╔═╡ 6e17e1e4-065e-47c9-bfd4-273d021b9ce0
+x_dot = stable_rand(secret_generative_dist; seed=redraw_button_clicked_count)
+
 # ╔═╡ 3d0f7af2-082d-4305-a271-349d41fcd166
 md"""
 #### Challenge solution
@@ -1847,6 +1928,42 @@ md"""
 
 # ╔═╡ eaf6794e-66a1-45f0-95ff-7d13983aafa2
 baseplot() = plot(; xlim=(-3,3), ylim=(-2,3))
+
+# ╔═╡ 5f19da92-9fe2-4607-89ae-3a0a98169bdc
+let
+	baseplot()
+	scatter!(D[1,:], D[2,:], marker=:x, markerstrokewidth=3, label=L"D")
+	scatter!([x_dot[1]], [x_dot[2]], label=L"x_\bullet")
+	plot!(S[1], fill(S[2][1], 2), fillrange=S[2][2], alpha=0.4, color=:gray,label=L"S")
+end
+
+# ╔═╡ bfab8dd0-b69e-4078-abb7-868e5f923a79
+let
+	baseplot()
+	
+	# Maximum likelihood estimation of 2D Gaussian
+	μ = 1/N * sum(D,dims=2)[:,1]
+	D_min_μ = D - repeat(μ, 1, N)
+	Σ = Hermitian(1/N * D_min_μ*D_min_μ')
+	global m = MvNormal(μ, convert(Matrix, Σ));
+	
+	contour!(range(-3, 4, length=100), range(-3, 4, length=100), (x, y) -> pdf(m, [x, y]))
+	scatter!(D[1,:], D[2,:]; marker=:x, markerstrokewidth=3, label=L"D")
+	scatter!([x_dot[1]], [x_dot[2]]; label=L"x_\bullet")
+	plot!(range(0, 2), [1., 1., 1.]; fillrange=2, alpha=0.4, color=:gray, label=L"S")
+end
+
+# ╔═╡ eadb40d9-1f89-4047-9d50-978603589925
+let
+	# We can use HCubature.jl to numerically evaluate the integral and get a good approximation.
+
+	(val,err) = hcubature(
+		(x)->pdf(m,x), # function to integrate
+		first.(S), last.(S), # start and end coordinates
+	)
+	
+	@mdx "Answer: ``p(x_⋅ ∈ S | m) ≈ $(round(val; digits=4))``"
+end
 
 # ╔═╡ bc7a875f-e4fa-43fd-b001-cec6aadea3bc
 md"""
@@ -1863,6 +1980,7 @@ LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 MarkdownLiteral = "736d6165-7244-6769-4267-6b50796e6954"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [compat]
@@ -1881,7 +1999,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.12.6"
 manifest_format = "2.0"
-project_hash = "ca090de1f994feb02c2134a2580b745a22666ee8"
+project_hash = "3220e8fff80e0d34fd1cf8d4c692796b1ec07cbe"
 
 [[deps.AbstractPlutoDingetjes]]
 git-tree-sha1 = "6c3913f4e9bdf6ba3c08041a446fb1332716cbc2"
@@ -3205,6 +3323,18 @@ version = "1.13.0+0"
 # ╟─b9a38e20-d294-11ef-166b-b5597125ed6d
 # ╟─5e9a51b1-c6e5-4fb5-9df3-9b189f3302e8
 # ╟─b9a46c3e-d294-11ef-116f-9b97e0118e5b
+# ╟─6f35e623-7e53-4fc7-a0be-5e9dc6f378b4
+# ╟─7001ad0f-c3bd-424f-91db-d18c5a4c15f9
+# ╟─69ee7a67-84a8-4d90-9020-f0a76a7c5d58
+# ╟─5f19da92-9fe2-4607-89ae-3a0a98169bdc
+# ╟─61624ee2-948f-464f-a1f7-ea95bcac7881
+# ╠═ecac6e86-03f4-485e-b2ce-c502dec52cf5
+# ╟─5194faba-2db0-4a28-9151-3e6582b1036a
+# ╠═6e17e1e4-065e-47c9-bfd4-273d021b9ce0
+# ╟─b20fa50e-ef09-43fc-93d7-76bf91cce696
+# ╟─01c050ed-e29e-431b-bfd6-f2fdcb9687fd
+# ╠═e12d7cf3-7e78-4472-8efa-528223668661
+# ╟─6adc446b-1e00-4a98-b68d-3e356682341d
 # ╟─71f1c8ee-3b65-4ef8-b36f-3822837de410
 # ╟─b9a4eb62-d294-11ef-06fa-af1f586cbc15
 # ╟─b9a50d0c-d294-11ef-0e60-2386cf289478
@@ -3270,6 +3400,11 @@ version = "1.13.0+0"
 # ╟─f8b57f11-f014-4a4a-aa41-8217b1a5b21d
 # ╟─bed4962d-cd5f-4bff-bf25-68e524b20183
 # ╟─bed7072c-53b0-47f7-bf77-32deed55b3e5
+# ╟─71c09b1e-de5c-404d-8099-965433e85481
+# ╟─eb901f4d-2ecd-44fb-baf2-80e65489186e
+# ╟─654909ff-2b56-4f81-97e3-a74e9028ada1
+# ╟─bfab8dd0-b69e-4078-abb7-868e5f923a79
+# ╟─eadb40d9-1f89-4047-9d50-978603589925
 # ╟─b89360b8-39fa-46e9-96c8-7eece50fcb90
 # ╟─a439c0a7-afa1-4d9a-8737-58d341744016
 # ╟─79a99a22-3bb5-431b-bf84-5dce5cccfe25
@@ -3325,6 +3460,7 @@ version = "1.13.0+0"
 # ╠═03a36e87-2378-4efc-bcac-9c0609b52784
 # ╟─bc7a875f-e4fa-43fd-b001-cec6aadea3bc
 # ╠═c97c495c-f7fe-4552-90df-e2fb16f81d15
+# ╠═4484429b-5f31-4a8c-89ed-2f67a1ac869e
 # ╠═3ec821fd-cf6c-4603-839d-8c59bb931fa9
 # ╠═00482666-0772-4e5d-bb35-df7b6fb67a1b
 # ╟─00000000-0000-0000-0000-000000000001
