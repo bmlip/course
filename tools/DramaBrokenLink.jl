@@ -18,8 +18,10 @@ const mock_browser_headers = [
 
 
 const impossible_domains = [
-    "research.tue.nl",
-    "doi.org",
+    "research.tue.nl",  # idk why, but seems reliable anyways
+    "doi.org",  # idk why, but seems reliable anyways
+    "mitpress.mit.edu", # idk why, but seems reliable anyways
+    "bmlip.nl", # redirect not understood by HTTP.jl 1.0
 ]
 
 
