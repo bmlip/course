@@ -97,7 +97,7 @@ $(html"<div style='font-size: 1.5em; text-align: center'>  👉 change your mode
 # ╔═╡ 6b853dc6-a72b-4f09-ba59-c0f0606a1bee
 md"""
 ## So what do we change the model to? 
-1. Go back to the lectures and have a look at what kind of distribution is appropriate or _conjugate_ with respect to the variable you want to find a posterior for. For example, the [Gaussian distribution lecture](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html) tells us the variance parameter is a strictly positive real number. `Gamma()` and `InverseGamma()` are distributions over strictly positive real numbers.
+1. Go back to the lectures and have a look at what kind of distribution is appropriate or _conjugate_ with respect to the variable you want to find a posterior for. For example, the [Density Estimation lecture](https://bmlip.github.io/course/lectures/Density%20Estimation.html) tells us the variance parameter is a strictly positive real number. `Gamma()` and `InverseGamma()` are distributions over strictly positive real numbers.
 2. Look at the error message: it specifies a `ProductOf(..Dirichlet().., ..InverseGamma()..)`. Products of the same distributions are typically closed (e.g., the product of two Gaussian pdf's is Gaussian). So you could the reported distribution type.
 
 Let's try that below.

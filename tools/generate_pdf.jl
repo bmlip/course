@@ -29,12 +29,13 @@ output_dir = mktempdir(; cleanup=false)
 @info "Output directory: $(output_dir)"
 
 lecture_urls = [
+    "TODO You need to update this list",
     "https://bmlip.github.io/course/lectures/Course%20Syllabus.html",
     "https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html",
     "https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html",
     "https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html",
     "https://bmlip.github.io/course/lectures/Factor%20Graphs.html",
-    "https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html",
+    "https://bmlip.github.io/course/lectures/Density%20Estimation.html",
     "https://bmlip.github.io/course/lectures/The%20Multinomial%20Distribution.html",
     "https://bmlip.github.io/course/lectures/Regression.html",
     "https://bmlip.github.io/course/lectures/Generative%20Classification.html",

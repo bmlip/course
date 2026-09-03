@@ -1208,7 +1208,7 @@ Let ``p_x(x) = \mathcal{N}(x|\mu,\sigma^2)`` where
 ```math
 \mathcal{N}(x|\mu,\sigma^2) \triangleq \frac{1}{\sigma \sqrt{2\pi}} \,\exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
 ```
-is a [Gaussian distribution](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#The-Gaussian-Distribution). Let ``y = \frac{x-\mu}{\sigma}``. 
+is a [Gaussian distribution](https://bmlip.github.io/course/lectures/Density%20Estimation.html#Continuous-Data-and-the-Gaussian-Distribution). Let ``y = \frac{x-\mu}{\sigma}``. 
 Evaluate ``p_y(y)`` as a Gaussian distribution. 
 
 """

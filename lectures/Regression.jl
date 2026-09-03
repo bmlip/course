@@ -264,7 +264,7 @@ p(w|D) &\propto p(D|w)\cdot p(w) \\
 \end{align}
 ```
 
-with natural parameters (see the [natural parameterization of Gaussian](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#natural-parameterization)):
+with natural parameters (see the [natural parameterization of Gaussian](https://bmlip.github.io/course/lectures/Density%20Estimation.html#natural-parameterization)):
 
 ```math
 \begin{align*}
@@ -273,7 +273,7 @@ with natural parameters (see the [natural parameterization of Gaussian](https://
 \end{align*}
 ```
 
-Or equivalently (in the [moment parameterization of the Gaussian](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#The-Moment-Parameterization)):
+Or equivalently (in the [moment parameterization of the Gaussian](https://bmlip.github.io/course/lectures/Density%20Estimation.html#The-Moment-Parameterization)):
 
 ```math
 \begin{align*}
