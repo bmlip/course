@@ -229,7 +229,7 @@ md"""
 
 Maximization of the LLH for the GDA model breaks down into
 
-  * **Gaussian density estimation** for parameters ``\mu_k, \Sigma``, since the first term contains exactly the log-likelihood for MVG density estimation. We've already done this, see the [Gaussian distribution lesson](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#ML-for-Gaussian).
+  * **Gaussian density estimation** for parameters ``\mu_k, \Sigma``, since the first term contains exactly the log-likelihood for MVG density estimation. We've already done this, see the [Gaussian distribution lesson](https://bmlip.github.io/course/lectures/Density%20Estimation.html#ML-for-Gaussian).
   * **Multinomial density estimation** for class priors ``\pi_k``, since the second term holds exactly the log-likelihood for multinomial density estimation, see the [Multinomial distribution lesson](https://bmlip.github.io/course/lectures/The%20Multinomial%20Distribution.html#ML-for-multinomial).
 
 """

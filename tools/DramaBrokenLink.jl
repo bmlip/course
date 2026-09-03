@@ -41,7 +41,7 @@ http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabi
 https://en.wikipedia.org/wiki/Central_limit_theorem
 https://reactivebayes.github.io/RxInfer.jl/stable/examples/basic_examples/Bayesian%20Linear%20Regression%20Tutorial/
 https://github.com/bmlip/course/blob/main/assets/files/Jaynes-1990-straight-line-fitting-a-Bayesian-solution.pdf
-https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#natural-parameterization
+https://bmlip.github.io/course/lectures/Density%20Estimation.html#natural-parameterization
 #change-of-variable-derivation
 #predictive-distribution
 #matrix-calculus
@@ -52,7 +52,7 @@ https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#natur
 The types:
 - A web URL, like https://wikipedia.org/wiki/Central_limit_theorem
 - No URL (just a fragment), like #change-of-variable-derivation
-- A URL pointing to this course website. Like https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#natural-parameterization In this case, we don't check the internet, but we check locally if that path will exist, given the new directory structure.
+- A URL pointing to this course website. Like https://bmlip.github.io/course/lectures/Density%20Estimation.html#natural-parameterization In this case, we don't check the internet, but we check locally if that path will exist, given the new directory structure.
 
 """
 @memoize function check_url(s::String)

@@ -515,7 +515,7 @@ hide_solution(
 	\end{align} 
 	```
 
-	This equation is the equivalent of the [Gaussian multiplication formula](https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#(Multivariate)-Gaussian-Multiplication) for discrete data. Note that the evidence is a scalar normalizer for given observations $m$ and pseudo-observations ("prior" observations) $\alpha$.
+	This equation is the equivalent of the [Gaussian multiplication formula](https://bmlip.github.io/course/lectures/Density%20Estimation.html#(Multivariate)-Gaussian-Multiplication) for discrete data. Note that the evidence is a scalar normalizer for given observations $m$ and pseudo-observations ("prior" observations) $\alpha$.
 	""")
 
 # ╔═╡ 59fb1e66-cf05-4f2b-8027-7ff3b1a57c15
