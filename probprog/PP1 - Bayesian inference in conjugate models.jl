@@ -538,7 +538,7 @@ $\begin{aligned}
   	v_{1} = \frac{1}{1/v_0 + 1/σ^2}
 \end{aligned}$
 			  
-$(NotebookCard("https://bmlip.github.io/course/lectures/The%20Gaussian%20Distribution.html#Inference"))
+$(NotebookCard("https://bmlip.github.io/course/lectures/Density%20Estimation.html#Inference"))
 """)
 
 # ╔═╡ 5ef49dcd-16ff-4183-a28b-061572d98b98
