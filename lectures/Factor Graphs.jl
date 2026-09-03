@@ -709,7 +709,7 @@ keyconcept(
 md"""
 ## Final thoughts: Modularity and Abstraction
 
-The great Michael Jordan (no, not [this one](https://youtu.be/cuLprHh_BRg), but [this one](https://people.eecs.berkeley.edu/~jordan/)), wrote:   
+The great Michael Jordan (no, not [this one](https://youtu.be/cuLprHh_BRg), but [this one](https://en.wikipedia.org/wiki/Michael_I._Jordan)), wrote:   
 
 > "I basically know of two principles for treating complicated systems in simple ways: the first is the principle of **modularity** and the second is the principle of **abstraction**. I am an apologist for computational probability in machine learning because I believe that probability theory implements these two principles in deep and intriguing ways — namely through factorization and through averaging. Exploiting these two mechanisms as fully as possible seems to me to be the way forward in machine learning." — Michael Jordan, 1997 (quoted in [Fre98](https://mitpress.mit.edu/9780262062022/)).
 
