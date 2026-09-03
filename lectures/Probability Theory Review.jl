@@ -1107,50 +1107,15 @@ md"""
 Set the parameters for the distributions of ``X`` and ``Y``:
 """
 
-# ╔═╡ 27ec154a-a4c3-4d71-b2a0-45f2b456a8e4
-μx = 2.0; σx = 1.0;
-
-# ╔═╡ de4dbfc9-9340-4ae2-b323-49abfd77f198
-μy = 2.0; σy = 0.5;
-
 # ╔═╡ 1cb8b2c4-e1ae-4973-ba53-fc6c7fe1f37a
 md"""
 Compute the parameters for the distribution of ``Z = X + Y``:
 """
 
-# ╔═╡ 91a91472-ee6d-416b-b18e-acbedc03a7fe
-μz = μx + μy
-
-# ╔═╡ 6485575d-c5a5-4891-8210-f50d6f75476f
-σz = sqrt(σx^2 + σy^2)
-
-# ╔═╡ 0abaed25-decc-4dcd-aa04-b68ec0d5c73e
-
-
 # ╔═╡ 218d3b6e-50b6-4b98-a00c-a19dd33d2c03
 md"""
-Let's plot the distributions for ``X``, ``Y``, and ``Z``
+Let's plot the distributions for ``X``, ``Y``, and ``Z``.
 """
-
-# ╔═╡ e836f877-5ed6-4865-ba3a-1ca5a86b2349
-begin
-	x = Normal(μx, σx)
-	y = Normal(μy, σy)
-	z = Normal(μz, σz)
-end;
-
-# ╔═╡ c0ea3253-a06b-426c-91a3-a6dd33e42779
-let
-	
-	# Calculate the x-range for plotting
-	range_min = min(μx-2*σx, μy-2*σy, μz-2*σz)
-	range_max = max(μx+2*σx, μy+2*σy, μz+2*σz)
-	range_grid = range(range_min, stop=range_max, length=100)
-	
-	plot(range_grid, t -> pdf(x,t), label=L"p_x", fill=(0, 0.1))
-	plot!(range_grid, t -> pdf(y,t), label=L"p_y", fill=(0, 0.1))
-	plot!(range_grid, t -> pdf(z,t), label=L"p_z", fill=(0, 0.1))
-end
 
 # ╔═╡ 3e1f4f46-d294-11ef-29b8-69e546763781
 md"""
@@ -1494,6 +1459,67 @@ Many people have trouble distinguishing ``p(A|B)`` from ``p(B|A)`` in their head
 """)
 end
 
+# ╔═╡ 577c6e08-9b74-43a4-9e27-9c477980406b
+function NormalBind(bond_mu, bond_sigma; style_css::String="")
+	PlutoUI.Experimental.transformed_value(
+		function((x,y))
+			Normal(x,y)
+		end,
+		PlutoUI.combine() do Child
+			@htl """
+			<code style='text-wrap: nowrap; background: none; $(style_css)'>Normal(μ=$(Child(bond_mu)), σ=$(Child(bond_sigma)))</code>
+			"""
+		end
+	)
+end
+
+# ╔═╡ d1ab6fc4-e92c-4e77-8c4a-f5f33cb0b52c
+@htl """
+<style>
+.psg {
+	display: block;
+	padding: 1rem;
+	border-radius: 1rem;
+	border: 3px solid gray;
+	color: black;
+}
+</style>
+
+<div style='display: flex; gap: 1rem;'>
+	<div class=psg style='background: #eef'>
+		<h3>Parameters for X</h3>
+		<p>$(@bind x NormalBind(Scrubbable(2.0), Scrubbable(1.0)))</p>
+	</div>
+	
+	<div class=psg style='background: #fee'>
+		<h3>Parameters for Y</h3>
+		<p>$(@bind y NormalBind(Scrubbable(2.0), Scrubbable(0.5)))</p>
+	</div>
+</div>
+"""
+
+# ╔═╡ 34f1f3cb-9346-4bd3-ae9f-a25b4d5de781
+z = Normal(
+    x.μ + y.μ,       # mean
+	√(x.σ^2 + y.σ^2) # stdev
+)
+
+# ╔═╡ c0ea3253-a06b-426c-91a3-a6dd33e42779
+let
+	
+	# Calculate the x-range for plotting
+	# range_min = min(μx-2*σx, μy-2*σy, μz-2*σz)
+	# range_max = max(μx+2*σx, μy+2*σy, μz+2*σz)
+	range_min = 0
+	range_max = 6
+	range_grid = range(range_min, stop=range_max, length=100)
+	
+	plot(ylim=(0,1))
+	plot!(range_grid, t -> pdf(x,t), label=L"X", lw=2, fill=(0, 0.1))
+	plot!(range_grid, t -> pdf(y,t), label=L"Y", lw=2, fill=(0, 0.1))
+	plot!(range_grid, t -> pdf(z,t), label=L"Z", lw=2, fill=(0, 0.1), linestyle=:dash)
+end
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -1516,7 +1542,7 @@ Plots = "~1.41.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
+julia_version = "1.12.7"
 manifest_format = "2.0"
 project_hash = "0fd20a2ca9903be4db968c9668bf0e2c12e12de3"
 
@@ -1621,7 +1647,7 @@ version = "1.0.2"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.0+1"
+version = "1.3.1+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -2129,7 +2155,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -2908,14 +2934,10 @@ version = "1.13.0+0"
 # ╟─3e1eeb14-d294-11ef-1702-f5d2cf6fe60a
 # ╟─3e1f225a-d294-11ef-04c6-f3ca018ab286
 # ╟─98fa17a6-7c8b-46e4-b32d-52db183d88f8
-# ╠═27ec154a-a4c3-4d71-b2a0-45f2b456a8e4
-# ╠═de4dbfc9-9340-4ae2-b323-49abfd77f198
+# ╟─d1ab6fc4-e92c-4e77-8c4a-f5f33cb0b52c
 # ╟─1cb8b2c4-e1ae-4973-ba53-fc6c7fe1f37a
-# ╠═91a91472-ee6d-416b-b18e-acbedc03a7fe
-# ╠═6485575d-c5a5-4891-8210-f50d6f75476f
-# ╟─0abaed25-decc-4dcd-aa04-b68ec0d5c73e
+# ╠═34f1f3cb-9346-4bd3-ae9f-a25b4d5de781
 # ╟─218d3b6e-50b6-4b98-a00c-a19dd33d2c03
-# ╠═e836f877-5ed6-4865-ba3a-1ca5a86b2349
 # ╟─c0ea3253-a06b-426c-91a3-a6dd33e42779
 # ╟─3e1f4f46-d294-11ef-29b8-69e546763781
 # ╟─3e1f68fa-d294-11ef-31b2-e7670da8c08c
@@ -2951,5 +2973,6 @@ version = "1.13.0+0"
 # ╠═42b47af6-b850-4987-a2d7-805a2cb64e43
 # ╠═a66ab9df-897c-42e5-8b0f-c520ceaffa23
 # ╠═4a81342c-17c7-4eb9-933b-edb98df7b9c4
+# ╟─577c6e08-9b74-43a4-9e27-9c477980406b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
