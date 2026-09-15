@@ -228,7 +228,11 @@ p(y\,|\,X,w,\beta) &= \mathcal{N}(y\,|\,X w,\beta^{-1} I) \\
 
 where ``w = \left(\begin{matrix} w_1 \\ w_2 \\ \vdots \\ w_{M} \end{matrix} \right)``, and the observed data set is represented by the ``(N\times M)``-dimensional matrix ``X  = \left(\begin{matrix}x_1^T \\ x_2^T \\ \vdots \\ x_N^T \end{matrix} \right) = \left(\begin{matrix}x_{11},x_{12},\dots,x_{1M}\\ x_{21},x_{22},\dots,x_{2M} \\ \vdots \\ x_{N1},x_{N2},\dots,x_{NM} \end{matrix} \right) $  and $y = \left(\begin{matrix} y_1 \\ y_2 \\ \vdots \\ y_N \end{matrix} \right)``.
 
-Note that, if parameter ``\beta`` is given, then Eq. B-3.10 is a proper likelihood function for the parameters ``w``.
+Note that if parameter ``\beta`` is given, then Eq. B-3.10 is a proper likelihood function for the parameters ``w``.
+
+(N.B.: the labels B-3.XX refer to the corresponding equation numbers in Bishop's book.)
+
+
 
 """
 
@@ -256,7 +260,7 @@ We'll do Bayesian inference for the parameters ``w``.
 
 ```math
 \begin{align}
-p(w|D) &\propto p(D|w)\cdot p(w) \\
+\overbrace{p(w|D)}^{\text{posterior}} &\propto \overbrace{p(D|w)}^{likelihood}\cdot \overbrace{p(w)}^{\text{prior}} \\
    &= \mathcal{N}(y\,|\,X w,\beta^{-1} I) \cdot \mathcal{N}(w\,|\,0,\alpha^{-1} I) \\
    &\propto \exp \big( -\frac{\beta}{2} \big( {y - X w } \big)^T \big( {y - X w } \big)  - \frac{\alpha}{2}w^T w \big) \tag{B-3.55} \\
    &= \exp\big( -\frac{1}{2} w^T\big(\underbrace{\beta X^T X + \alpha I}_{\Lambda_N}\big)w + \big(\underbrace{\beta X^T y}_{\eta_N}\big)^T w - \frac{\beta}{2}y^T y \big) \\
@@ -299,7 +303,7 @@ Assume we are interested in the distribution ``p(y_\bullet \,|\, x_\bullet, D)``
 
 ```math
 \begin{align*}
-p(y_\bullet \,|\, x_\bullet, D) &= \int p(y_\bullet \,|\, x_\bullet, w) p(w\,|\,D)\,\mathrm{d}w \\
+p(y_\bullet \,|\, x_\bullet, D) &= \int \overbrace{p(y_\bullet \,|\, x_\bullet, w)}^{\text{B-3.10}} \overbrace{p(w\,|\,D)}^{\text{B-3.49}}\,\mathrm{d}w \\
 &= \int \mathcal{N}(y_\bullet \,|\, w^T x_\bullet, \beta^{-1}) \mathcal{N}(w\,|\,m_N,S_N)\,\mathrm{d}w \\
 &= \mathcal{N}\left(y_\bullet\,|\, m_N^T x_\bullet, \sigma_N^2(x_\bullet) \right)
 \end{align*}
@@ -918,7 +922,7 @@ Plots = "~1.41.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.7"
+julia_version = "1.12.6"
 manifest_format = "2.0"
 project_hash = "75acce8c3101551433a277462cda30e8e96cbc11"
 
@@ -1009,7 +1013,7 @@ version = "0.13.1"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.1+2"
+version = "1.3.0+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1511,7 +1515,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.6+0"
+version = "3.5.4+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
