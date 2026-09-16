@@ -230,7 +230,7 @@ where ``w = \left(\begin{matrix} w_1 \\ w_2 \\ \vdots \\ w_{M} \end{matrix} \rig
 
 Note that if parameter ``\beta`` is given, then Eq. B-3.10 is a proper likelihood function for the parameters ``w``.
 
-(N.B.: the labels B-3.XX refer to the corresponding equation numbers in Bishop's book.)
+(N.B.: the equation labels B-3.XX refer to the corresponding equation numbers in Bishop's book.)
 
 
 
@@ -260,7 +260,7 @@ We'll do Bayesian inference for the parameters ``w``.
 
 ```math
 \begin{align}
-\overbrace{p(w|D)}^{\text{posterior}} &\propto \overbrace{p(D|w)}^{likelihood}\cdot \overbrace{p(w)}^{\text{prior}} \\
+\overbrace{p(w|D)}^{\text{posterior}} &\propto \overbrace{p(D|w)}^{\text{likelihood}}\cdot \overbrace{p(w)}^{\text{prior}} \\
    &= \mathcal{N}(y\,|\,X w,\beta^{-1} I) \cdot \mathcal{N}(w\,|\,0,\alpha^{-1} I) \\
    &\propto \exp \big( -\frac{\beta}{2} \big( {y - X w } \big)^T \big( {y - X w } \big)  - \frac{\alpha}{2}w^T w \big) \tag{B-3.55} \\
    &= \exp\big( -\frac{1}{2} w^T\big(\underbrace{\beta X^T X + \alpha I}_{\Lambda_N}\big)w + \big(\underbrace{\beta X^T y}_{\eta_N}\big)^T w - \frac{\beta}{2}y^T y \big) \\
@@ -292,7 +292,7 @@ Note that Eqs. B-3.53 and B-3.54 combine to
 ```math
 m_N = \left(\frac{\alpha}{\beta}I + X^T X \right)^{-1} X^T y\,,
 ```
-which comprises only given variables, so ``m_N`` evaluates to a fixed vector.
+which comprises only given variables, so the mean ``m_N`` for the weight vector  evaluates to a fixed value that depends on the data.
 """
 
 # ╔═╡ 234d6dd8-d294-11ef-3abf-8d6cb00b1907

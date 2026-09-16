@@ -229,8 +229,8 @@ md"""
 
 Maximization of the LLH for the GDA model breaks down into
 
-  * **Gaussian density estimation** for parameters ``\mu_k, \Sigma``, since the first term contains exactly the log-likelihood for MVG density estimation. We've already done this, see the [Gaussian distribution lesson](https://bmlip.github.io/course/lectures/Density%20Estimation.html#ML-for-Gaussian).
-  * **Multinomial density estimation** for class priors ``\pi_k``, since the second term holds exactly the log-likelihood for multinomial density estimation, see the [Multinomial distribution lesson](https://bmlip.github.io/course/lectures/The%20Multinomial%20Distribution.html#ML-for-multinomial).
+  * **Gaussian density estimation** for parameters ``\mu_k, \Sigma``, since the first term contains exactly the log-likelihood for MVG density estimation. We've already done this; see the [Density Estimation lesson](https://bmlip.github.io/course/lectures/Density%20Estimation.html#Gaussian-Maximum-Likelihood-Estimation).
+  * **Multinomial density estimation** for class priors ``\pi_k``, since the second term holds exactly the log-likelihood for multinomial density estimation. We've also done this before; see the [Density Estimation lesson](https://bmlip.github.io/course/lectures/Density%20Estimation.html#Multinomial-Maximum-Likelihood-Estimation).
 
 """
 
@@ -870,7 +870,7 @@ Plots = "~1.41.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.7"
+julia_version = "1.12.6"
 manifest_format = "2.0"
 project_hash = "6d1799f252855be0f18fc1ca832f8f19cdc722a4"
 
@@ -975,7 +975,7 @@ version = "1.0.2"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.3.1+2"
+version = "1.3.0+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -1483,7 +1483,7 @@ version = "1.6.1"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.6+0"
+version = "3.5.4+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -2207,7 +2207,7 @@ version = "1.13.0+0"
 # ╟─866d8e7a-2b33-4635-84c0-6cbf900b523b
 # ╟─23c82154-d294-11ef-0945-c9c94fc2a44d
 # ╟─23c7e4a0-d294-11ef-16e9-6f96a41baf97
-# ╟─23c7f170-d294-11ef-1340-fbdf4ce5fd44
+# ╠═23c7f170-d294-11ef-1340-fbdf4ce5fd44
 # ╟─5c746070-19a9-464b-aedc-401d016dfdb6
 # ╟─8d78f9d3-7ba8-46b0-8d6f-231e681caa49
 # ╟─25e18c78-9cac-4faa-bb7c-ac036d0eac90
