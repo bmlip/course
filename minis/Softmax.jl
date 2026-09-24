@@ -4,6 +4,7 @@
 #> [frontmatter]
 #> image = "https://i.imgur.com/fnNZUew.png"
 #> language = "en-US"
+#> title = "Mini: The Softmax Function"
 #> date = "2025-08-26"
 #> description = "Interactive introduction to the softmax function and the logistic function."
 
