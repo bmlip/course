@@ -214,7 +214,7 @@ You can access all lecture materials online through the links below:
   <tr>
     <td>08-Jan-2027 <em>(Fri)</em></td>
     <td>⚪️ B11: Intelligent Agents and Active Inference</td>
-    <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B11</a>,<br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2025-AIF-lecture.ppsx">slides</a></td>
+    <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B11</a>,<br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2026-AIF-lecture.ppsx">slides</a></td>
     <td></td>
     <td><a href="https://youtu.be/fBm1oAzlv0w">B11.1</a>, <a href="https://youtu.be/UbOuLxv9EdI">B11.2</a></td>
   </tr>
