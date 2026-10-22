@@ -163,7 +163,7 @@ Alternatively, the $(HTML("<span id='natural-parameterization'></span>"))*canoni
 
 ```math
 \begin{equation*}
-p(x | \eta, \Lambda) = \mathcal{N}_c(x|\eta,\Lambda)  = \exp\left( a + \eta^T x - \frac{1}{2}x^T \Lambda x \right) \,,
+p(x | \eta, \Lambda) = \mathcal{N}_c(x|\eta,\Lambda)  = \exp\left( a + \eta^T x - \frac{1}{2}x^T \Lambda^{-1} x \right) \,,
 \end{equation*}
 ```
 where
