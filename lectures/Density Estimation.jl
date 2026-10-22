@@ -163,12 +163,12 @@ Alternatively, the $(HTML("<span id='natural-parameterization'></span>"))*canoni
 
 ```math
 \begin{equation*}
-p(x | \eta, \Lambda) = \mathcal{N}_c(x|\eta,\Lambda)  = \exp\left( a + \eta^T x - \frac{1}{2}x^T \Lambda^{-1} x \right) \,,
+p(x | \eta, \Lambda) = \mathcal{N}_c(x|\eta,\Lambda)  = \exp\left( a + \eta^T x - \frac{1}{2}x^T \Lambda x \right) \,,
 \end{equation*}
 ```
 where
 ```math
-a = -\frac{1}{2} \left( M \log(2 \pi) - \log |\Lambda| + \eta^T \Lambda \eta\right)
+a = -\frac{1}{2} \left( M \log(2 \pi) - \log |\Lambda| + \eta^T \Lambda^{-1} \eta\right)
 ```
 
 is the *normalizing* constant that ensures that ``\int p(x)\mathrm{d}x = 1``, and
