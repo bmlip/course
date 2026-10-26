@@ -1,42 +1,16 @@
-if !isdir("pluto-deployment-environment") || length(ARGS) != 1
-    error("""
-    Run me from the root of the repository directory, using:
+include("./common.jl")
 
-    julia tools/combine_pkg_envs.jl <update (true or false)>
+if length(ARGS) != 1
+    error("""
+    Syntax:
+
+    julia tools/$(basename(@__FILE__)) <update (true or false)>
 
     Where <update> is true or false to update all packages as well.
     """)
 end
 
 update = parse(Bool, ARGS[1])
-
-import Pkg
-Pkg.activate("./pluto-deployment-environment")
-Pkg.instantiate()
-import Pluto
-ENV["JULIA_PKG_PRECOMPILE_AUTO"] = 0
-
-
-
-# Find all notebooks
-lectures_dir = joinpath(@__DIR__, "..", "lectures")
-prob_prog_dir = joinpath(@__DIR__, "..", "probprog")
-minis_dir = joinpath(@__DIR__, "..", "minis")
-ignore_dir = joinpath(@__DIR__, "..", "ignore_dir")
-
-all_notebooks = mapreduce(union, [
-    lectures_dir, 
-    prob_prog_dir, 
-    minis_dir,
-    ignore_dir
-]) do d
-    isdir(d) ? 
-        filter(Pluto.is_pluto_notebook, readdir(d; join=true)) : 
-        String[]
-end
-
-
-
 
 "Extract embedded project and manifest contents from each notebook"
 function extract_toml_contents(notebook_path::String)
