@@ -1,4 +1,6 @@
-if !isdir("pluto-deployment-environment") || length(ARGS) != 2
+include("./common.jl")
+
+if length(ARGS) != 2
     error("""
     Run me from the root of the repository directory, using:
 
@@ -9,32 +11,13 @@ if !isdir("pluto-deployment-environment") || length(ARGS) != 2
     """)
 end
 
-begin
-    import TOML
-    manifest_version = TOML.parsefile("./pluto-deployment-environment/Manifest.toml")["julia_version"]
-    
-    @assert manifest_version == string(VERSION) "This repository uses Julia version $(manifest_version) (in pluto-deployment-environment), but this is Julia $(VERSION). Start a new Julia session with the correct version, or create a new Manifest.toml."
-end
-
-import Pkg
-Pkg.activate("./pluto-deployment-environment")
-Pkg.instantiate()
-
-import Pluto
-
-flatmap(args...) = vcat(map(args...)...)
+level = getfield(Pkg, Symbol("UPLEVEL_$(ARGS[1])"))
+run_notebooks = parse(Bool, ARGS[2])
 
 
 getfrom(dir) = flatmap(walkdir(dir)) do (root, _dirs, files)
     joinpath.((root,), files)
 end
-
-all_files_recursive = [getfrom("lectures")..., getfrom("probprog")..., getfrom("minis")...]
-
-all_notebooks = filter!(Pluto.is_pluto_notebook, all_files_recursive)
-
-level = getfield(Pkg, Symbol("UPLEVEL_$(ARGS[1])"))
-run_notebooks = parse(Bool, ARGS[2])
 
 for n in all_notebooks
     @info "Updating" n
