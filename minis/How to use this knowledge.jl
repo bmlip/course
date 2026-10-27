@@ -1,10 +1,10 @@
 ### A Pluto.jl notebook ###
-# v0.20.28
+# v1.0.4
 
 #> [frontmatter]
-#> image = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/P%C3%A4ij%C3%A4nne_and_p%C3%A4ij%C3%A4tsalo.jpg/960px-P%C3%A4ij%C3%A4nne_and_p%C3%A4ij%C3%A4tsalo.jpg"
 #> title = "Mini: How to use this knowledge?"
 #> description = "What can Bayesian machine learning be used for after this course?"
+#> image = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/P%C3%A4ij%C3%A4nne_and_p%C3%A4ij%C3%A4tsalo.jpg/960px-P%C3%A4ij%C3%A4nne_and_p%C3%A4ij%C3%A4tsalo.jpg"
 
 using Markdown
 using InteractiveUtils
@@ -65,8 +65,8 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.6"
-manifest_format = "2.0"
+julia_version = "1.13.3"
+manifest_format = "2.1"
 project_hash = "71853c6197a6a7f222db0f1978c7cb232b87c5ee"
 
 [deps]
