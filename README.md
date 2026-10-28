@@ -29,10 +29,7 @@ Indeed, in this course, we relate synthetic Bayesian intelligent agents to natur
 News and Announcements
 </h2>
 
-<!---
-- See Piazza
-- (2 March 2026) See [this note on the Resit exam](https://piazza.com/class/mh9arwinped720/post/63). 
---->
+- Most announcements will be distributed through [Piazza](https://piazza.com/class/mvs6snzpy3c5ma). [Sign up here!](https://piazza.com/tue.nl/winter2027/5ssd0)
 
 
 ## Instructors
