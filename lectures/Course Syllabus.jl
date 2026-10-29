@@ -153,7 +153,7 @@ We look forward to your feedback on your experience using Pluto as an educationa
 md"""
 ## Exam Guide
 
-The course will be scored by two programming assignments and a final written exam. See the [course homepage](https://github.com/bmlip/course?tab=readme-ov-file#exams--assignments) for how the final score is computed.
+The course will be scored by programming assignments and a final written exam. See the [course homepage](https://github.com/bmlip/course?tab=readme-ov-file#exams--assignments) for how the final score is computed.
 
 **The written exam is in multiple-choice format.** 
 
