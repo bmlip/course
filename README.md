@@ -348,7 +348,7 @@ Throughout the course, you can read _Minis_ that deep-dive into specific topics.
 
 ### Grading
 
-- The final grade is composed of the results of assignments A1 (10%),  A2 (10%), and the final written exam (80%). The grade will be rounded to the nearest integer.
+- The final grade is composed of the results of programming assignment(s) (20%) and the final written exam (80%). The grade will be rounded to the nearest integer.
 
 
 <!---
