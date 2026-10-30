@@ -1,0 +1,24 @@
+{
+    
+    "title": "BMLIP 2025",
+    "description": "Course materials for the course Bayesian Machine Learning and Information Processing, bmlip.nl.",
+    
+    "collections": [
+        {
+            "title": "Minis",
+            "description": "Short showcases of core concepts from the course.",
+            "tags": ["mini"]
+        },
+        {
+            "title": "Lectures",
+            "description": "",
+            "tags": ["lecture"]
+        },
+        {
+            "title": "Probabilistic programming",
+            "description": "",
+            "tags": ["pp"]
+        }
+    ]
+    
+}
