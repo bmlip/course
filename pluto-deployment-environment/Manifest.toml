@@ -76,10 +76,10 @@ version = "1.5.5+2"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
-git-tree-sha1 = "d5e5fa1f0d6ca517edbbcd734efa93c6639405b0"
+git-tree-sha1 = "8e0b1057b8c3627562526304d3cc8f835fbb36c0"
 registries = "General"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
-version = "2.7.1"
+version = "2.8.0"
 
 [[deps.Configurations]]
 deps = ["ExproniconLite", "OrderedCollections", "TOML"]
@@ -220,10 +220,10 @@ version = "1.8.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Logging", "Parsers", "PrecompileTools", "StructUtils", "UUIDs", "Unicode"]
-git-tree-sha1 = "3a9b0da8237deffb70be5e8d2e9af7601e4a79b0"
+git-tree-sha1 = "69a876face3b7aa9ac03b8dbf0f27d71bc17cf05"
 registries = "General"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "1.13.0"
+version = "1.13.1"
 
     [deps.JSON.extensions]
     JSONArrowExt = ["ArrowTypes"]
@@ -384,10 +384,10 @@ version = "10.6.1+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "NetworkOptions", "OpenSSL_jll", "Sockets"]
-git-tree-sha1 = "d1ea2f05c285ae58f82a9e53f8025d9b1dfc1a5f"
+git-tree-sha1 = "8ade771b131f953e7a02da7198af8c392334a5d8"
 registries = "General"
 uuid = "4d8831e6-92b7-49fb-bdf8-b643e874388c"
-version = "1.8.0"
+version = "1.10.0"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -407,10 +407,10 @@ version = "10.47.0+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools"]
-git-tree-sha1 = "d874044ef56b0c9dd19d5fe966ebb62a9d27a9e9"
+git-tree-sha1 = "610915fdeab587d89d6e9f2768b7268674ceb62b"
 registries = "General"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "3.0.2"
+version = "3.0.3"
 
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "Zstd_jll", "p7zip_jll"]
@@ -423,10 +423,10 @@ weakdeps = ["REPL"]
 
 [[deps.Pluto]]
 deps = ["Base64", "Configurations", "Dates", "Downloads", "ExpressionExplorer", "FileWatching", "GracefulPkg", "HTTP", "HypertextLiteral", "InteractiveUtils", "LRUCache", "Logging", "LoggingExtras", "MIMEs", "Malt", "Markdown", "MsgPack", "Pkg", "PlutoDependencyExplorer", "PrecompileSignatures", "PrecompileTools", "REPL", "Random", "RegistryInstances", "RelocatableFolders", "SHA", "Scratch", "Sockets", "TOML", "Tables", "URIs", "UUIDs"]
-git-tree-sha1 = "ecb99a3714b5b1b3dd7498b87be2f9468f35ab7b"
+git-tree-sha1 = "3bb3d6a96633c20dfb6366217bf592ecda71659c"
 registries = "General"
 uuid = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
-version = "1.0.4"
+version = "1.1.0"
 
 [[deps.PlutoDependencyExplorer]]
 deps = ["ExpressionExplorer", "InteractiveUtils", "Markdown"]
@@ -437,11 +437,11 @@ version = "1.2.2"
 
 [[deps.PlutoNotebookComparison]]
 deps = ["Compat", "ExpressionExplorer", "HTTP", "InteractiveUtils", "LibGit2", "Logging", "LoggingExtras", "Markdown", "Pkg", "Pluto", "PlutoSliderServer", "TOML", "URIs"]
-git-tree-sha1 = "6110521308e08139b4c3d0e34f3da9ca35d17d8a"
+git-tree-sha1 = "c5e4b4a406d69fb19eb5b5a87b3242b62419838a"
 repo-rev = "main"
 repo-url = "https://github.com/JuliaPluto/PlutoNotebookComparison.jl"
 uuid = "828d9ff0-206c-6161-646e-6576656f7242"
-version = "1.0.3"
+version = "1.0.4"
 
 [[deps.PlutoSliderServer]]
 deps = ["AbstractPlutoDingetjes", "Base64", "BetterFileWatching", "CancellationTokens", "Configurations", "Distributed", "FromFile", "Git", "Glob", "GracefulPkg", "HTTP", "JSON", "LibGit2", "Logging", "Pkg", "Pluto", "PlutoDependencyExplorer", "SHA", "Serialization", "Sockets", "TOML", "TerminalLoggers", "UUIDs"]
@@ -627,10 +627,10 @@ version = "0.1.13"
 
 [[deps.URIs]]
 deps = ["Serialization"]
-git-tree-sha1 = "50eda8011f098869a76da69a524ff59e0298711a"
+git-tree-sha1 = "eb3b85ca904a1d1647b15acc091b113b8874b648"
 registries = "General"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.7.2"
+version = "1.7.3"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
