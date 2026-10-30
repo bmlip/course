@@ -32,7 +32,7 @@ jobs:
               uses: julia-actions/setup-julia@v3
               with:
                   # note: this version should match the version in the other actions in this repo
-                  version: "1.12"
+                  version: "1.13"
 
             - name: Cache Julia artifacts & such
               uses: julia-actions/cache@v2

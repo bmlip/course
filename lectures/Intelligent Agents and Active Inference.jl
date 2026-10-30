@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v1.1.0
+# v1.0.4
 
 #> [frontmatter]
 #> language = "en-US"
@@ -653,7 +653,7 @@ RxInfer = "86711068-29c9-4ff7-b620-ae75d7495b3d"
 
 [compat]
 BmlipTeachingTools = "~1.4.1"
-RxInfer = "~6.1.0"
+RxInfer = "~6.1.1"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -662,20 +662,20 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.13.3"
 manifest_format = "2.1"
-project_hash = "ff75dd7c97d3140ff72508d3435ddb7f177b4620"
+project_hash = "874544dca674f603343cfad7a212a88d0f4d5cee"
 
 [[deps.AbstractPlutoDingetjes]]
-git-tree-sha1 = "6c3913f4e9bdf6ba3c08041a446fb1332716cbc2"
+git-tree-sha1 = "e71ee7b4aa06b045259a7d6101e1cb45ad140bce"
 registries = "General"
 uuid = "6e696c72-6542-2067-7265-42206c756150"
-version = "1.4.0"
+version = "1.4.1"
 
 [[deps.Accessors]]
 deps = ["CompositionsBase", "ConstructionBase", "Dates", "InverseFunctions", "MacroTools"]
-git-tree-sha1 = "7063ad1083578215c7c4bf410368150abe8d5524"
+git-tree-sha1 = "8c0bc12397dabf5d2dfc4b5763ec463854cc44d3"
 registries = "General"
 uuid = "7d9f7c33-5ae7-4f3b-8dc6-eff91059b697"
-version = "0.1.45"
+version = "0.1.46"
 
     [deps.Accessors.extensions]
     AxisKeysExt = "AxisKeys"
@@ -715,10 +715,10 @@ version = "0.4.0"
 
 [[deps.ArrayLayouts]]
 deps = ["FillArrays", "LinearAlgebra", "StaticArrays"]
-git-tree-sha1 = "b4a2d2dfcaedf8f0cb93a970c4ccba6f632f14cc"
+git-tree-sha1 = "8fde25d92e917350570f1203e47c933d16b77dce"
 registries = "General"
 uuid = "4c555306-a7a7-4459-81d9-ec55ddd5c99a"
-version = "1.15.1"
+version = "1.16.0"
 weakdeps = ["SparseArrays"]
 
     [deps.ArrayLayouts.extensions]
@@ -808,10 +808,10 @@ version = "0.7.9"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
-git-tree-sha1 = "67e11ee83a43eb71ddc950302c53bf33f0690dfe"
+git-tree-sha1 = "a7cf827a79b378a381e31e5c7feca853ec19cb94"
 registries = "General"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
-version = "0.12.1"
+version = "0.12.4"
 weakdeps = ["StyledStrings"]
 
     [deps.ColorTypes.extensions]
@@ -967,10 +967,10 @@ version = "0.25.132"
     Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [[deps.DocStringExtensions]]
-git-tree-sha1 = "7442a5dfe1ebb773c29cc2962a8980f47221d76c"
+git-tree-sha1 = "38ef52f18cbdfa783ec6c25acc23fb1e8525ec16"
 registries = "General"
 uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
-version = "0.9.5"
+version = "0.10.2"
 
 [[deps.DomainSets]]
 deps = ["CompositeTypes", "FunctionMaps", "IntervalSets", "LinearAlgebra", "StaticArrays"]
@@ -1002,10 +1002,10 @@ version = "1.0.7"
 
 [[deps.ExponentialFamily]]
 deps = ["BayesBase", "BlockArrays", "Distributions", "DomainSets", "FastCholesky", "FillArrays", "ForwardDiff", "HCubature", "HypergeometricFunctions", "IntervalSets", "IrrationalConstants", "LinearAlgebra", "LogExpFunctions", "PositiveFactorizations", "Random", "SparseArrays", "SpecialFunctions", "StaticArrays", "StatsBase", "StatsFuns", "TinyHugeNumbers"]
-git-tree-sha1 = "22a03af5898b5f988efdd835f40af831164f7d4b"
+git-tree-sha1 = "56fc67ab5647cedc2315462a3902aa75432499ca"
 registries = "General"
 uuid = "62312e5e-252a-4322-ace9-a5f4bf9b357b"
-version = "2.7.1"
+version = "2.9.0"
 
 [[deps.FastCholesky]]
 deps = ["LinearAlgebra", "PositiveFactorizations"]
@@ -1046,10 +1046,10 @@ version = "1.11.0"
 
 [[deps.FillArrays]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "417289ac840d201005d9ed16789a46defccbe36d"
+git-tree-sha1 = "831f86fde78ab7f6470d6ba4d1161a11fb6b4ec0"
 registries = "General"
 uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
-version = "1.18.1"
+version = "1.18.2"
 weakdeps = ["PDMats", "SparseArrays", "StaticArrays", "Statistics"]
 
     [deps.FillArrays.extensions]
@@ -1091,16 +1091,17 @@ version = "0.1.2"
 
 [[deps.GCVMessagePassingRules]]
 deps = ["BayesBase", "Distributions", "ExponentialFamily", "MessagePassingRulesApproximations", "MessagePassingRulesBase", "StandardMessagePassingRules", "StatsFuns"]
-git-tree-sha1 = "b9d896eff3b7dd887b119675f96d210abc31f2a9"
+git-tree-sha1 = "3698a13b49ebfd67d8bc851a6d25b74e9fadf9d9"
 registries = "General"
 uuid = "2bb838d1-ae36-49a2-8c64-82a0acccfa93"
-version = "1.0.0"
+version = "1.0.1"
 
 [[deps.Gamma]]
-git-tree-sha1 = "86f86b6168a016ed88e4ae4e64577b98c3b59e8e"
+deps = ["LogExpFunctions"]
+git-tree-sha1 = "becc397f7cfb06e343496ae6ffb04818a851da51"
 registries = "General"
 uuid = "a0844989-3bd2-4988-8bea-c9407ab0941b"
-version = "1.1.0"
+version = "1.2.0"
 
 [[deps.GaussianCouplingMessagePassingRules]]
 deps = ["BayesBase", "Distributions", "ExponentialFamily", "MessagePassingRulesBase"]
@@ -1156,11 +1157,11 @@ uuid = "19dc6840-f33b-545b-b366-655c7e3ffd49"
 version = "1.8.0"
 
 [[deps.HTTP]]
-deps = ["Base64", "CodecZlib", "Dates", "EnumX", "Logging", "PrecompileTools", "Random", "Reseau", "SHA", "URIs", "UUIDs", "Zlib_jll"]
-git-tree-sha1 = "33d8e43f09dce4d79b076f3022e96063db806df3"
+deps = ["Base64", "CodecZlib", "Dates", "EnumX", "Logging", "PrecompileTools", "Random", "Reseau", "SHA", "TranscodingStreams", "URIs", "UUIDs", "Zlib_jll"]
+git-tree-sha1 = "4a5ca8aaf013767dc2b8d881e2b2f890e5104639"
 registries = "General"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "2.11.2"
+version = "2.13.1"
 
 [[deps.HashArrayMappedTries]]
 git-tree-sha1 = "2eaa69a7cab70a52b9687c8bf950a5a93ec895ae"
@@ -1170,10 +1171,10 @@ version = "0.2.0"
 
 [[deps.HypergeometricFunctions]]
 deps = ["Gamma", "LinearAlgebra"]
-git-tree-sha1 = "31bb6c92405c084617facc1d7ed9eb6c402d061e"
+git-tree-sha1 = "c28dceeadc1c9c699656a3ac9d63f79cfaa17472"
 registries = "General"
 uuid = "34004b35-14d8-5ef3-9330-4cdb6864b03a"
-version = "0.3.30"
+version = "0.3.31"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
@@ -1276,23 +1277,25 @@ version = "1.8.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Logging", "Parsers", "PrecompileTools", "StructUtils", "UUIDs", "Unicode"]
-git-tree-sha1 = "9939eb6f799a963b3392ac4a1d49d3fc0646eb80"
+git-tree-sha1 = "3a9b0da8237deffb70be5e8d2e9af7601e4a79b0"
 registries = "General"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "1.11.0"
+version = "1.13.0"
 
     [deps.JSON.extensions]
     JSONArrowExt = ["ArrowTypes"]
+    JSONSerializationExt = ["Serialization"]
 
     [deps.JSON.weakdeps]
     ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+    Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
 [[deps.JpegTurbo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "c0c9b76f3520863909825cbecdef58cd63de705a"
+git-tree-sha1 = "037babc10853eeb8e585418922246cb97b8e5b74"
 registries = "General"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
-version = "3.1.5+0"
+version = "3.2.0+1"
 
 [[deps.JuliaSyntaxHighlighting]]
 deps = ["StyledStrings"]
@@ -1300,17 +1303,17 @@ uuid = "ac6e5ff7-fb65-4e79-a425-ec3bc9c03011"
 version = "1.12.0"
 
 [[deps.LaTeXStrings]]
-git-tree-sha1 = "dda21b8cbd6a6c40d9d02a73230f9d70fed6918c"
+git-tree-sha1 = "f88f3ccef05a6a72a0cf0ed417c8fd68530f4ab2"
 registries = "General"
 uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
-version = "1.4.0"
+version = "1.4.1"
 
 [[deps.Latexify]]
 deps = ["Format", "Ghostscript_jll", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Requires"]
-git-tree-sha1 = "44f93c47f9cd6c7e431f2f2091fcba8f01cd7e8f"
+git-tree-sha1 = "df7566479bd64f20bd16b09960145e70160ffb3b"
 registries = "General"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
-version = "0.16.10"
+version = "0.16.12"
 
     [deps.Latexify.extensions]
     DataFramesExt = "DataFrames"
@@ -1360,10 +1363,10 @@ version = "1.13.0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
-git-tree-sha1 = "13ca9e2586b89836fd20cccf56e57e2b9ae7f38f"
+git-tree-sha1 = "28d620bcdb37a3fb02de9f521928ee453690f414"
 registries = "General"
 uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
-version = "0.3.29"
+version = "1.0.3"
 
     [deps.LogExpFunctions.extensions]
     LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"
@@ -1412,10 +1415,10 @@ version = "1.0.0"
 
 [[deps.MessagePassingRulesBase]]
 deps = ["BayesBase", "Compat", "FastCholesky", "IrrationalConstants", "LinearAlgebra", "MacroTools"]
-git-tree-sha1 = "386ffd59dc3b21d3d36542c41f7b0326c821813f"
+git-tree-sha1 = "9326e13d74c6501dd704216e97d8db9499936170"
 registries = "General"
 uuid = "4a5b64c7-30c9-4471-82f2-bbe8464b157d"
-version = "1.1.2"
+version = "1.1.3"
 
 [[deps.MetaGraphsNext]]
 deps = ["Graphs", "JLD2", "SimpleTraits"]
@@ -1426,10 +1429,10 @@ version = "0.7.5"
 
 [[deps.Missings]]
 deps = ["DataAPI"]
-git-tree-sha1 = "ec4f7fbeab05d7747bdf98eb74d130a2a2ed298d"
+git-tree-sha1 = "d9d20d6eb2a3290ba5c70a1c013b45305cc39c9e"
 registries = "General"
 uuid = "e1d29d7a-bbdc-5cf2-9ac0-f12de2c33e28"
-version = "1.2.0"
+version = "1.2.1"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
@@ -1479,10 +1482,10 @@ uuid = "efe28fd5-8261-553b-a9e1-b2916fc3738e"
 version = "0.5.6+0"
 
 [[deps.OrderedCollections]]
-git-tree-sha1 = "94ba93778373a53bfd5a0caaf7d809c445292ff4"
+git-tree-sha1 = "b079a6affebde167dad8ffe0d670b53917fbcb68"
 registries = "General"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
-version = "1.8.2"
+version = "2.0.3"
 
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1502,10 +1505,10 @@ weakdeps = ["StatsBase"]
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools"]
-git-tree-sha1 = "663e8b48b789916221e0765393b289ca6c88f24e"
+git-tree-sha1 = "d874044ef56b0c9dd19d5fe966ebb62a9d27a9e9"
 registries = "General"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "3.0.0"
+version = "3.0.2"
 
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "Zstd_jll", "p7zip_jll"]
@@ -1599,10 +1602,10 @@ version = "1.11.0"
 
 [[deps.ReactiveMP]]
 deps = ["BayesBase", "Compat", "Distributions", "LinearAlgebra", "MacroTools", "MessagePassingRulesBase", "Random", "Rocket", "TinyHugeNumbers", "TupleTools", "UUIDs"]
-git-tree-sha1 = "944722ce6bfb8b1cdfb05a123afe9fe397fbd725"
+git-tree-sha1 = "1ba72c90b6e1b2d2ed292e690049afc06881c1a7"
 registries = "General"
 uuid = "a194aa59-28ba-4574-a09c-4a745416d6e3"
-version = "7.0.0"
+version = "7.0.1"
 
     [deps.ReactiveMP.extensions]
     ReactiveMPReactantExt = "Reactant"
@@ -1625,10 +1628,10 @@ version = "1.3.1"
 
 [[deps.Reseau]]
 deps = ["NetworkOptions", "OpenSSL_jll", "PrecompileTools", "Random", "SHA"]
-git-tree-sha1 = "c1332beecf9cf267e99b83ab878a3460f047964f"
+git-tree-sha1 = "f21d20b4c7bfe4afff55722fa8be86cccf2cd64d"
 registries = "General"
 uuid = "802f3686-a58f-41ce-bb0c-3c43c75bba36"
-version = "1.6.1"
+version = "1.6.3"
 
 [[deps.Rmath]]
 deps = ["Random", "Rmath_jll"]
@@ -1659,10 +1662,10 @@ version = "1.11.0"
 
 [[deps.Roots]]
 deps = ["Accessors", "CommonSolve", "Printf"]
-git-tree-sha1 = "e6ffa7bd4f8d0b8744d18f219304738d952f9a37"
+git-tree-sha1 = "c5e8a0a52c0d5d043214de04f11f4d9c2c6ccdb8"
 registries = "General"
 uuid = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
-version = "3.0.11"
+version = "3.0.13"
 
     [deps.Roots.extensions]
     RootsChainRulesCoreExt = "ChainRulesCore"
@@ -1682,10 +1685,10 @@ version = "3.0.11"
 
 [[deps.RxInfer]]
 deps = ["AutoregressiveMessagePassingRules", "Base64", "BayesBase", "DataStructures", "Dates", "DeltaMessagePassingRules", "DiscreteTransitionMessagePassingRules", "Distributions", "DomainSets", "ExponentialFamily", "FastCholesky", "GCVMessagePassingRules", "GaussianCouplingMessagePassingRules", "GraphPPL", "HTTP", "JSON", "LinearAlgebra", "Logging", "MacroTools", "MessagePassingRulesApproximations", "MessagePassingRulesBase", "PrecompileTools", "Preferences", "ProgressMeter", "Random", "ReactiveMP", "Reexport", "Rocket", "SoftDotMessagePassingRules", "SparseArrays", "StandardMessagePassingRules", "Static", "Statistics", "TupleTools", "UUIDs"]
-git-tree-sha1 = "cbb0595f742056ccab20beba5cf2a1253294c6dd"
+git-tree-sha1 = "4a4ffe9e41c58e1b4f7c7a0e24dabba8bb35c4c2"
 registries = "General"
 uuid = "86711068-29c9-4ff7-b620-ae75d7495b3d"
-version = "6.1.0"
+version = "6.1.1"
 
     [deps.RxInfer.extensions]
     OptimExt = "Optim"
@@ -1755,10 +1758,10 @@ version = "1.13.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "429071b23f4c9a13fb6582f807cc2ef454082408"
+git-tree-sha1 = "88ef0d98204515bc53dd4aaea5f7788882d1b66c"
 registries = "General"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.9.0"
+version = "2.9.1"
 
     [deps.SpecialFunctions.extensions]
     SpecialFunctionsChainRulesCoreExt = "ChainRulesCore"
@@ -1828,10 +1831,10 @@ version = "0.34.13"
 
 [[deps.StatsFuns]]
 deps = ["HypergeometricFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
-git-tree-sha1 = "0aa97471d55945556e8d2859568b8317cef98351"
+git-tree-sha1 = "91a5737baed20ee31f3faea0e51f57461f6a689e"
 registries = "General"
 uuid = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
-version = "1.5.3"
+version = "2.2.1"
 
     [deps.StatsFuns.extensions]
     StatsFunsChainRulesCoreExt = "ChainRulesCore"
@@ -1843,10 +1846,10 @@ version = "1.5.3"
 
 [[deps.StructUtils]]
 deps = ["Dates", "UUIDs"]
-git-tree-sha1 = "ad435e30854ed0f50f4b7f67edd71664afecc5d8"
+git-tree-sha1 = "96cf0c4f535157787dc4089eca1cbed62d124d5f"
 registries = "General"
 uuid = "ec057cc2-7a8d-4b58-b3b3-92acb9f63b42"
-version = "2.10.0"
+version = "2.11.2"
 
     [deps.StructUtils.extensions]
     StructUtilsDataFramesExt = ["DataFrames"]
@@ -1916,10 +1919,10 @@ version = "1.6.1"
 
 [[deps.URIs]]
 deps = ["Serialization"]
-git-tree-sha1 = "0392e5e3c5327b90a487b0ff3e818c4aecd3660b"
+git-tree-sha1 = "50eda8011f098869a76da69a524ff59e0298711a"
 registries = "General"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.7.1"
+version = "1.7.2"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
