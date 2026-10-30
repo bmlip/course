@@ -85,14 +85,14 @@ See [data generation code](#Data-Generation).
 # ╔═╡ aeee1072-5173-4eae-8027-3fbf2e338d95
 md"""
 ### Why Not Generative Classification?
-Like in the [last lecture](https://bmlip.github.io/course/lectures/Generative%20Classification.html), let's try to fit a generative distribution to the data. This is what we get when fitting two Gaussians to the two classes:
+Like in the [previous lecture](https://bmlip.github.io/course/lectures/Generative%20Classification.html), let's try to fit a generative distribution to the data. This is what we get when fitting two Gaussians to the two classes:
 """
 
 # ╔═╡ 93083660-6a49-4147-b00c-d62a4453f222
 md"""
-That's not a good fit!
+That's not a good fit for the $y=1$ class!
 
-Now, we could continue down this road, and try to fit a more complex distribution to the ``y = 1`` class to make it fit. **But let's explore a different approach**, modeling the discrimative boundary directly.
+Now, we could continue down this road and try to fit a more complex distribution to the ``y = 1`` class to make it fit. **But let's explore a different approach**, modeling the discriminative boundary directly.
 """
 
 # ╔═╡ d1bbdc6a-e5ff-4cd6-9175-860b5ec04f3c

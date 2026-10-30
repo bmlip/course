@@ -55,7 +55,7 @@ md"""
 Please bookmark the following three websites:
 
 1. The course homepage [https://bmlip.nl](https://bmlip.nl) contains links to all materials, such as lecture notes and video lectures.
-2. The [Piazza course site](https://piazza.com/tue.nl/winter2026/5ssd0/home) will be used for Q&A and communication.
+2. The [Piazza course site](https://piazza.com/tue.nl/winter2027/5ssd0/home) will be used for Q&A and communication.
 3. The [Canvas course site](https://canvas.tue.nl/courses/37173) will be sparingly used for communication (mostly by ESA staff)
 
 """
@@ -64,7 +64,7 @@ Please bookmark the following three websites:
 md"""
 ## Materials
 
-All materials can be accessed from the [course homepage](https://bmlip.nl). The materials consist of the following resources:
+You can access all materials from the [course homepage](https://bmlip.nl). The materials consist of the following resources:
 
 ##### Mandatory materials for the exam
 
@@ -80,7 +80,7 @@ All materials can be accessed from the [course homepage](https://bmlip.nl). The 
  * In the lecture notes, slides that are not required for the exam are moved to the end of the notes in the **Optional Slides** section.
 
 
-Source materials are available at GitHub repo at [https://github.com/bmlip/course](https://github.com/bmlip/course). If you spot an error in the materials, please raise an issue at Piazza.  
+Source materials are available in the GitHub repo at [https://github.com/bmlip/course](https://github.com/bmlip/course). If you spot an error in the materials, please raise an issue on Piazza.  
 
 """
 
@@ -95,14 +95,14 @@ md"""
 1. **Please study the lecture notes BEFORE you come to class!!**
    - Optionally, you can view the video recordings of the Q2-2023/24 lecture series for additional explanations. 
 
-2. Then come to the class!
+2. Then come to class!
    - During the scheduled classroom meetings, I will not cover all of the material from the lecture notes in detail. Instead, I will begin with a summary of the notes and then be available to address any additional questions you may have.
    - Pose your questions in the classroom so others can also learn from the answers and/or discussion. 
 
 3. If you still have questions after class, or later on when preparing for the exam, pose your question at the **Piazza site**!
    - Your questions will be answered at the Piazza site by fellow students and accorded (or corrected) by the teaching staff.
 
-Each class is accompanied by a set of exercises (at bottom of lecture notes). These are often somewhat challenging and emphasize _quantitative skills beyond what will be required for the exam_. You may use this [**Formula Sheet**](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf) when working on the exercises; the same sheet will also be provided during the written exam.
+Each class includes a set of exercises (at the bottom of the lecture notes). These are often somewhat challenging and emphasize _quantitative skills beyond what will be required for the exam_. You may use this [**Formula Sheet**](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf) when working on the exercises; the same sheet will also be provided during the written exam.
  
 
 """
@@ -115,9 +115,9 @@ keyconcept("",
 md"""
 ## Piazza (Q&A)
 
-We will be using [Piazza](https://piazza.com/) for Q&A and course announcements. Piazza is designed to get you help quickly and efficiently, both from classmates and the teaching staff.
+We will be using [Piazza](https://piazza.com/) for Q&A and course announcements. Piazza is designed to help you get support quickly and efficiently, from both classmates and the teaching staff.
 
-👉 [Sign up for Piazza](http://piazza.com/tue.nl/winter2026/5ssd0) today if you haven’t already, and consider installing the Piazza app on your phone.
+👉 [Sign up for Piazza](http://piazza.com/tue.nl/winter2027/5ssd0) today if you haven’t already, and consider installing the Piazza app on your phone.
 
 The sooner you start asking questions on Piazza (instead of sending emails), the sooner you’ll benefit from the collective knowledge of your classmates and instructors. Don’t hesitate to ask questions when something is unclear—you can even post anonymously if you prefer.
 
@@ -129,7 +129,7 @@ We also encourage you to contribute by answering questions on Piazza:
   - Explaining material to others is an excellent way to deepen your own understanding.
   - Each question has one “student answer,” which the class can edit collaboratively, and one “instructor answer” for the teaching staff.
 
-Piazza also supports **LaTeX**, please use it for math. And don’t forget to try the **search** function before posting a new question.
+Piazza also supports **LaTeX**; please use it for math. And don’t forget to try the **search** function before posting a new question.
 
 """
 
@@ -141,11 +141,11 @@ md""" Piazza is a great resource for continuing discussion outside the classroom
 md"""
 ## Pluto
 
-All lectures were developed in executable [Julia](https://julialang.org/) code. Julia is an open-source programming language with a MATLAB-like syntax and performance comparable to C.
+We developed all lectures in executable [Julia](https://julialang.org/) code. Julia is an open-source programming language with a MATLAB-like syntax and performance comparable to C.
 
-We created interactive course notebooks using [Pluto](https://plutojl.org/), which allows students to modify simulation conditions and immediately observe the results.
+We created interactive course notebooks using [Pluto](https://plutojl.org/), which lets students modify simulation conditions and see the results immediately.
 
-We look forward to receiving your feedback on your experiences with Pluto as an educational tool for playing with interactive learning materials.
+We look forward to your feedback on your experience using Pluto as an educational tool for interactive learning.
 
 """
 
@@ -153,11 +153,11 @@ We look forward to receiving your feedback on your experiences with Pluto as an 
 md"""
 ## Exam Guide
 
-The course will be scored by two programming assignments and a final written exam. See the [course homepage](https://github.com/bmlip/course?tab=readme-ov-file#exams--assignments) for how the final score is computed.
+The course will be scored by programming assignments and a final written exam. See the [course homepage](https://github.com/bmlip/course?tab=readme-ov-file#exams--assignments) for how the final score is computed.
 
 **The written exam is in multiple-choice format.** 
 
-You are not allowed to use books, smartphones, calculators, or bring printed or handwritten formula sheets to the exam. All difficult-to-remember formulas are included on this [Formula Sheet](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf), which will be provided together with the exam.
+You may not use books, smartphones, calculators, or bring printed or handwritten formula sheets to the exam. All difficult-to-remember formulas are included on this [Formula Sheet](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf), which will be provided together with the exam.
 
 The class homepage contains [two representative practice exams](https://github.com/bmlip/course?tab=readme-ov-file#exams--assignments) from previous terms. **It is highly recommended to practice with these previous exams when preparing for the exam.**. 
 
@@ -165,7 +165,7 @@ The class homepage contains [two representative practice exams](https://github.c
 """
 
 # ╔═╡ 31f8669b-b547-4a11-acc6-64e02e6e9dc0
-keyconcept("","The written exam will be in multiple-choice format. Two previous exams, along with their answers, are available on the course homepage.")
+keyconcept("", "The written exam will be in multiple-choice format. Two previous exams, along with their answers, are available on the course homepage.")
 
 # ╔═╡ f46ccac8-e87c-4cbe-9d2c-fdb4723c639e
 keyconcept("",md"""When working on exercises or preparing for the written exam, you may use this [Formula Sheet](https://github.com/bmlip/course/blob/main/assets/files/5SSD0_formula_sheet.pdf), which will also be provided during the exam.""" )
@@ -180,7 +180,7 @@ md"""
 TwoColumn(
 md"""
 ## Preview
-Check out [a recording from last year](https://youtu.be/k9DO26O6dIg?si=b8EiK12O_s76btPn) to understand what this class will be like. 
+Watch [a recording from last year](https://youtu.be/k9DO26O6dIg?si=b8EiK12O_s76btPn) to see what this class will be like. 
 """,
 md"""
 ![](https://github.com/bmlip/course/blob/main/assets/figures/Professor-Terguson.png?raw=true)

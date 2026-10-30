@@ -176,8 +176,12 @@ keyconcept("",md"""
 A common generative model for classification is the **Gaussian–Categorical model**:
 
 ```math
-p(x,\mathcal{C}_k|\,\theta) = \pi_k \cdot \mathcal{N}(x|\mu_k,\Sigma) \,.
-```   
+p(x_n,\mathcal{C}_k|\,\theta) = \pi_k \cdot \mathcal{N}(x_n|\mu_k,\Sigma) \,,
+``` 
+leading to
+```math
+p(x_n,y_n|\,\theta) = \prod_{k=1}^K \big( \pi_k \cdot \mathcal{N}(x|\mu_k,\Sigma)\big)^{y_{nk}} 
+``` 		   
 
 """)
 

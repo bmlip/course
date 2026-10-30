@@ -2,19 +2,20 @@
 ### Bayesian Machine Learning and Information Processing (at [TU Eindhoven](https://www.tue.nl/en/))
 
 
-> [!WARNING]
+<!--- 
+[!WARNING]
 > This site is currently under construction. This is the class for 11 Nov 2026 - 28 Jan 2027 (2nd quarter).
-
+--->
 
 <img src="https://github.com/bmlip/course/blob/main/assets/figures/5SSD0-banner.png?raw=true">
 
 ### Course goals
-This course provides an introduction to Bayesian machine learning and information processing systems. The Bayesian approach affords a unified and consistent treatment of many useful information processing systems.
+This course introduces Bayesian machine learning and information processing systems. The Bayesian approach offers a unified, consistent framework for many useful information processing systems.
 
 ### Course summary
 This course covers the fundamentals of a Bayesian (i.e., probabilistic) approach to machine learning and information processing systems. The Bayesian approach provides a unified, consistent framework for many model-based machine learning techniques. 
 
-Initially, we focus on Linear Gaussian systems and will discuss many useful models and applications, including common regression and classification methods, Gaussian mixture models, hidden Markov models, and Kalman filters. We will discuss essential algorithms for parameter estimation in these models, including the _Variational Bayes_ method. 
+We begin with linear Gaussian systems and discuss useful models and applications, including common regression and classification methods, Gaussian mixture models, hidden Markov models, and Kalman filters. We will discuss essential algorithms for parameter estimation in these models, including the _Variational Bayes_ method. 
 
 The Bayesian method also provides tools for comparing the _performance_ of different information-processing systems by estimating the _Bayesian evidence_ for each model. We will discuss several methods for approximating Bayesian evidence. 
 
@@ -28,10 +29,7 @@ Indeed, in this course, we relate synthetic Bayesian intelligent agents to natur
 News and Announcements
 </h2>
 
-<!---
-- See Piazza
-- (2 March 2026) See [this note on the Resit exam](https://piazza.com/class/mh9arwinped720/post/63). 
---->
+- Most announcements will be distributed through [Piazza](https://piazza.com/class/mvs6snzpy3c5ma). [Sign up here!](https://piazza.com/tue.nl/winter2027/5ssd0)
 
 
 ## Instructors
@@ -350,7 +348,7 @@ Throughout the course, you can read _Minis_ that deep-dive into specific topics.
 
 ### Grading
 
-- The final grade is composed of the results of assignments A1 (10%),  A2 (10%), and the final written exam (80%). The grade will be rounded to the nearest integer.
+- The final grade is composed of the results of programming assignment(s) (20%) and the final written exam (80%). The grade will be rounded to the nearest integer.
 
 
 <!---

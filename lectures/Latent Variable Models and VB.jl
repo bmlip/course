@@ -426,7 +426,7 @@ F[\hat{q}] &\approx -\log p(x)
 Executing inference by minimizing the VFE functional is called **Variational Bayes** (VB) or **Variational Inference** (VI). 
 
 
-(As an aside), note that Bishop introduces in Eq. B-10.3 an *Evidence Lower BOund* (in modern machine learning literature abbreviated as **ELBO**) ``\mathcal{L}[q]`` that equals the *negative* VFE (``\mathcal{L}[q]=-F[q]``). In this class, we prefer to discuss inference in terms of minimizing VFE rather than maximizing ELBO, but note that these two concepts are equivalent. (The reason why we prefer the Free Energy formulation relates to the terminology in the Free Energy Principle, which we introduce in the [Intelligent Agents and active Inference lesson (B12)](https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html)). 
+(As an aside), note that Bishop introduces in Eq. B-10.3 an *Evidence Lower BOund* (in modern machine learning literature abbreviated as **ELBO**) ``\mathcal{L}[q]`` that equals the *negative* VFE (``\mathcal{L}[q]=-F[q]``). In this class, we prefer to discuss inference in terms of minimizing VFE rather than maximizing ELBO, but note that these two concepts are equivalent. (We prefer the Free Energy formulation because of the terminology in the Free Energy Principle, which we introduce in the [Intelligent Agents and active Inference lesson](https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html)). 
 """
 
 # ╔═╡ 87715fcd-c92e-4bfa-8b0a-15e469548f3d
