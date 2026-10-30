@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v1.0.4
+# v1.1.0
 
 using Markdown
 using InteractiveUtils
@@ -232,7 +232,7 @@ PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 [compat]
 Distributions = "~0.25.132"
 HypertextLiteral = "~1.0.0"
-PlutoUI = "~0.7.83"
+PlutoUI = "~0.7.84"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -241,7 +241,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.13.3"
 manifest_format = "2.1"
-project_hash = "7c883cc822141458616617ca096f80bd78f98a35"
+project_hash = "42ed22585a23dc8ea3817fa9ad84a594e401207c"
 
 [[deps.AbstractPlutoDingetjes]]
 git-tree-sha1 = "e71ee7b4aa06b045259a7d6101e1cb45ad140bce"
@@ -295,10 +295,10 @@ version = "1.11.0"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
-git-tree-sha1 = "a7cf827a79b378a381e31e5c7feca853ec19cb94"
+git-tree-sha1 = "af523e59de94de05b9b367a2ca4d63233aacd222"
 registries = "General"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
-version = "0.12.4"
+version = "0.12.5"
 weakdeps = ["StyledStrings"]
 
     [deps.ColorTypes.extensions]
@@ -607,10 +607,10 @@ weakdeps = ["StatsBase"]
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Downloads", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
-git-tree-sha1 = "e189d0623e7ce9c37389bac17e80aac3b0302e75"
+git-tree-sha1 = "9869376035f47756b8b8e711fd0d06a06d51da6f"
 registries = "General"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.83"
+version = "0.7.84"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
@@ -802,10 +802,10 @@ version = "0.1.13"
 
 [[deps.URIs]]
 deps = ["Serialization"]
-git-tree-sha1 = "50eda8011f098869a76da69a524ff59e0298711a"
+git-tree-sha1 = "eb3b85ca904a1d1647b15acc091b113b8874b648"
 registries = "General"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.7.2"
+version = "1.7.3"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
