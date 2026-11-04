@@ -82,7 +82,8 @@ You can access all lecture materials online through the links below:
   <tr>
     <td>11-Nov-2026 <em>(Wed)</em></td>
     <td>⚪️ B0: Course Syllabus<br/>
-    ⚪️ B1: Machine Learning Overview</td>
+    ⚪️ B1: Machine Learning Overview<br/>
+    🟢 Information assignments &amp; AI usage</td>
     <td><a href="https://bmlip.github.io/course/lectures/Course%20Syllabus.html">B0</a>, <a href="https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html">B1</a></td>
     <td></td>
     <td><a href="https://youtu.be/GtukVrtcXe8">B0</a>, <a href="https://youtu.be/mPc3j7XgZHM">B1</a></td>
@@ -110,15 +111,9 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>25-Nov-2026 <em>(Wed)</em></td>
-    <td>🟢 Introduction to Julia</td>
+    <td>🟢 Introduction to Julia &amp; assignments<br/>
+    🔴 Pick-up assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>27-Nov-2026 <em>(Fri)</em></td>
-    <td>🔴 Pick-up Julia programming assignment A0</td>
-    <td></td>
     <td><a href="">A0</a></td>
     <td></td>
   </tr>
@@ -138,31 +133,19 @@ You can access all lecture materials online through the links below:
   </tr> --->
   <tr>
     <td>02-Dec-2026 <em>(Wed)</em></td>
-    <td>🟢 Probabilistic Programming 1 - Bayesian inference with conjugate models</td>
+    <td>🟢 Probabilistic Programming 1 - Bayesian inference with conjugate models<br/>
+    🔴 Submission deadline assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
-    <td></td>
-    <td><a href="https://youtu.be/ynfvgtjOnqo">W1.1</a>, <a href="https://youtu.be/h9nODl50m_M">W1.2</a></td>
-  </tr>
-  <tr>
-    <td>04-Dec-2026 <em>(Fri)</em></td>
-    <td>⚪️ B6: Regression</td>
-    <td><a href="https://bmlip.github.io/course/lectures/Regression.html">B6</a></td>
-    <td></td>
-    <td><a href="https://youtu.be/2llpaRSN2Wc">B6.1</a>, <a href="https://youtu.be/TSoYnO6oXhw">B6.2</a></td>
-  </tr>
-  <tr>
-    <td>04-Dec-2026</td>
-    <td>🔴 Submission deadline assignment A0</td>
-    <td></td>
     <td><a href="">submit</a></td>
     <td></td>
   </tr>
   <tr>
-    <td>04-Dec-2026</td>
-    <td>🔴 Pick-up probabilistic programming assignment A1</td>
-    <td></td>
-    <td><a href="">A1</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
-    <td></td>
+    <td>04-Dec-2026 <em>(Fri)</em></td>
+    <td>⚪️ B6: Regression<br/>
+    🔴 Pick-up assignment A1</td>
+    <td><a href="https://bmlip.github.io/course/lectures/Regression.html">B6</a></td>
+    <td><a href="">A1</a><br/>(<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a href="https://youtu.be/2llpaRSN2Wc">B6.1</a>, <a href="https://youtu.be/TSoYnO6oXhw">B6.2</a></td>
   </tr>
   <tr>
     <td>09-Dec-2026 <em>(Wed)</em></td>
@@ -176,7 +159,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 Probabilistic Programming 2 - Bayesian regression &amp; classification</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP2%20-%20Bayesian%20regression%20and%20classification.html">W2</a></td>
     <td></td>
-    <td><a href="https://youtu.be/TKvI5uUYY8A">W2.1</a>, <a href="https://youtu.be/WCtInHz5-zA">W2.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>16-Dec-2026 <em>(Wed)</em></td>
@@ -187,15 +170,9 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>18-Dec-2026 <em>(Fri)</em></td>
-    <td>🟢 Probabilistic Programming 3 - Variational Bayesian inference</td>
+    <td>🟢 Probabilistic Programming 3 - Variational Bayesian inference<br/>
+    🔴 Submission deadline assignment A1</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
-    <td></td>
-    <td><a href="https://youtu.be/z_hKaRqpNQM">W3.1</a>, <a href="https://youtu.be/FLKbzyiQlLo">W3.2</a></td>
-  </tr>
-  <tr>
-    <td>18-Dec-2026</td>
-    <td>🔴 Submission deadline assignment A1</td>
-    <td></td>
     <td><a href="">submit</a></td>
     <td></td>
   </tr>
@@ -211,31 +188,25 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>08-Jan-2027 <em>(Fri)</em></td>
-    <td>⚪️ B11: Intelligent Agents and Active Inference</td>
+    <td>⚪️ B11: Intelligent Agents and Active Inference<br/>
+    🔴 Pick-up assignment A2</td>
     <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B11</a>,<br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2026-AIF-lecture.ppsx">slides</a></td>
-    <td></td>
+    <td><a href="">A2</a><br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td><a href="https://youtu.be/fBm1oAzlv0w">B11.1</a>, <a href="https://youtu.be/UbOuLxv9EdI">B11.2</a></td>
-  </tr>
-  <tr>
-    <td>08-Jan-2027</td>
-    <td>🔴 Pick-up probabilistic programming assignment A2</td>
-    <td></td>
-    <td><a href="">A2</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
-    <td></td>
   </tr>
   <tr>
     <td>13-Jan-2027 <em>(Wed)</em></td>
     <td>🟢 Probabilistic Programming 4 - Bayesian filters &amp; smoothers</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP4%20-%20Bayesian%20filtering%20and%20smoothing.html">W4</a></td>
     <td></td>
-    <td><a href="https://youtu.be/Yp2vhndnjng">W4.1</a>, <a href="https://youtu.be/qnWofDRh5eo">W4.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>15-Jan-2027 <em>(Fri)</em></td>
-    <td>🟢 TO BE DETERMINED</td>
+    <td>🟢 Probabilistic Programming 5 - Bayesian control and active inference</td>
     <td></td>
     <td></td>
-    <td></td>
+    <td><a href="https://bmlip.github.io/course/probprog/PP5%20-%20Bayesian%20control%20and%20active%20inference.html">W5</a></td>
   </tr>
   <tr>
     <td>22-Jan-2027 <em>(Fri)</em></td>
@@ -250,9 +221,9 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>TBD</td>
-    <td>🔴 Pick-up resit programming assignment</td>
+    <td>🔴 Pick-up resit assignment</td>
     <td></td>
-    <td><a href="">Resit</a> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a href="">Resit</a><br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td></td>
   </tr>
   <tr>
@@ -338,9 +309,10 @@ Throughout the course, you can read _Minis_ that deep-dive into specific topics.
   - 2-Feb-2023: <a href="https://github.com/bmlip/course/blob/main/exams/20230202-5SSD0-exam.pdf">exam </a>; <a href="https://github.com/bmlip/course/blob/main/exams/20230202-5SSD0-exam-answers.pdf">answers </a>; <a href="https://github.com/bmlip/course/blob/main/exams/20230202-5SSD0-exam-calculations.ipynb">calculations</a>
 
 
-### Programming Assignments
+### Assignments
 
-- Programming assignments can be downloaded and submitted through the links in the above table.
+- We will have two assignments where you have to use probabilistic programming to solve real-world challenges. The assignments can be downloaded through "A*" links above and submitted via Canvas.
+- This year, we will also run an experiment with an "AI track" where you are free to use AI as a tool. However, the assignment will be structured differently to avoid having the AI solve all the problems by itself. More information will be given in the first session on November 11th.
 
 <!---
 - Programming assignments should be submitted before the indicated deadlines at the [Canvas Assignments tab](https://canvas.tue.nl/courses/26086/assignments).
@@ -348,7 +320,7 @@ Throughout the course, you can read _Minis_ that deep-dive into specific topics.
 
 ### Grading
 
-- The final grade is composed of the results of programming assignment(s) (20%) and the final written exam (80%). The grade will be rounded to the nearest integer.
+- The final grade is composed of the results of assignment(s) (20%) and the final written exam (80%). The grade will be rounded to the nearest integer.
 
 
 <!---
