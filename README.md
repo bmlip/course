@@ -204,9 +204,9 @@ You can access all lecture materials online through the links below:
   <tr>
     <td>15-Jan-2027 <em>(Fri)</em></td>
     <td>🟢 Probabilistic Programming 5 - Bayesian control and active inference</td>
-    <td></td>
-    <td></td>
     <td><a href="https://bmlip.github.io/course/probprog/PP5%20-%20Bayesian%20control%20and%20active%20inference.html">W5</a></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>22-Jan-2027 <em>(Fri)</em></td>
