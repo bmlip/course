@@ -752,6 +752,252 @@ md"""
 Curious how this scales up? The same ideas drive the NARX- and ARX-based active inference agents in [Kouw (2023)](https://arxiv.org/abs/2312.15046) and [Nisslbeck & Kouw (2024)](https://arxiv.org/abs/2410.10415), which learn the dynamics of systems such as a pendulum while controlling them. [De Vries et al. (2025)](https://arxiv.org/abs/2504.14898) show how minimizing the expected free energy itself can be realized by message passing.
 """
 
+# ╔═╡ 75b92f65-6746-4f83-8669-09c3fc7a9393
+challenge_statement("Real world example: active inference in traffic and mobility"; header_level=1, big=true)
+
+# ╔═╡ 69df80d0-a05b-49f5-a576-fe3ae8b629f3
+md"""
+The ideas in this notebook are not limited to robots. In the [AiMTT](https://aimtt.nl) programme (*AI Learning Initiative for Multi-modal Traffic and Transportation*), TU/e and TU Delft work together with NDW, Rijkswaterstaat and industry partners on active inference for traffic management. Traffic lights, ramp meters and travellers increasingly make their own decisions, each based on their own, incomplete information. Active inference offers a principled way to build such decision makers: agents that form expectations, take their uncertainty into account, and adjust when reality deviates from their predictions.
+
+In [one of the AiMTT experiments](http://biaslab.github.io/aim-tt), a population of simulated travellers chooses every day between two routes between the Valburg and Velperbroek interchanges near Arnhem. The travellers have to *learn* how congested each route is while they use it, and they have to *adapt* when the network changes, for example when road construction halves the capacity of one of the routes for a few weeks.
+
+Below, we strip this experiment down to a single commuter, and we use exactly the same tools as for the rewired robot.
+"""
+
+# ╔═╡ 09279d95-27f2-4eaa-9267-6b9209f60632
+md"""
+## The commuter's problem
+
+Every morning, a commuter drives from home to work. There are two routes:
+- route **A**, the motorway, which usually takes about 22 minutes, and
+- route **B**, a secondary road, which usually takes about 32 minutes.
+
+The commuter has just moved, and doesn't know these travel times: they can only find out by driving. Moreover, they only experience the route they drive: there is no way to know how long the other route would have taken today. The travel times also vary from day to day, with a standard deviation of about 2 minutes.
+
+To make things interesting, there are **road works on route A** from day 31 to day 70, during which the motorway takes about 45 minutes. Nobody tells the commuter when the road works start or end.
+
+The road network is simulated by a `CommuteNetwork` (see the [Appendix](#Appendix)). The function `drive!(network, route)` returns the travel time (in minutes) of the next day's trip along `route` (1 = A, 2 = B).
+"""
+
+# ╔═╡ d6c9a2b1-e636-409a-a9a2-7e5389bcb4e6
+md"""
+## The commuter's model
+
+The commuter keeps a belief about the mean travel time ``\theta_{r,d}`` of each route ``r \in \{A, B\}`` on day ``d``. Their generative model consists of a prior, a state transition, a likelihood and a goal prior:
+
+```math
+\begin{aligned}
+p(\theta_{r,0}) &= \mathcal{N}(\theta_{r,0} \mid 30, 10^2) \\
+p(\theta_{r,d} \mid \theta_{r,d-1}) &= \mathcal{N}(\theta_{r,d} \mid \theta_{r,d-1}, \sigma_\text{drift}^2) \\
+p(y_d \mid \theta_{r,d}) &= \mathcal{N}(y_d \mid \theta_{r,d}, \sigma_y^2) \\
+\hat{p}(y_d) &= \mathcal{N}(y_d \mid y_*, s_*^2) \, .
+\end{aligned}
+```
+
+- The prior says: "a trip probably takes about half an hour", for both routes.
+- The state transition says that travel times **may change** from day to day.
+- The likelihood describes the travel time ``y_d`` of today's trip, *if* route ``r`` was driven on day ``d``.
+- The goal prior says that the commuter wants to be at work in ``y_* = 20`` minutes.
+
+The state transition is the crucial ingredient. A commuter who believes that travel times never change (``\sigma_\text{drift} = 0``) is learning a fixed parameter, as in [Probabilistic Programming 2](https://bmlip.github.io/course/probprog/PP2%20-%20Bayesian%20regression%20and%20classification.html). A commuter with ``\sigma_\text{drift} > 0`` is tracking a hidden state, as in [Probabilistic Programming 4](https://bmlip.github.io/course/probprog/PP4%20-%20Bayesian%20filtering%20and%20smoothing.html): they expect that the road network can change.
+
+In the code, ``\sigma_\text{drift}`` is called `commute_drift_std`, ``\sigma_y`` is `commute_obs_std` and ``s_*`` is `commute_goal_std`. With the sliders, you can change ``\sigma_\text{drift}`` and ``s_*``.
+"""
+
+# ╔═╡ cc583d4c-cc9c-4bcd-a29d-6abfe12d7072
+begin
+	N_days = 120                  # number of days
+	commute_prior_mean = 30.0     # prior mean of the travel time of each route (min)
+	commute_prior_var = 10.0^2    # prior variance of the travel time of each route (min²)
+	commute_obs_std = 2.0         # standard deviation of the travel time of a single trip (min)
+	commute_target = 20.0         # goal prior: the commuter wants to be at work in 20 minutes
+end
+
+# ╔═╡ 61a5c9b4-8e5e-4b6a-8e0f-d3ff0866d318
+begin
+	commute_bonds = PlutoUI.ExperimentalLayout.vbox([
+		@bindname(commute_drift_std, Slider([0.0, 0.5, 1.0, 1.5, 2.0, 3.0]; default=1.5, show_value=true))
+		@bindname(commute_goal_std, Slider([5.0, 8.0, 10.0, 12.0, 15.0, 20.0, 30.0]; default=15.0, show_value=true))
+	])
+end
+
+# ╔═╡ 07a717c9-5ec2-43cf-b0a3-17691a3ba5de
+md"""
+After driving route ``r`` on day ``d``, the commuter updates their beliefs ``q(\theta_{r,d}) = \mathcal{N}(\theta_{r,d} \mid m_r, v_r)`` about both routes. This is one step of a Kalman filter, as for the parking robot, with one twist: only the route that was driven is observed. In RxInfer, we simply pass `missing` as the observation of the other route.
+
+The posterior for the route that was not driven is then just the prediction, ``\mathcal{N}(\theta_{r,d} \mid m_r, v_r + \sigma_\text{drift}^2)``: its mean stays the same, but its variance **grows** with every day that the commuter stays away from that route.
+"""
+
+# ╔═╡ 4eec31d0-a8f4-49e1-8f88-42c1d1b94188
+@model function commute_learning(y, m_prev, v_prev, σ2_drift, σ2_obs)
+	"One day of learning the travel times of both routes"
+
+	for r in 1:2
+		# Belief about yesterday's travel time of route r
+		θ_prev[r] ~ NormalMeanVariance(m_prev[r], v_prev[r])
+
+		# The travel time may have changed overnight
+		θ[r] ~ NormalMeanVariance(θ_prev[r], σ2_drift)
+
+		# Today's trip (missing for the route that was not driven)
+		y[r] ~ NormalMeanVariance(θ[r], σ2_obs)
+	end
+end
+
+# ╔═╡ 5290535c-3444-481f-a0bc-760f8230abe8
+"Update the beliefs N(m, v) about the travel times of both routes, after driving `route` and observing travel time y"
+function update_route_beliefs(m, v, route, y)
+
+	# Only the route that was driven is observed
+	observations = [r == route ? y : missing for r in 1:2]
+
+	result = infer(
+		model = commute_learning(m_prev=m, v_prev=v, σ2_drift=commute_drift_std^2, σ2_obs=commute_obs_std^2),
+		data  = (y = observations,),
+	)
+	return mean.(result.posteriors[:θ]), var.(result.posteriors[:θ])
+end
+
+# ╔═╡ e4e2c95f-5484-4e90-afec-ada06ff8bb8c
+md"""
+## Choosing a route
+
+To choose a route, the commuter predicts tomorrow's travel time on each route:
+
+```math
+q(y \mid r) = \mathcal{N}\big(y \mid m_r, \ v_r + \sigma_\text{drift}^2 + \sigma_y^2\big) \, .
+```
+
+The commuter scores both routes in the same way as the agents of the rewired robot. There are only two candidate actions now, and there is no control cost (both routes take the same effort to drive):
+
+```math
+\begin{aligned}
+J(r) &= \mathbb{E}_{q(y \mid r)}\big[ -\log \hat{p}(y) \big] && \text{(decision-theoretic commuter)} \\
+G(r) &= \mathbb{E}_{q(y \mid r)}\big[ -\log \hat{p}(y) \big] - H\big[ q(y \mid r) \big] && \text{(active inference commuter)}
+\end{aligned}
+```
+
+As before, the entropy contains the information gain: ``H[q(y \mid r)] = \tfrac{1}{2}\log 2\pi e \sigma_y^2 + I[\theta_r; y \mid r]``. The uncertainty about a route grows while it is not driven, so the longer the commuter stays away from a route, the more they expect to learn by driving it.
+"""
+
+# ╔═╡ 8c873a95-c5a2-484d-ade3-bc129515438a
+"Predictive distribution of tomorrow's travel time on a route with belief N(m_r, v_r): returns (mean, variance)"
+function predict_travel_time(m_r, v_r)
+	return m_r, v_r + commute_drift_std^2 + commute_obs_std^2
+end
+
+# ╔═╡ 61613276-a1dd-4fc6-8bd4-423f3cce7cdc
+begin
+	"Expected cost: cross-entropy between the predicted travel time N(μ, v) and the goal prior"
+	route_expected_cost(μ, v) = ((v + (μ - commute_target)^2) / commute_goal_std^2 + log(2π * commute_goal_std^2)) / 2
+
+	"Decision-theoretic commuter: expected cost"
+	function route_dt_objective(m_r, v_r)
+		μ, v = predict_travel_time(m_r, v_r)
+		return route_expected_cost(μ, v)
+	end
+
+	"Active inference commuter: expected free energy (= expected cost - entropy)"
+	function route_aif_objective(m_r, v_r)
+		μ, v = predict_travel_time(m_r, v_r)
+		return route_expected_cost(μ, v) - entropy_gaussian(v)
+	end
+end
+
+# ╔═╡ 2216a8fb-81d9-4376-8a0a-5c1dfabdf66d
+md"""
+## Driving to work for 120 days
+
+Both commuters run the same action-perception loop: plan (score both routes), act (drive to work), and learn (update the beliefs about the travel times):
+"""
+
+# ╔═╡ b1626647-7841-4620-982b-b352d78c1770
+commute_bonds
+
+# ╔═╡ 4d863121-0381-4af0-a231-bd404060cd0f
+md"""
+With the default settings (``\sigma_\text{drift} = 1.5`` and ``s_* = 15``), the plots tell three stories:
+
+1. **Learning the network** (days 1 to 30). Both commuters start with the same prior. The decision-theoretic commuter drives route A on the first day (both routes look the same, and `argmin` picks the first one), finds it fast, and never tries route B. Their belief about route B stays at the prior mean, with an ever-growing uncertainty (the wide orange band). The active inference commuter tries route B on the second day, and checks it again every few days, whenever their uncertainty about route B has grown enough. This curiosity has a price: about 10 extra minutes per check (bottom panel).
+2. **Road works** (days 31 to 70). Both commuters notice the road works within a few days, and switch to route B. They can only do so this quickly because their model allows the travel times to change (see the exercise below).
+3. **After the road works** (days 71 to 120). The decision-theoretic commuter remembers route A as slow, and never drives it again. So they never find out that the road works are over, and they lose 10 minutes every day, for the rest of the simulation. This is the *turn-off* phenomenon of the rewired robot again, but now it happens halfway: a change in the world has made old knowledge stale. The uncertainty of the active inference commuter about route A keeps growing, until driving it becomes worth the risk. They find out that the road works are over, and return to route A.
+
+In the long run, curiosity pays off: the active inference commuter loses much less time than the decision-theoretic commuter (see the table).
+"""
+
+# ╔═╡ c12907ed-9c2a-46f2-9962-0be558d86a3e
+exercise_statement("A world that never changes", header_level=2)
+
+# ╔═╡ 8e7317f4-d17d-4137-b419-460d27c6778a
+md"""
+👉 Set `commute_drift_std` to 0, so that the commuters believe that the travel time of each route is a fixed (but unknown) number. How do the commuters respond to the road works now? Can you explain it?
+"""
+
+# ╔═╡ 5301881d-f47c-48df-8345-25b2267688e4
+commute_bonds
+
+# ╔═╡ 29d0b601-2d6d-48f8-ac2f-eb1f6e75a51f
+hide_solution(md"""
+With ``\sigma_\text{drift} = 0``, the travel time of a route is a fixed parameter. The posterior mean is then (roughly) the average of all trips along that route, and the posterior variance shrinks as ``\sigma_y^2 / n`` after ``n`` trips. After 30 trips along route A, the commuter is very sure that it takes 22 minutes, and each trip through the road works moves the average only a little. For example, after 20 days of road works, the average of all trips along route A is still only ``(30 \cdot 22 + 20 \cdot 45) / 50 \approx 31`` minutes.
+
+So, both commuters keep driving through the road works for weeks. The decision-theoretic commuter only switches to route B after more than a month. And when the road works are over, the static model makes things worse a second time: the commuter's belief about route A is stuck at the average of all their trips (about 34 minutes), and they are just as certain about it as about route B. There is nothing left to learn, so the decision-theoretic commuter never goes back to route A. With ``\sigma_\text{drift} = 0``, the decision-theoretic commuter loses almost twice as much time as with ``\sigma_\text{drift} = 1.5``.
+
+A model that cannot represent change, cannot detect it either: to adapt, an agent must believe that the world can change. (The agents in the AiMTT experiments use a similar trick: they inflate their uncertainty about routes they have not driven recently.)
+
+Note that adapting has a price as well: a commuter who believes that travel times drift keeps forgetting what they know about the other route, and has to check it every now and then. This pays off here, because the road works last for almost six weeks. If the road works only lasted a few days, a stubborn commuter could actually lose less time!
+""")
+
+# ╔═╡ 2753fe1b-48c4-4b66-bde2-e5d067bbdaca
+exercise_statement("Strict commuters", header_level=2)
+
+# ╔═╡ 8a77b17b-de60-465a-b7f7-cecf2a9ad21c
+md"""
+👉 Set `commute_drift_std` back to 1.5, and make the goal prior narrower: set `commute_goal_std` to 10. What does the active inference commuter do after the road works? Can you explain it?
+"""
+
+# ╔═╡ cc0c9e01-9de6-42e0-a03d-509988c4f468
+commute_bonds
+
+# ╔═╡ c8706bc6-4133-4bb2-a6c8-1c1fe5b7b56c
+hint(md"""
+Write ``G(r)`` as a function of the mean ``\mu_r`` and the variance ``V_r`` of the predicted travel time. For which value of ``V_r`` is ``G(r)`` minimal?
+""")
+
+# ╔═╡ 25802cd8-bca5-4813-b5c4-6836ee0c84cb
+hide_solution(md"""
+The strict active inference commuter stays on route B after the road works, just like the decision-theoretic commuter.
+
+Up to a constant, the expected free energy of route ``r`` is
+
+```math
+G(r) = \frac{(\mu_r - y_*)^2 + V_r}{2 s_*^2} - \tfrac{1}{2} \log V_r \, .
+```
+
+Uncertainty is attractive, but only up to a point: as a function of ``V_r``, ``G(r)`` is minimal at ``V_r = s_*^2``. Compared to the well-known route B (with ``V_B \approx 8``), the uncertainty about route A can lower its score by at most
+
+```math
+\Delta G_\text{max} = \tfrac{1}{2} \log \frac{s_*^2}{V_B} - \frac{s_*^2 - V_B}{2 s_*^2} \, .
+```
+
+At the end of the road works, the commuter believes that route A takes ``\mu_A \approx 44`` minutes and route B ``\mu_B \approx 32`` minutes. This costs route A an extra ``\big((\mu_A - y_*)^2 - (\mu_B - y_*)^2\big) / (2 s_*^2)``:
+
+| ``s_*`` | maximal curiosity bonus ``\Delta G_\text{max}`` | penalty for the slow memory of route A |
+|:--:|:--:|:--:|
+| 15 | ≈ 1.2 | ≈ 1.0 |
+| 10 | ≈ 0.8 | ≈ 2.2 |
+
+With ``s_* = 15``, curiosity eventually wins. With ``s_* = 10``, it never does: a strict commuter cares so much about the mean travel time that the stale memory of a slow route A can never be outweighed by curiosity. This is the same lesson as in the exercise *When does curiosity stop?*: the stricter the goals, the less an active inference agent explores.
+""")
+
+# ╔═╡ ccfd1039-4346-4ff8-a670-e8e0a2857aa8
+md"""
+## From one commuter to a whole corridor
+
+In the [AiMTT experiments](http://biaslab.github.io/aim-tt), the travel times are not fixed numbers. 2000 active inference travellers share the same two routes, and the travel time of a route depends on how many of them choose it, through the queues that form on the road. Each traveller only observes the route they drove, learns the free-flow travel time, the capacity and the queue of each route, and chooses a route by minimizing the expected free energy, just like our commuter.
+
+Compared to classical route-choice models (a logit model and a reinforcement-learning model), the population of active inference travellers produces more stable route splits, and adapts more smoothly to road construction and to random incidents. You can read more about these experiments, and about the programme at [aimtt.nl](https://aimtt.nl).
+"""
+
 # ╔═╡ cce2a7a0-abc0-5d36-87f6-c54391429e78
 md"""
 # Appendix
@@ -916,6 +1162,79 @@ let
 	end
 end
 
+# ╔═╡ c446cf9f-12c2-4a6f-a0e1-0cd0bb4c3f46
+begin
+	# The true road network (hidden from the commuter)
+	tt_usual = [22.0, 32.0]      # usual travel times of route A (motorway) and route B (secondary road), in minutes
+	tt_roadworks = 45.0          # travel time of route A during the road works (min)
+	roadworks_days = 31:70       # days with road works on route A
+	tt_noise_std = 2.0           # day-to-day variation of the travel time (min)
+
+	"True mean travel time of a route (1 = A, 2 = B) on a given day"
+	commute_true_tt(route, day) = (route == 1 && day in roadworks_days) ? tt_roadworks : tt_usual[route]
+
+	"Simulated road network with two routes from home to work (environment of the traffic example)"
+	mutable struct CommuteNetwork
+		day::Int
+		rng::Xoshiro
+	end
+	CommuteNetwork(; seed=2) = CommuteNetwork(0, Xoshiro(seed))
+
+	"Drive along route 1 (A) or 2 (B) on the next day, and return the travel time (min)"
+	function drive!(network::CommuteNetwork, route::Int)
+		network.day += 1
+		return commute_true_tt(route, network.day) + tt_noise_std*randn(network.rng)
+	end
+end
+
+# ╔═╡ 3068b8c8-a397-4bd8-9f81-83d5062f3aca
+"Run the action-perception loop of a commuter with the given objective, for N_days days"
+function run_commuter(objective; seed=2)
+
+	# The environment: a road network with two routes
+	network = CommuteNetwork(seed=seed)
+
+	# The commuter's prior beliefs about the travel times of route A and route B
+	m = fill(commute_prior_mean, 2)
+	v = fill(commute_prior_var, 2)
+
+	# Bookkeeping
+	history = (
+		route = Int[],        # chosen routes (1 = A, 2 = B)
+		tt    = Float64[],    # experienced travel times
+		extra = Float64[],    # extra travel time, compared to the faster route on that day
+		m     = [m],          # belief means
+		v     = [v],          # belief variances
+	)
+
+	for day in 1:N_days
+
+		# 1. Plan: score both routes, and pick the best one
+		scores = [objective(m[r], v[r]) for r in 1:2]
+		route = argmin(scores)
+
+		# 2. Act: drive to work, and observe the travel time
+		y = drive!(network, route)
+
+		# 3. Learn: update the beliefs about the travel times
+		m, v = update_route_beliefs(m, v, route, y)
+
+		# Store results (the true travel times are only used for evaluation)
+		push!(history.route, route)
+		push!(history.tt, y)
+		push!(history.extra, commute_true_tt(route, day) - minimum(commute_true_tt(r, day) for r in 1:2))
+		push!(history.m, m)
+		push!(history.v, v)
+	end
+	return history
+end
+
+# ╔═╡ bb9b2685-375b-4d5a-91b6-dbe83d2feeb1
+commute_dt = run_commuter(route_dt_objective)
+
+# ╔═╡ e29f44d3-0b71-444e-bb76-80207694ccf6
+commute_aif = run_commuter(route_aif_objective)
+
 # ╔═╡ f28dc0f1-5366-5395-869c-75a260e98aa9
 md"""
 ### Plotting functions
@@ -1008,6 +1327,72 @@ end
 
 # ╔═╡ e43f046f-cd46-5d21-89a4-4367de89af57
 plot_rewired(history_dt, history_aif)
+
+# ╔═╡ 67dc62b5-f28a-4b31-b2a1-640a7c0d2c80
+"Compare the route choices, beliefs and extra travel times of two commuters"
+function plot_commute(h1, h2; labels=["decision-theoretic", "active inference"], colors=["orange", "blue"])
+	days = 1:N_days
+	shade_roadworks!(p) = vspan!(p, [first(roadworks_days) - 0.5, last(roadworks_days) + 0.5]; color="gray", alpha=0.15, label="")
+
+	# Which route did each commuter take?
+	p1 = plot(ylabel="route", yticks=([1, 2], ["B", "A"]), ylims=(0.5, 2.5), legend=:outertopright, title="route choice (gray: road works on route A)", titlefontsize=10)
+	shade_roadworks!(p1)
+	scatter!(p1, days, 3 .- h1.route .+ 0.08; color=colors[1], markersize=3, markerstrokewidth=0, label=labels[1])
+	scatter!(p1, days, 3 .- h2.route .- 0.08; color=colors[2], markersize=3, markerstrokewidth=0, label=labels[2])
+
+	# What did each commuter believe?
+	function belief_panel(h, label, color)
+		p = plot(ylabel="travel time (min)", ylims=(10, 60), legend=:outertopright, title="beliefs of the $(label) commuter", titlefontsize=10)
+		shade_roadworks!(p)
+		for (r, style, name) in [(1, :solid, "A"), (2, :dash, "B")]
+			μ = [m[r] for m in h.m[2:end]]
+			σ = [sqrt(v[r]) for v in h.v[2:end]]
+			plot!(p, days, μ; ribbon=2 .* σ, fillalpha=0.15, color=color, linestyle=style, label="belief about $(name)")
+			plot!(p, days, [commute_true_tt(r, d) for d in days]; color="black", linewidth=1, linestyle=style, label="true $(name)")
+		end
+		return p
+	end
+	p2 = belief_panel(h1, labels[1], colors[1])
+	p3 = belief_panel(h2, labels[2], colors[2])
+
+	# How much time did each commuter lose?
+	p4 = plot(xlabel="day", ylabel="minutes", legend=:outertopright, title="cumulative extra travel time (compared to always taking the faster route)", titlefontsize=10)
+	shade_roadworks!(p4)
+	plot!(p4, days, cumsum(h1.extra); color=colors[1], label=labels[1])
+	plot!(p4, days, cumsum(h2.extra); color=colors[2], label=labels[2])
+
+	plot(p1, p2, p3, p4; layout=(4,1), size=(800,1000))
+end
+
+# ╔═╡ 9b9dcb16-6321-4937-9d81-edd9bc6f156d
+plot_commute(commute_dt, commute_aif)
+
+# ╔═╡ 8d91235c-3349-4562-a305-2465516e8af8
+"Summarize the route choices of two commuters in a table"
+function commute_summary(h1, h2; labels=["decision-theoretic", "active inference"])
+	last_day = last(roadworks_days)
+	function row(h, label)
+		days_on_A = count(==(1), h.route[roadworks_days])
+		back = findfirst(==(1), h.route[last_day+1:end])
+		back_on_A = back === nothing ? "never" : "day $(last_day + back)"
+		return "| $(label) | $(days_on_A) of $(length(roadworks_days)) | $(back_on_A) | $(round(Int, sum(h.extra))) |"
+	end
+	Markdown.parse(join([
+		"| commuter | days on route A during the road works | back on route A after the road works | total extra travel time (min) |",
+		"|:--|:--:|:--:|:--:|",
+		row(h1, labels[1]),
+		row(h2, labels[2]),
+	], "\n"))
+end
+
+# ╔═╡ f54dceb2-0956-4c04-ac9e-10c638850668
+commute_summary(commute_dt, commute_aif)
+
+# ╔═╡ 8c721823-37c3-4316-a090-bb7a8ac36b7b
+commute_summary(commute_dt, commute_aif)
+
+# ╔═╡ e0278cd0-3280-4a3f-9fa3-93e753a95585
+commute_summary(commute_dt, commute_aif)
 
 # ╔═╡ ec4514f4-7df5-5634-8f39-9685615df687
 md"""
@@ -3028,15 +3413,50 @@ version = "1.13.0+0"
 # ╠═8a05d41d-b09f-5602-8220-bcca5f2a6878
 # ╟─2607c35f-9632-59c5-b0c8-753ea3a9cd21
 # ╟─fb51c8cd-958b-52b8-bc26-328337ad8c44
+# ╟─75b92f65-6746-4f83-8669-09c3fc7a9393
+# ╟─69df80d0-a05b-49f5-a576-fe3ae8b629f3
+# ╟─09279d95-27f2-4eaa-9267-6b9209f60632
+# ╟─d6c9a2b1-e636-409a-a9a2-7e5389bcb4e6
+# ╠═cc583d4c-cc9c-4bcd-a29d-6abfe12d7072
+# ╟─61a5c9b4-8e5e-4b6a-8e0f-d3ff0866d318
+# ╟─07a717c9-5ec2-43cf-b0a3-17691a3ba5de
+# ╠═4eec31d0-a8f4-49e1-8f88-42c1d1b94188
+# ╠═5290535c-3444-481f-a0bc-760f8230abe8
+# ╟─e4e2c95f-5484-4e90-afec-ada06ff8bb8c
+# ╠═8c873a95-c5a2-484d-ade3-bc129515438a
+# ╠═61613276-a1dd-4fc6-8bd4-423f3cce7cdc
+# ╟─2216a8fb-81d9-4376-8a0a-5c1dfabdf66d
+# ╠═3068b8c8-a397-4bd8-9f81-83d5062f3aca
+# ╠═bb9b2685-375b-4d5a-91b6-dbe83d2feeb1
+# ╠═e29f44d3-0b71-444e-bb76-80207694ccf6
+# ╟─b1626647-7841-4620-982b-b352d78c1770
+# ╟─9b9dcb16-6321-4937-9d81-edd9bc6f156d
+# ╟─f54dceb2-0956-4c04-ac9e-10c638850668
+# ╟─4d863121-0381-4af0-a231-bd404060cd0f
+# ╟─c12907ed-9c2a-46f2-9962-0be558d86a3e
+# ╟─8e7317f4-d17d-4137-b419-460d27c6778a
+# ╟─5301881d-f47c-48df-8345-25b2267688e4
+# ╟─8c721823-37c3-4316-a090-bb7a8ac36b7b
+# ╟─29d0b601-2d6d-48f8-ac2f-eb1f6e75a51f
+# ╟─2753fe1b-48c4-4b66-bde2-e5d067bbdaca
+# ╟─8a77b17b-de60-465a-b7f7-cecf2a9ad21c
+# ╟─cc0c9e01-9de6-42e0-a03d-509988c4f468
+# ╟─e0278cd0-3280-4a3f-9fa3-93e753a95585
+# ╟─c8706bc6-4133-4bb2-a6c8-1c1fe5b7b56c
+# ╟─25802cd8-bca5-4813-b5c4-6836ee0c84cb
+# ╟─ccfd1039-4346-4ff8-a670-e8e0a2857aa8
 # ╟─cce2a7a0-abc0-5d36-87f6-c54391429e78
 # ╟─c787491a-252f-5bd7-9860-1a6aadf205de
 # ╟─889c61d3-3173-5f7c-aac1-71a245e0f752
 # ╟─90d3f2cd-d510-5694-8c39-62e1635bdf4c
+# ╟─c446cf9f-12c2-4a6f-a0e1-0cd0bb4c3f46
 # ╟─f28dc0f1-5366-5395-869c-75a260e98aa9
 # ╟─ade5e467-96f1-5730-9796-c3eddc09e001
 # ╟─e4876603-a1f0-54db-a40c-ceed18b6c9dd
 # ╟─bbfaf3f4-cd13-5bc5-b593-fbac3dd1afcd
 # ╟─cc6f1751-897d-582f-8b2a-ef3764823f09
+# ╟─67dc62b5-f28a-4b31-b2a1-640a7c0d2c80
+# ╟─8d91235c-3349-4562-a305-2465516e8af8
 # ╟─ec4514f4-7df5-5634-8f39-9685615df687
 # ╠═d29a1629-fe4a-58af-8ad0-f4ce4a70e74d
 # ╟─b85beb41-21d4-5d5f-b620-12474f3e4325
