@@ -1,0 +1,5 @@
+
+.DS_Store
+**/* backup *.jl
+ignore_dir/
+
