@@ -12,16 +12,12 @@ catch
     error("pdfunite is not installed. Please install it using your package manager. This is used to merge the individual PDFs into a single PDF.")
 end
 
-# if !(v"1.12.0-aaa" < VERSION < v"1.13.0")
-#     error("Our notebook package environments need to be updated with Julia 1.11. Go to julialang.org/downloads to install it.")
-# end
-
 import Pkg
-
 project = mktempdir()
 cp("./pluto-deployment-environment", project; force=true)
 Pkg.activate(project)
-Pkg.add(["URIs", "PlutoPDF"])
+Pkg.add(["URIs"])
+Pkg.develop(path="/Users/fons/Documents/PlutoPDF.jl/")
 Pkg.instantiate()
 
 
@@ -67,18 +63,14 @@ const options = (
     displayHeaderFooter=false,
 )
 
-const preamble_html = """
-<script>
+const preamble_js = """
 // Open all <details> on the page
 setInterval(() => {
     [...document.querySelectorAll("details")].forEach(detailEl => {
         detailEl.setAttribute("open", true);
     });
 }, 1)
-</script>
 """
-
-const preamble_html_query = "?preamble_html=$(URIs.escapeuri(preamble_html))"
 
 function output_path(i, url, prefix, base_url_pattern)
     name = URIs.unescapeuri(replace(url, base_url_pattern => "", ".html" => ""))
@@ -92,7 +84,7 @@ function generate_pdf_collection(urls, prefix, base_url_pattern)
     for (i, url) in enumerate(urls)
         out_path = output_path(i, url, prefix, base_url_pattern)
         @info "📄 Generating PDF ($(i)/$(length(urls))): $(basename(out_path))"
-        PlutoPDF.html_to_pdf(url * preamble_html_query, out_path; open=false, options)
+        PlutoPDF.html_to_pdf(url, out_path; open=false, options, preamble_js)
     end
     
     # Merge PDFs
