@@ -81,13 +81,13 @@ The types:
         end
     else
         response = HTTP.head(without_fragment; status_exception=false, cookies=false, headers=mock_browser_headers)
-        if response.status ∉ 200:299
+        if response.status ∉ [200:299..., 429]
             # oh no!
             # let's check one last thing before erroring
             # this might be a "CloudFlare challenge", a sort of captcha that you need to fill in before you are allowed to access the page.
-            response = HTTP.get(without_fragment; status_exception=false, headers=mock_browser_headers)
-            is_challenge = occursin("challenge", String(response.body))
-            @assert response.status ∈ 200:299 || is_challenge "The URL does not resolve:\n\n\t$s\n\nThe server responded with status $(response.status)."
+            new_response = HTTP.get(without_fragment; status_exception=false, headers=mock_browser_headers)
+            is_challenge = occursin("challenge", String(new_response.body))
+            @assert new_response.status ∈ 200:299 || is_challenge "The URL does not resolve:\n\n\t$s\n\nThe server responded with status $(new_response.status)."
         end
     end
 end
