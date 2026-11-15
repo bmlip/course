@@ -91,7 +91,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Course%20Syllabus.html">B0</a>, <a href="https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html">B1</a></td>
     <td></td>
     <td><a href="https://youtu.be/GtukVrtcXe8">B0</a>, <a href="https://youtu.be/mPc3j7XgZHM">B1</a></td>
-    <td></td>
+    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6252355"> B0,1</a></td>
   </tr>
   <tr>
     <td>13-Nov-2026 <em>(Fri)</em></td>
@@ -99,7 +99,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html">B2</a></td>
     <td></td>
     <td><a href="https://youtu.be/PGbN5rv6HL4">B2.1</a>, <a href="https://youtu.be/LKh2ypFVGwY">B2.2</a></td>
-    <td></td>
+    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6256979">B2</a></td>
   </tr>
   <tr>
     <td>18-Nov-2026 <em>(Wed)</em></td>
