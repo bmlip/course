@@ -335,7 +335,7 @@ Throughout the course, you can read _Minis_ that deep-dive into specific topics.
 
 ### Assignments
 
-- We will have two assignments where you have to use probabilistic programming to solve real-world challenges. The assignments can be downloaded through "A*" links above and submitted via Canvas.
+- We will have two assignments where you have to use probabilistic programming to solve real-world challenges. You can download and submit the assignments through the "A*" links in the table above.
 - This year, we will also run an experiment with an "AI track" where you are free to use AI as a tool. However, the assignment will be structured differently to avoid having the AI solve all the problems by itself. More information will be given in the first session on November 11th.
 
 <!---
