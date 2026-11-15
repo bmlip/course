@@ -87,11 +87,11 @@ You can access all lecture materials online through the links below:
     <td>11-Nov-2026 <em>(Wed)</em></td>
     <td>⚪️ B0: Course Syllabus<br/>
     ⚪️ B1: Machine Learning Overview<br/>
-    🟢 Information assignments &amp; AI usage</td>
+    🟢 AI: Information assignments &amp; AI usage</td>
     <td><a href="https://bmlip.github.io/course/lectures/Course%20Syllabus.html">B0</a>, <a href="https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html">B1</a></td>
     <td></td>
     <td><a href="https://youtu.be/GtukVrtcXe8">B0</a>, <a href="https://youtu.be/mPc3j7XgZHM">B1</a></td>
-    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6252355"> B0,1</a></td>
+    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6252355"> B0,1;AI</a></td>
   </tr>
   <tr>
     <td>13-Nov-2026 <em>(Fri)</em></td>
@@ -119,7 +119,7 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>25-Nov-2026 <em>(Wed)</em></td>
-    <td>🟢 Introduction to Julia &amp; assignments<br/>
+    <td>🟢 W0: Introduction to Julia &amp; assignments<br/>
     🔴 Pick-up assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
     <td><a href="">A0</a></td>
@@ -144,7 +144,7 @@ You can access all lecture materials online through the links below:
   </tr> --->
   <tr>
     <td>02-Dec-2026 <em>(Wed)</em></td>
-    <td>🟢 Probabilistic Programming 1 - Bayesian inference with conjugate models<br/>
+    <td>🟢 W1: Probabilistic Programming 1 - Bayesian inference with conjugate models<br/>
     🔴 Submission deadline assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
     <td><a href="">submit</a></td>
@@ -170,7 +170,7 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>11-Dec-2026 <em>(Fri)</em></td>
-    <td>🟢 Probabilistic Programming 2 - Bayesian regression &amp; classification</td>
+    <td>🟢 W2: Probabilistic Programming 2 - Bayesian regression &amp; classification</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP2%20-%20Bayesian%20regression%20and%20classification.html">W2</a></td>
     <td></td>
     <td></td>
@@ -186,7 +186,7 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>18-Dec-2026 <em>(Fri)</em></td>
-    <td>🟢 Probabilistic Programming 3 - Variational Bayesian inference<br/>
+    <td>🟢 W3: Probabilistic Programming 3 - Variational Bayesian inference<br/>
     🔴 Submission deadline assignment A1</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
     <td><a href="">submit</a></td>
@@ -215,7 +215,7 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>13-Jan-2027 <em>(Wed)</em></td>
-    <td>🟢 Probabilistic Programming 4 - Bayesian filters &amp; smoothers</td>
+    <td>🟢 W4: Probabilistic Programming 4 - Bayesian filters &amp; smoothers</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP4%20-%20Bayesian%20filtering%20and%20smoothing.html">W4</a></td>
     <td></td>
     <td></td>
@@ -223,7 +223,7 @@ You can access all lecture materials online through the links below:
   </tr>
   <tr>
     <td>15-Jan-2027 <em>(Fri)</em></td>
-    <td>🟢 Probabilistic Programming 5 - Bayesian control and active inference</td>
+    <td>🟢 W5: Probabilistic Programming 5 - Bayesian control and active inference</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP5%20-%20Bayesian%20control%20and%20active%20inference.html">W5</a></td>
     <td></td>
     <td></td>
