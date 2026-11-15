@@ -73,11 +73,15 @@ You can access all lecture materials online through the links below:
 
 <table>
   <tr>
-    <th style="text-align:center">date</th>
-    <th style="text-align:center">topic</th>
-    <th style="text-align:center">lecture notes</th>
-    <th style="text-align:center">assignments</th>
-    <th style="text-align:center">video recordings (2023/24)</th>
+    <th rowspan="2" style="text-align:center">date</th>
+    <th rowspan="2" style="text-align:center">topic</th>
+    <th rowspan="2" style="text-align:center">lecture notes</th>
+    <th rowspan="2" style="text-align:center">assignments</th>
+    <th colspan="2" style="text-align:center">video recordings</th>
+  </tr>
+  <tr>
+    <th style="text-align:center">2023/24</th>
+    <th style="text-align:center">2026/27</th>
   </tr>
   <tr>
     <td>11-Nov-2026 <em>(Wed)</em></td>
@@ -87,6 +91,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Course%20Syllabus.html">B0</a>, <a href="https://bmlip.github.io/course/lectures/Machine%20Learning%20Overview.html">B1</a></td>
     <td></td>
     <td><a href="https://youtu.be/GtukVrtcXe8">B0</a>, <a href="https://youtu.be/mPc3j7XgZHM">B1</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>13-Nov-2026 <em>(Fri)</em></td>
@@ -94,6 +99,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Probability%20Theory%20Review.html">B2</a></td>
     <td></td>
     <td><a href="https://youtu.be/PGbN5rv6HL4">B2.1</a>, <a href="https://youtu.be/LKh2ypFVGwY">B2.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>18-Nov-2026 <em>(Wed)</em></td>
@@ -101,6 +107,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html">B3</a></td>
     <td></td>
     <td><a href="https://youtu.be/OPGrqnnEfU0">B3.1</a>, <a href="https://youtu.be/BOUmzY1Nx5g">B3.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>20-Nov-2026 <em>(Fri)</em></td>
@@ -108,6 +115,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Factor%20Graphs.html">B4</a></td>
     <td></td>
     <td><a href="https://youtu.be/C2vvsf_Ts2g">B4.1</a>, <a href="https://youtu.be/HbUuYBMZOKw">B4.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>25-Nov-2026 <em>(Wed)</em></td>
@@ -116,6 +124,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
     <td><a href="">A0</a></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>27-Nov-2026 <em>(Fri)</em></td>
@@ -123,6 +132,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Density%20Estimation.html">B5</a></td>
     <td></td>
     <td><a href="https://youtu.be/WS6gWO5vgtc">B5.1</a>, <a href="https://youtu.be/Ma3jXNbNCyc">B5.2</a>, <a href="https://youtu.be/vyh8RvXxnT8">B5.3</a></td>
+    <td></td>
   </tr>
 <!---  <tr>
     <td>02-Dec-2026 <em>(Wed)</em></td>
@@ -130,6 +140,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/The%20Multinomial%20Distribution.html">B6</a></td>
     <td></td>
     <td><a href="https://youtu.be/vyh8RvXxnT8">B6</a></td>
+    <td></td>
   </tr> --->
   <tr>
     <td>02-Dec-2026 <em>(Wed)</em></td>
@@ -137,6 +148,7 @@ You can access all lecture materials online through the links below:
     🔴 Submission deadline assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
     <td><a href="">submit</a></td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -146,6 +158,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Regression.html">B6</a></td>
     <td><a href="">A1</a><br/>(<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td><a href="https://youtu.be/2llpaRSN2Wc">B6.1</a>, <a href="https://youtu.be/TSoYnO6oXhw">B6.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>09-Dec-2026 <em>(Wed)</em></td>
@@ -153,11 +166,13 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Generative%20Classification.html">B7</a>, <a href="https://bmlip.github.io/course/lectures/Discriminative%20Classification.html">B8</a></td>
     <td></td>
     <td><a href="https://youtu.be/IzNDzIcrhLA">B7</a>, <a href="https://youtu.be/Y7q0JQKNfjM">B8</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>11-Dec-2026 <em>(Fri)</em></td>
     <td>🟢 Probabilistic Programming 2 - Bayesian regression &amp; classification</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP2%20-%20Bayesian%20regression%20and%20classification.html">W2</a></td>
+    <td></td>
     <td></td>
     <td></td>
   </tr>
@@ -167,6 +182,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Latent%20Variable%20Models%20and%20VB.html">B9</a></td>
     <td></td>
     <td><a href="https://youtu.be/pVWdm9fQT6Y">B9.1</a>, <a href="https://youtu.be/mg9HGykqEbw">B9.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>18-Dec-2026 <em>(Fri)</em></td>
@@ -175,9 +191,10 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
     <td><a href="">submit</a></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td colspan="5" style="text-align:center">🔵 break</td>
+    <td colspan="6" style="text-align:center">🔵 break</td>
   </tr>
   <tr>
     <td>06-Jan-2027 <em>(Wed)</em></td>
@@ -185,6 +202,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Dynamic%20Models.html">B10</a></td>
     <td></td>
     <td><a href="https://youtu.be/W1AkZJAjvqI">B10</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>08-Jan-2027 <em>(Fri)</em></td>
@@ -193,11 +211,13 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B11</a>,<br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2026-AIF-lecture.ppsx">slides</a></td>
     <td><a href="">A2</a><br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td><a href="https://youtu.be/fBm1oAzlv0w">B11.1</a>, <a href="https://youtu.be/UbOuLxv9EdI">B11.2</a></td>
+    <td></td>
   </tr>
   <tr>
     <td>13-Jan-2027 <em>(Wed)</em></td>
     <td>🟢 Probabilistic Programming 4 - Bayesian filters &amp; smoothers</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP4%20-%20Bayesian%20filtering%20and%20smoothing.html">W4</a></td>
+    <td></td>
     <td></td>
     <td></td>
   </tr>
@@ -207,6 +227,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/probprog/PP5%20-%20Bayesian%20control%20and%20active%20inference.html">W5</a></td>
     <td></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>22-Jan-2027 <em>(Fri)</em></td>
@@ -214,16 +235,18 @@ You can access all lecture materials online through the links below:
     <td></td>
     <td><a href="">submit</a></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>28-Jan-2027 <em>(Thu)</em></td>
-    <td colspan="4">🔵 written examination (13:30-16:30)</td>
+    <td colspan="5">🔵 written examination (13:30-16:30)</td>
   </tr>
   <tr>
     <td>TBD</td>
     <td>🔴 Pick-up resit assignment</td>
     <td></td>
     <td><a href="">Resit</a><br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -232,10 +255,11 @@ You can access all lecture materials online through the links below:
     <td></td>
     <td><a href="">submit</a></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>TBD</td>
-    <td colspan="4">🔵 resit written examination (18:00-21:00)</td>
+    <td colspan="5">🔵 resit written examination (18:00-21:00)</td>
   </tr>
 
 </table>
