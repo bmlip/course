@@ -147,7 +147,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 W1: Probabilistic Programming 1 - Bayesian inference with conjugate models<br/>
     🔴 Submission deadline assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
-    <td><a href="">submit</a></td>
+    <td><a href="">submit A0</a></td>
     <td></td>
     <td></td>
   </tr>
@@ -189,7 +189,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 W3: Probabilistic Programming 3 - Variational Bayesian inference<br/>
     🔴 Submission deadline assignment A1</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
-    <td><a href="">submit</a></td>
+    <td><a href="">submit A1</a></td>
     <td></td>
     <td></td>
   </tr>
@@ -233,7 +233,7 @@ You can access all lecture materials online through the links below:
     <td>22-Jan-2027 <em>(Fri)</em></td>
     <td>🔴 Submission deadline assignment A2</td>
     <td></td>
-    <td><a href="">submit</a></td>
+    <td><a href="">submit A2</a></td>
     <td></td>
     <td></td>
   </tr>
