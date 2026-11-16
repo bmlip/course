@@ -18,6 +18,12 @@ title("RxInfer Tips & Tricks")
 # ╔═╡ cd1f0337-47c0-46ca-992e-40e3bd68b5a9
 md"""
 Below we've collected handy tips for specifying models and inference procedures in RxInfer. If you have any more that you'd like to add, let us know.
+
+This page is a short cheat sheet, not a replacement for the official resources. For more information, we strongly encourage you to read:
+- 📖 the **official documentation** at [docs.rxinfer.com](https://docs.rxinfer.com/stable/). The [Getting started](https://docs.rxinfer.com/stable/manuals/getting-started/) page is a good place to begin.
+- 🧪 the **examples gallery** at [examples.rxinfer.com](https://examples.rxinfer.com/), which has many complete, runnable models. The **More examples** section at the bottom of this page lists the ones that match this course.
+
+The course uses **RxInfer 6**. Some code you find online (or that an AI assistant writes) uses older syntax. For example, `@meta` / `meta = ...` is now called `@algorithm` / `algorithm = ...`. The old names still work but print a deprecation warning. See the [migration guide](https://docs.rxinfer.com/stable/manuals/migration/v5-to-v6/) if something from an older example does not run.
 """
 
 # ╔═╡ c33945f2-6254-48c5-80d2-82987d5578dc
@@ -27,14 +33,14 @@ md"""
 Below is a list of distributions relevant to the course:
 
 ## Discrete
-- `Bernoulli(θ)` with rate parameter θ
-- `Binomial(θ)` with rate parameter θ
-- `Geometric(θ)` with failure rate parameter θ
+- `Bernoulli(θ)` with success probability θ
+- `Binomial(n,θ)` with n trials and success probability θ
+- `Geometric(θ)` with success probability θ
 - `Poisson(λ)` with rate parameter λ
 - `Categorical([π₁,π₂,...])` with probabilities πᵢ
 
 ## Continuous
-- `Beta(α,β)` with shape parameter α and rate β
+- `Beta(α,β)` with shape parameters α and β
 - `Dirichlet([α₁,α₂,..])` with concentration parameters α
 - `Laplace(μ,θ)` with location μ and scale θ
 - `Gamma(shape=.., rate=..)`
@@ -42,20 +48,27 @@ Below is a list of distributions relevant to the course:
     - `GammaShapeScale(α,θ)` with shape α and scale θ
     - `InverseGamma(α,θ)` with shape α and scale θ
 - `Exponential(θ)` with scale parameter θ
-- `Normal(mean = .., var = ..)` 
+- `Normal(mean = .., var = ..)` or `Normal(mean = .., precision = ..)`
     - `NormalMeanVariance(μ,σ²)` with mean μ and variance σ²
     - `NormalMeanPrecision(μ,τ)` with mean μ and precision τ
+- `MvNormal(mean = .., covariance = ..)` or `MvNormal(mean = .., precision = ..)`
     - `MvNormalMeanCovariance(μ,Σ)` with mean vector μ and covariance matrix Σ
     - `MvNormalMeanPrecision(μ,Λ)` with mean vector μ and precision matrix Λ
-- `LogNormal(μ,σ)` with mean μ and scale σ
+- `LogNormal(μ,σ)` where μ and σ are the mean and standard deviation of log(x)
 - `Wishart(ν,S)` with ν degrees-of-freedom and scale matrix S
     - `InverseWishart(ν,S)` with ν degrees-of-freedom and scale matrix S
 
+!!! warning "Keyword forms only work inside `@model`"
+	The keyword forms such as `Normal(mean = .., var = ..)`, `Gamma(shape = .., rate = ..)` and `MvNormal(mean = .., covariance = ..)` are only understood *inside* a `@model` definition. Everywhere else, for example in `@initialization`, when plotting, or in a regular Julia cell, use the explicit types such as `NormalMeanVariance(μ,σ²)`, `GammaShapeRate(α,β)` or `MvNormalMeanCovariance(μ,Σ)`.
 """
 
 # ╔═╡ d477f0dd-9cd6-462c-ba4e-8556e4e564f9
 md"""
 If you want more information on any of these distributions, such as the density function, methods, usage examples or references to literature, open the "Live Docs" button in the bottom right corner and enter the distribution name.
+
+In the RxInfer documentation, see:
+- [Probability distributions](https://docs.rxinfer.com/stable/concepts/probability-distributions/), which includes a table of **conjugate prior–likelihood pairs**. This table is very useful when choosing priors (see the next section).
+- [Model specification](https://docs.rxinfer.com/stable/manuals/model-specification/), which explains how distributions are used inside `@model`.
 """
 
 # ╔═╡ 2201e992-0c21-4ce3-ab81-9c3d4c206ce3
@@ -72,6 +85,10 @@ Internally, RxInfer constructs a factor graph and will pass messages around. The
 
 ## `ProductOf` and `RuleNotFound` errors
 Unfortunately, this product does not simplify to a known distribution. RxInfer will throw an error that the product has an "undefined functional form" (see below).
+
+A closely related error is `RuleNotFoundError`. It means that RxInfer has no message update rule for a particular node and combination of incoming messages. Its report tells you which node and edge failed, lists suggestions under "what to try", and shows "near misses": existing rules that almost match your inputs.
+
+In both cases, read the error message carefully. It names the variable (here `q(σ)`) and the distributions involved, and it links to the relevant documentation.
 """
 
 # ╔═╡ 719c570b-a47f-4326-b940-fd0242aec9c8
@@ -98,7 +115,8 @@ $(html"<div style='font-size: 1.5em; text-align: center'>  👉 change your mode
 md"""
 ## So what do we change the model to? 
 1. Go back to the lectures and have a look at what kind of distribution is appropriate or _conjugate_ with respect to the variable you want to find a posterior for. For example, the [Density Estimation lecture](https://bmlip.github.io/course/lectures/Density%20Estimation.html) tells us the variance parameter is a strictly positive real number. `Gamma()` and `InverseGamma()` are distributions over strictly positive real numbers.
-2. Look at the error message: it specifies a `ProductOf(..Dirichlet().., ..InverseGamma()..)`. Products of the same distributions are typically closed (e.g., the product of two Gaussian pdf's is Gaussian). So you could the reported distribution type.
+2. Look at the error message: it specifies a `ProductOf{Dirichlet{..}, InverseGamma{..}}`. Products of distributions of the same type are typically closed (e.g., the product of two Gaussian pdf's is Gaussian). So you could use the distribution type of the incoming message from the likelihood (here `InverseGamma`) as your prior.
+3. Check the table of conjugate pairs in the [Probability distributions](https://docs.rxinfer.com/stable/concepts/probability-distributions/) documentation page.
 
 Let's try that below.
 """
@@ -116,21 +134,65 @@ begin
 	)
 end
 
+# ╔═╡ 3f6a1c52-8d2e-4b7a-9e01-5c4d2a7b8e10
+md"""
+!!! info "Want to know more?"
+	- [Sharp bits: Rule not found](https://docs.rxinfer.com/stable/manuals/sharpbits/rule-not-found/) explains how to read the `RuleNotFoundError` report and the most common fixes.
+	- [Undefined rules](https://docs.rxinfer.com/stable/manuals/inference/undefinedrules/) and [Non-conjugate inference](https://docs.rxinfer.com/stable/manuals/inference/nonconjugate/) describe the "advanced route" of approximations and projections, for when you really need a non-conjugate model.
+	- The [Sharp bits overview](https://docs.rxinfer.com/stable/manuals/sharpbits/overview/) collects other common pitfalls.
+"""
+
+# ╔═╡ 8b2e4d17-6c3a-4f59-a1d8-0e7f9c2b5a34
+md"""
+# `~`, `:=` and `=` in a model
+
+Inside `@model`, these three operators mean different things:
+- `x ~ Normal(mean = 0.0, var = 1.0)` creates a **random variable** with a distribution.
+- `y := f(x)` creates a **deterministic** relation between random variables (a deterministic factor node).
+- `y = f(x)` is a **plain Julia assignment**. It runs once, while the model is being built, so it does not create a node in the graph. Never use `=` with random variables.
+
+For example, this works:
+```julia
+@model function correct_model(θ, z)
+	x ~ MvNormal(mean = [0.0, 0.0], covariance = [1.0 0.0; 0.0 1.0])
+	y := dot(x, θ)
+	z ~ Normal(mean = y, var = 1.0)
+end
+```
+If you write `y = dot(x, θ)` instead, you get a confusing `ArgumentError: cannot evaluate dot recursively...`. The error mentions `dot` and not the `=` sign, so the cause is easy to miss!
+
+See [Sharp bits: `=` vs `:=`](https://docs.rxinfer.com/stable/manuals/sharpbits/usage-colon-equality/) for more details.
+"""
+
 # ╔═╡ b8f71f90-fa36-47cb-9f64-2ad9aa8a8482
 md"""
 # Data inputs
 
 You have to be mindful of your data's format when you enter it in `infer(...)`. Some important things to know:
 
-- You cannot slice an array inside the `@model` definition. For example, this
+- Indexing **one element at a time** is fine, and is the standard way to handle a data set:
 ```julia
-@model function simple(z)
-	x = z[1]
+@model function iid(y)
 	μ ~ Normal(mean=0.0, var=1.0)
-	x ~ Normal(mean=μ, var=1.0)
+	for i in eachindex(y)
+		y[i] ~ Normal(mean=μ, var=1.0)
+	end
 end
 ```
-will not work. You need to make sure your data format fits _before_ you pass it to `infer`.
+- You **cannot slice** an array inside the `@model` definition. All of the following fail:
+```julia
+x = z[1]                          # plain `=` assignment of a data element
+x ~ Normal(mean=μ, var=1.0)
+
+y[1:2] ~ Normal(mean=μ, var=1.0)  # range slice on the left of `~`
+```
+Make sure your data has the right format _before_ you pass it to `infer`, for example by passing `z[1]` or `y[1:2]` as a separate data argument.
+- You also **cannot index into a multivariate random variable**. If `x ~ MvNormal(...)`, then `x[1]` gives the error "Indexing a single node label `x` with an index `[1]` is not allowed". Either model the components as separate (univariate) random variables, or select a component with a deterministic relation:
+```julia
+x  ~ MvNormal(mean=zeros(2), covariance=diageye(2))
+x₁ := dot([1.0, 0.0], x)          # first component of x
+y  ~ Normal(mean=x₁, var=1.0)
+```
 - If your distribution expects an `Integer`, you cannot put in a real number (i.e., `Float64`).
 
 ## Arrays
@@ -146,6 +208,25 @@ X = cat(X_...,dims=2)
 
 ## Alternative formats
 - A `DataFrame` object ([DataFrames.jl](https://github.com/JuliaData/DataFrames.jl)) will also work, but you need to match column names to variable names.
+- Missing observations can be passed as `missing`. See [Missing (partial) data](https://docs.rxinfer.com/stable/manuals/inference/partial-data/).
+
+For everything about writing models, see the [Model specification](https://docs.rxinfer.com/stable/manuals/model-specification/) page of the documentation.
+"""
+
+# ╔═╡ c41d7e93-2a5b-4e86-b3f0-6d9a8e1c2f57
+md"""
+# Inference options & debugging
+
+The `infer` function has many keyword arguments. These are the ones we use in the probabilistic programming sessions, with the documentation page for each:
+
+- `iterations = ..`, `free_energy = true` and `returnvars = KeepLast()` / `KeepEach()`: see [Static inference](https://docs.rxinfer.com/stable/manuals/inference/static/).
+- `constraints = @constraints begin ... end` for variational inference: see [Constraints specification](https://docs.rxinfer.com/stable/manuals/variational/constraints-specification/).
+- `initialization = @initialization begin ... end`: see [Initialization](https://docs.rxinfer.com/stable/manuals/inference/initialization/).
+- `algorithm = @algorithm begin ... end` to choose approximation methods for specific nodes (formerly `@meta`): see [Algorithm specification](https://docs.rxinfer.com/stable/manuals/inference/algorithm-specification/).
+
+If your results look wrong or inference is stuck, the [Debugging](https://docs.rxinfer.com/stable/manuals/debugging/) page shows how to record what happens during inference (e.g., with `trace = true`), and the [FAQ](https://docs.rxinfer.com/stable/manuals/faq/) answers many common questions.
+
+Curious what RxInfer is actually computing? The pages [Messages by hand](https://docs.rxinfer.com/stable/manuals/learning/messages-by-hand/) and [Variational message passing by hand](https://docs.rxinfer.com/stable/manuals/learning/vmp-by-hand/) work through the message passing from the [Factor Graphs lecture](https://bmlip.github.io/course/lectures/Factor%20Graphs.html) step by step and compare it with RxInfer's output.
 """
 
 # ╔═╡ 94c46c1a-2712-4a69-be3d-6abe425bbb56
@@ -157,6 +238,23 @@ md"""
     - MacOS: world button (https://support.apple.com/guide/mac-help/use-emoji-and-symbols-on-mac-mchlp1560/mac)
     - Windows: `windows` + `.` (https://www.howtogeek.com/windows-11-has-a-new-way-to-open-the-emoji-picker/) 
     - Linux: `super` + `space bar` (https://itsfoss.com/ubuntu-emojis/)
+"""
+
+# ╔═╡ e5a90f28-7b1c-4d63-8f4e-2c3b6d0a9e81
+md"""
+# More examples
+
+The [RxInfer examples gallery](https://examples.rxinfer.com/) contains many complete models. These are closest to what we do in the course:
+
+| Course session | Related examples |
+|:---|:---|
+| PP1: Bayesian inference in conjugate models | [Coin Toss Model](https://examples.rxinfer.com/categories/basic_examples/coin_toss_model/), [Assessing People Skills](https://examples.rxinfer.com/categories/advanced_examples/assessing_people_skills/) |
+| PP2: Bayesian regression and classification | [Bayesian Linear Regression](https://examples.rxinfer.com/categories/basic_examples/bayesian_linear_regression/), [Feature Functions in Bayesian Regression](https://examples.rxinfer.com/categories/basic_examples/feature_functions_in_bayesian_regression/), [Probit Model](https://examples.rxinfer.com/categories/problem_specific/probit_model/) |
+| PP3: Variational Bayesian inference | [Gaussian Mixture](https://examples.rxinfer.com/categories/problem_specific/gaussian_mixture/) |
+| PP4: Bayesian filtering and smoothing | [Kalman Filtering and Smoothing](https://examples.rxinfer.com/categories/basic_examples/kalman_filtering_and_smoothing/), [Hidden Markov Model](https://examples.rxinfer.com/categories/basic_examples/hidden_markov_model/) |
+| PP5: Bayesian control and active inference | [T-Maze Active Inference](https://examples.rxinfer.com/categories/basic_examples/t-maze_active_inference/), [POMDP Control](https://examples.rxinfer.com/categories/basic_examples/pomdp_control/), [Active Inference Mountain Car](https://examples.rxinfer.com/categories/advanced_examples/active_inference_mountain_car/) |
+
+Missing data in your assignment? Have a look at [Incomplete Data](https://examples.rxinfer.com/categories/basic_examples/incomplete_data/).
 """
 
 # ╔═╡ 7e2100e1-1b20-4a40-b84d-eac0ba99000d
@@ -2202,8 +2300,12 @@ uuid = "23338594-aafe-5451-b93e-139f81909106"
 # ╟─5c3fbfab-7b92-4542-a22c-3690e1879c61
 # ╟─6b853dc6-a72b-4f09-ba59-c0f0606a1bee
 # ╠═4e129514-0c3e-461b-81b3-4c4ace6a8134
+# ╟─3f6a1c52-8d2e-4b7a-9e01-5c4d2a7b8e10
+# ╟─8b2e4d17-6c3a-4f59-a1d8-0e7f9c2b5a34
 # ╟─b8f71f90-fa36-47cb-9f64-2ad9aa8a8482
+# ╟─c41d7e93-2a5b-4e86-b3f0-6d9a8e1c2f57
 # ╟─94c46c1a-2712-4a69-be3d-6abe425bbb56
+# ╟─e5a90f28-7b1c-4d63-8f4e-2c3b6d0a9e81
 # ╟─7e2100e1-1b20-4a40-b84d-eac0ba99000d
 # ╠═9d461cb4-d44a-11f0-982a-eb1249c48f13
 # ╟─b0af888a-827d-4c24-8da9-9ddf16a5c824
