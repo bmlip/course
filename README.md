@@ -122,7 +122,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 W0: Introduction to Julia &amp; assignments<br/>
     🔴 Pick-up assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
-    <td><a href="">A0</a></td>
+    <td><a>A0</a> (TBA)</td>
     <td></td>
     <td></td>
   </tr>
@@ -147,7 +147,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 W1: Probabilistic Programming 1 - Bayesian inference with conjugate models<br/>
     🔴 Submission deadline assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP1%20-%20Bayesian%20inference%20in%20conjugate%20models.html">W1</a></td>
-    <td><a href="">submit A0</a></td>
+    <td><a>submit A0</a> (TBA)</td>
     <td></td>
     <td></td>
   </tr>
@@ -156,7 +156,7 @@ You can access all lecture materials online through the links below:
     <td>⚪️ B6: Regression<br/>
     🔴 Pick-up assignment A1</td>
     <td><a href="https://bmlip.github.io/course/lectures/Regression.html">B6</a></td>
-    <td><a href="">A1</a><br/>(<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a>A1</a> (TBA)<br/>(<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td><a href="https://youtu.be/2llpaRSN2Wc">B6.1</a>, <a href="https://youtu.be/TSoYnO6oXhw">B6.2</a></td>
     <td></td>
   </tr>
@@ -189,7 +189,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 W3: Probabilistic Programming 3 - Variational Bayesian inference<br/>
     🔴 Submission deadline assignment A1</td>
     <td><a href="https://bmlip.github.io/course/probprog/PP3%20-%20variational%20Bayesian%20inference.html">W3</a></td>
-    <td><a href="">submit A1</a></td>
+    <td><a>submit A1</a> (TBA)</td>
     <td></td>
     <td></td>
   </tr>
@@ -209,7 +209,7 @@ You can access all lecture materials online through the links below:
     <td>⚪️ B11: Intelligent Agents and Active Inference<br/>
     🔴 Pick-up assignment A2</td>
     <td><a href="https://bmlip.github.io/course/lectures/Intelligent%20Agents%20and%20Active%20Inference.html">B11</a>,<br/> <a href="https://github.com/bmlip/course/blob/main/lectures/bdv-Nov2026-AIF-lecture.ppsx">slides</a></td>
-    <td><a href="">A2</a><br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a>A2</a> (TBA)<br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td><a href="https://youtu.be/fBm1oAzlv0w">B11.1</a>, <a href="https://youtu.be/UbOuLxv9EdI">B11.2</a></td>
     <td></td>
   </tr>
@@ -233,7 +233,7 @@ You can access all lecture materials online through the links below:
     <td>22-Jan-2027 <em>(Fri)</em></td>
     <td>🔴 Submission deadline assignment A2</td>
     <td></td>
-    <td><a href="">submit A2</a></td>
+    <td><a>submit A2</a> (TBA)</td>
     <td></td>
     <td></td>
   </tr>
@@ -245,7 +245,7 @@ You can access all lecture materials online through the links below:
     <td>TBD</td>
     <td>🔴 Pick-up resit assignment</td>
     <td></td>
-    <td><a href="">Resit</a><br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
+    <td><a>Resit</a> (TBA)<br/> (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td></td>
     <td></td>
   </tr>
@@ -253,7 +253,7 @@ You can access all lecture materials online through the links below:
     <td>TBD</td>
     <td>🔴 Submission deadline resit assignment</td>
     <td></td>
-    <td><a href="">submit</a></td>
+    <td><a>submit</a> (TBA)</td>
     <td></td>
     <td></td>
   </tr>
