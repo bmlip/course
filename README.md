@@ -122,7 +122,7 @@ You can access all lecture materials online through the links below:
     <td>🟢 W0: Introduction to Julia &amp; assignments<br/>
     🔴 Pick-up assignment A0</td>
     <td><a href="https://bmlip.github.io/course/probprog/Intro%20to%20Julia.html">W0</a></td>
-    <td><a>A0</a> (TBA)</td>
+    <td><a>A0</a> (TBA) (<a href="https://github.com/bmlip/course/blob/main/Software%20installation.md#how-to-open-an-assignment">how to open</a>)</td>
     <td></td>
     <td></td>
   </tr>
