@@ -107,7 +107,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Bayesian%20Machine%20Learning.html">B3</a></td>
     <td></td>
     <td><a href="https://youtu.be/OPGrqnnEfU0">B3.1</a>, <a href="https://youtu.be/BOUmzY1Nx5g">B3.2</a></td>
-    <td></td>
+    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6267882">B3</a></td>
   </tr>
   <tr>
     <td>20-Nov-2026 <em>(Fri)</em></td>
@@ -115,7 +115,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Factor%20Graphs.html">B4</a></td>
     <td></td>
     <td><a href="https://youtu.be/C2vvsf_Ts2g">B4.1</a>, <a href="https://youtu.be/HbUuYBMZOKw">B4.2</a></td>
-    <td></td>
+    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6272053">B4</a></td>
   </tr>
   <tr>
     <td>25-Nov-2026 <em>(Wed)</em></td>
