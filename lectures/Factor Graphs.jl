@@ -670,7 +670,8 @@ Now build the factor graph in RxInfer, and perform sum-product message passing t
 end
 
 # ╔═╡ 1070063a-ef85-4527-ae82-1f01c1a506ff
-prior_Σ = 1e5 * Diagonal(I,3); # prior for the weights
+# prior for the weights, large variance makes it uninformative (flat Gaussian)
+prior_Σ = 1e5 * Diagonal(I,3); 
 
 # ╔═╡ 9431bc9a-bd83-4e4d-b64d-0571c1d01c87
 md"""
@@ -1217,8 +1218,6 @@ results = infer(
 					Σ=prior_Σ, σ²=data_noise_σ²
 				 ),
 	data       = (y = y_train, x = x_train),
-	returnvars = (w = KeepLast(),),
-	iterations = 20,
 )
 
 # ╔═╡ 83a70a4b-b114-4351-8fa2-dd565ebc9916
