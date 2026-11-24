@@ -726,7 +726,7 @@ Caticha's argumentation is as follows:
 q^* = \arg\max_q S[q]\,, \quad \text{subject to all constraints.} 
 ```
 
-Similarly to [Cox' method](https://en.wikipedia.org/wiki/Cox%27s_theorem) for deriving Probability Theory from a set of sensical axioms, Caticha then introduced the following axioms, based on a rational principle (the **principle of minimal updating**, see [Caticha 2010](https://arxiv.org/abs/1011.0723)), that the ranking function needs to adhere to: 
+Similarly to [Cox' method](https://en.wikipedia.org/wiki/Cox%27s_theorem) for deriving Probability Theory from a set of sensible axioms, Caticha then introduced the following axioms, based on a rational principle (the **principle of minimal updating**, see [Caticha 2010](https://arxiv.org/abs/1011.0723)), that the ranking function needs to adhere to: 
 
   1. *Locality*: local information has local effects.
   2. *Coordinate invariance*: the system of coordinates carries no information.
@@ -736,15 +736,26 @@ It turns out that these three criteria **uniquely identify the Relative Entropy*
 
 ```math
 \begin{align*}
-S[q] = - \sum_z q(x,z) \log \frac{q(x,z)}{p(x,z)}
+S[q] &= - \sum_x \sum_z q(x,z) \log \frac{q(x,z)}{p(x,z)} \\
+  &= - D_{\text{KL}}\big[ q(x,z),\, p(x,z) \big]
 \end{align*}
 ```
 
-This procedure for finding the variational posterior ``q`` is called the **Principle of  Maximum (Relative) Entropy** (PME). Note that, since ``S[q]=-F[q]``, constrained Relative Entropy maximization is equivalent to constrained VFE minimization! 
+Without additional constraints (no new information is available), ``S`` is maximized by ``q(x,z) = p(x,z)``, meaning the beliefs remain unchanged.
+
+If we add an observation ``x=\hat x`` as a __data constraint__, then ``q(x,z) = \delta(x-\hat x) q(z)``. By substitution into ``S``, the sum over ``x`` selects ``x = \hat x``, and we get
+
+```math
+\begin{align*}
+S[q] = -\sum_z q(z)\log\frac{q(z)}{p(\hat x,z)} = -F[q]
+\end{align*}
+```
+
+This procedure for finding the variational posterior ``q`` is called the **Principle of  Maximum (Relative) Entropy** (PME). Note that, since ``S[q]=-F[q]`` under data constraints, constrained Relative Entropy maximization is equivalent to constrained VFE minimization! 
 
 Therefore, when information is supplied in the form of constraints on the posterior (such as form/factorization constraints and new observations as data constraints), we *should* select the posterior that minimizes the constrained Variational Free Energy. **Constrained FE minimization is the proper method for inference!**
 
-Bayes rule is the global solution of constrained VFEM when all constraints are data constraints, ie, delta distributions on ``q(x)``. Hence, Bayes rule is a special case of constrained VFEM. Bayes rule only applies to updating beliefs on the basis of new observations. 
+Bayes rule is the global solution of constrained VFEM when all constraints are data constraints, i.e., delta distributions on ``q(x)``. Hence, Bayes rule is a special case of constrained VFEM. Bayes rule applies only to updating beliefs based on new observations. 
  
 """
 
@@ -1898,7 +1909,7 @@ StatsPlots = "~0.15.8"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.13.3"
+julia_version = "1.13.0"
 manifest_format = "2.1"
 project_hash = "12b30d67ec3a1c4e918217a2996b87e9e16b6a87"
 
@@ -2026,10 +2037,10 @@ version = "1.18.8+1"
 
 [[deps.ChainRulesCore]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "7dc4359cbda4cbf3e5dbbbf075250a63e7021f69"
+git-tree-sha1 = "5f88748b7bdf3163e2e7c9e30338355e80ce0ba3"
 registries = "General"
 uuid = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-version = "1.26.7"
+version = "1.26.6"
 weakdeps = ["SparseArrays"]
 
     [deps.ChainRulesCore.extensions]
@@ -2456,10 +2467,10 @@ version = "1.8.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Logging", "Parsers", "PrecompileTools", "StructUtils", "UUIDs", "Unicode"]
-git-tree-sha1 = "69a876face3b7aa9ac03b8dbf0f27d71bc17cf05"
+git-tree-sha1 = "3a9b0da8237deffb70be5e8d2e9af7601e4a79b0"
 registries = "General"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
-version = "1.13.1"
+version = "1.13.0"
 
     [deps.JSON.extensions]
     JSONArrowExt = ["ArrowTypes"]
@@ -2542,7 +2553,7 @@ version = "1.0.0"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "Zstd_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.22.0+0"
+version = "8.18.0+1"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -2552,12 +2563,12 @@ version = "1.11.0"
 [[deps.LibGit2_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "PCRE2_jll", "Zlib_jll"]
 uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
-version = "1.9.7+0"
+version = "1.9.1+0"
 
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl", "OpenSSL_jll", "Zlib_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.11.104+0"
+version = "1.11.103+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -2667,7 +2678,7 @@ version = "1.11.0"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2026.10.20"
+version = "2026.8.13"
 
 [[deps.MuladdMacro]]
 deps = ["PrecompileTools"]
@@ -2737,7 +2748,7 @@ version = "0.8.7+0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.8+0"
+version = "3.5.6+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl"]
@@ -2762,7 +2773,7 @@ version = "2.0.3"
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-version = "10.47.0+0"
+version = "10.46.0+0"
 
 [[deps.PDMats]]
 deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse"]
@@ -2849,10 +2860,10 @@ version = "0.4.7"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Downloads", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
-git-tree-sha1 = "9869376035f47756b8b8e711fd0d06a06d51da6f"
+git-tree-sha1 = "e189d0623e7ce9c37389bac17e80aac3b0302e75"
 registries = "General"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.84"
+version = "0.7.83"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
@@ -3234,10 +3245,10 @@ version = "0.1.13"
 
 [[deps.URIs]]
 deps = ["Serialization"]
-git-tree-sha1 = "eb3b85ca904a1d1647b15acc091b113b8874b648"
+git-tree-sha1 = "50eda8011f098869a76da69a524ff59e0298711a"
 registries = "General"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.7.3"
+version = "1.7.2"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
@@ -3467,7 +3478,7 @@ version = "1.6.0+0"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.3.2+0"
+version = "1.3.1+2"
 
 [[deps.Zstd_jll]]
 deps = ["CompilerSupportLibraries_jll", "Libdl"]
@@ -3573,12 +3584,12 @@ version = "1.1.7+0"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.70.0+0"
+version = "1.67.1+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.8.3+0"
+version = "17.8.2+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
