@@ -132,7 +132,7 @@ You can access all lecture materials online through the links below:
     <td><a href="https://bmlip.github.io/course/lectures/Density%20Estimation.html">B5</a></td>
     <td></td>
     <td><a href="https://youtu.be/WS6gWO5vgtc">B5.1</a>, <a href="https://youtu.be/Ma3jXNbNCyc">B5.2</a>, <a href="https://youtu.be/vyh8RvXxnT8">B5.3</a></td>
-    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6287007">W0</a></td>
+    <td><a href="https://tue.video.yuja.com/P/VideoManagement/MediaLibrary/MediaChannel/93358/WatchVideo/6287007">B5</a></td>
   </tr>
 <!---  <tr>
     <td>02-Dec-2026 <em>(Wed)</em></td>
